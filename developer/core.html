@@ -1,0 +1,196 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Holland Core &mdash; Holland v documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="Holland v documentation" href="../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li><a href="../index.html">Holland v documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="holland-core">
+<h1>Holland Core<a class="headerlink" href="#holland-core" title="Permalink to this headline">¶</a></h1>
+<p>Holland Core provides low level services to perform useful backups.</p>
+<p>These services are currently broken down into 5 main categories:</p>
+<ul class="simple">
+<li>holland.core.plugin - Support for loading arbitrary code objects</li>
+<li>holland.core.config - Support for loading configuration files</li>
+<li>holland.core.backup - Support for loading and executing a backup plugin</li>
+<li>holland.core.hooks  - Support for running callbacks</li>
+<li>holland.core.stream - Support for arbitrary output filters</li>
+</ul>
+</div>
+<div class="section" id="plugins">
+<h1>Plugins<a class="headerlink" href="#plugins" title="Permalink to this headline">¶</a></h1>
+<p>The Holland plugin API provides support for loading plugins - arbitrary python
+objects that provides some useful functionality.  These are typically a class
+deriving from one of the standard plugin interfaces</p>
+<dl class="docutils">
+<dt>Loading a plugin::</dt>
+<dd><div class="first last highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">holland.core.plugin</span> <span class="kn">import</span> <span class="n">load_plugin</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">load_plugin</span><span class="p">(</span><span class="n">group</span><span class="o">=</span><span class="s">&#39;holland.backup&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s">&#39;mysqldump&#39;</span><span class="p">)</span>
+<span class="go">&lt;class &#39;holland.backup.mysqldump.plugin.MySQLDumpPlugin&#39;&gt;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>load_plugin is a wrapper around the default <tt class="docutils literal"><span class="pre">PluginManager</span></tt> which
+uses setuptools entrypoints.  Other implementations may be provided by
+subclassing <tt class="docutils literal"><span class="pre">PluginManager</span></tt> and overriding the <tt class="docutils literal"><span class="pre">load</span></tt> and <tt class="docutils literal"><span class="pre">iterate</span></tt>
+methods.  See the API documentation for further details</p>
+<div class="section" id="plugin-interfaces">
+<h2>Plugin interfaces<a class="headerlink" href="#plugin-interfaces" title="Permalink to this headline">¶</a></h2>
+<p>Two plugin interfaces are exposed in the plugin API:</p>
+<ul class="simple">
+<li>BasePlugin         - simplest plugin interface</li>
+<li>ConfigurablePlugin - a BasePlugin that can be configured explicitly</li>
+</ul>
+<p>Use of these interfaces by external code is not strictly required, and are not
+enforced by the current PluginManager implementations but these interfaces are
+used and expected by services provided by the holland.core framework</p>
+<p>BasePlugin exposes one important method - plugin_info().  This should return a
+holland.core.plugin.PluginInfo object that provides some basic information about
+a plugin.</p>
+<p>For a quick example let&#8217;s look at the script plugin&#8217;s plugin_info() in holland 1.1.0a1:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">ScriptPlugin</span><span class="o">.</span><span class="n">plugin_info</span><span class="p">()</span>
+<span class="go">PluginInfo({&#39;api_version&#39;: &#39;1.1.0a1&#39;,</span>
+<span class="go"> &#39;description&#39;: &#39;\n\n    &#39;,</span>
+<span class="go"> &#39;name&#39;: &#39;script&#39;,</span>
+<span class="go"> &#39;summary&#39;: &#39;Run arbitrary commands as a holland backup method&#39;,</span>
+<span class="go"> &#39;version&#39;: &#39;1.1.0a1&#39;})</span>
+</pre></div>
+</div>
+<p>There are 5 attributes for PluginInfo that are understood:</p>
+<ul class="simple">
+<li>api_version - a version string defining what version of holland the plugin was written for</li>
+<li>version     - version of the particular plugin</li>
+<li>name        - name of the plugin</li>
+<li>author      - author of the plugin</li>
+<li>summary     - one-line textual summary of the plugin</li>
+<li>description - multi-line textual description of the plugin</li>
+</ul>
+</div>
+</div>
+<div class="section" id="config">
+<h1>Config<a class="headerlink" href="#config" title="Permalink to this headline">¶</a></h1>
+<p>Holland exposes a simple config layer that provides methods for loading and validating config files.</p>
+<p>All configs are based on an ini-like structure with sections containing option/value pairs.  Plugins
+provide specifications for what section/option/values they support and holland will validate
+configs based on those specifications.</p>
+<p>XXX: Explain configspecs and the backupset format</p>
+</div>
+<div class="section" id="backup">
+<h1>Backup<a class="headerlink" href="#backup" title="Permalink to this headline">¶</a></h1>
+<p>The backup layer ties together all the other layers into a simple API for:</p>
+<ul class="simple">
+<li>Loading a backupset config</li>
+<li>Loading a backup plugin from a config</li>
+<li>Running through a backup lifecycle</li>
+<li>Optionally calling external hook plugins at various points in the lifecycle</li>
+<li>Purging old backups</li>
+<li>Allowing out-of-band cleanup of old backups (XXX: explain)</li>
+</ul>
+</div>
+<div class="section" id="hooks">
+<h1>Hooks<a class="headerlink" href="#hooks" title="Permalink to this headline">¶</a></h1>
+<p>Hooks are simple callbacks where a plugin does a useful bit of work at one or more
+points while running some holland.core service.</p>
+<p>These are primarily used for the backup framework to allow performing an action
+before and/or after a backup runs or as the result of a backup failure.</p>
+<p>Holland backups expose three main hook points:</p>
+<p>pre-backup - before a backup is run but once a plugin is initialized
+post-backup - after a backup has completed succesfully
+fail-backup - once a backup has failed</p>
+</div>
+<div class="section" id="streams">
+<h1>Streams<a class="headerlink" href="#streams" title="Permalink to this headline">¶</a></h1>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Holland Core</a></li>
+<li><a class="reference internal" href="#plugins">Plugins</a><ul>
+<li><a class="reference internal" href="#plugin-interfaces">Plugin interfaces</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#config">Config</a></li>
+<li><a class="reference internal" href="#backup">Backup</a></li>
+<li><a class="reference internal" href="#hooks">Hooks</a></li>
+<li><a class="reference internal" href="#streams">Streams</a></li>
+</ul>
+
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/developer/core.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li><a href="../index.html">Holland v documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Rackspace Inc..
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.4.
+    </div>
+  </body>
+</html>

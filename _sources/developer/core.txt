@@ -1,0 +1,106 @@
+Holland Core
+============
+
+Holland Core provides low level services to perform useful backups.
+
+These services are currently broken down into 5 main categories:
+
+* holland.core.plugin - Support for loading arbitrary code objects
+* holland.core.config - Support for loading configuration files
+* holland.core.backup - Support for loading and executing a backup plugin
+* holland.core.hooks  - Support for running callbacks
+* holland.core.stream - Support for arbitrary output filters
+
+Plugins
+=======
+
+The Holland plugin API provides support for loading plugins - arbitrary python
+objects that provides some useful functionality.  These are typically a class
+deriving from one of the standard plugin interfaces
+
+Loading a plugin::
+  >>> from holland.core.plugin import load_plugin
+  >>> load_plugin(group='holland.backup', name='mysqldump')
+  <class 'holland.backup.mysqldump.plugin.MySQLDumpPlugin'>
+
+load_plugin is a wrapper around the default ``PluginManager`` which
+uses setuptools entrypoints.  Other implementations may be provided by
+subclassing ``PluginManager`` and overriding the ``load`` and ``iterate``
+methods.  See the API documentation for further details
+
+Plugin interfaces
++++++++++++++++++
+
+Two plugin interfaces are exposed in the plugin API:
+
+* BasePlugin         - simplest plugin interface
+* ConfigurablePlugin - a BasePlugin that can be configured explicitly
+
+Use of these interfaces by external code is not strictly required, and are not
+enforced by the current PluginManager implementations but these interfaces are
+used and expected by services provided by the holland.core framework
+
+BasePlugin exposes one important method - plugin_info().  This should return a
+holland.core.plugin.PluginInfo object that provides some basic information about
+a plugin. 
+
+For a quick example let's look at the script plugin's plugin_info() in holland 1.1.0a1:
+
+  >>> ScriptPlugin.plugin_info()
+  PluginInfo({'api_version': '1.1.0a1',
+   'description': '\n\n    ',
+   'name': 'script',
+   'summary': 'Run arbitrary commands as a holland backup method',
+   'version': '1.1.0a1'})
+
+There are 5 attributes for PluginInfo that are understood:
+
+* api_version - a version string defining what version of holland the plugin was written for
+* version     - version of the particular plugin
+* name        - name of the plugin
+* author      - author of the plugin
+* summary     - one-line textual summary of the plugin
+* description - multi-line textual description of the plugin
+
+Config
+======
+Holland exposes a simple config layer that provides methods for loading and validating config files.
+
+All configs are based on an ini-like structure with sections containing option/value pairs.  Plugins
+provide specifications for what section/option/values they support and holland will validate
+configs based on those specifications.
+
+XXX: Explain configspecs and the backupset format
+
+Backup
+======
+
+The backup layer ties together all the other layers into a simple API for:
+
+* Loading a backupset config
+* Loading a backup plugin from a config
+* Running through a backup lifecycle
+* Optionally calling external hook plugins at various points in the lifecycle
+* Purging old backups
+* Allowing out-of-band cleanup of old backups (XXX: explain)
+
+
+Hooks
+=====
+
+Hooks are simple callbacks where a plugin does a useful bit of work at one or more
+points while running some holland.core service.
+
+These are primarily used for the backup framework to allow performing an action
+before and/or after a backup runs or as the result of a backup failure.
+
+Holland backups expose three main hook points:
+
+pre-backup - before a backup is run but once a plugin is initialized
+post-backup - after a backup has completed succesfully
+fail-backup - once a backup has failed
+
+
+Streams
+=======
+

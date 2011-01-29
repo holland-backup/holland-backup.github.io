@@ -1,0 +1,197 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Holland Command-Line Reference &mdash; Holland v documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Holland v documentation" href="index.html" />
+    <link rel="next" title="Usage and Implementation Overview" href="overview.html" />
+    <link rel="prev" title="Introduction to Holland" href="intro.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="overview.html" title="Usage and Implementation Overview"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="Introduction to Holland"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Holland v documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="holland-command-line-reference">
+<span id="command-line-reference"></span><h1>Holland Command-Line Reference<a class="headerlink" href="#holland-command-line-reference" title="Permalink to this headline">¶</a></h1>
+<p>Here are the commands available from the &#8216;holland&#8217; command-line tool:</p>
+<div class="section" id="help-h">
+<h2>help (h)<a class="headerlink" href="#help-h" title="Permalink to this headline">¶</a></h2>
+<p><strong>Usage</strong>: <tt class="docutils literal"><span class="pre">holland</span> <span class="pre">help</span> <span class="pre">&lt;command&gt;</span></tt></p>
+<p>Provides basic information about the provided command. If no command is
+provided, it displays global help instead.</p>
+</div>
+<div class="section" id="backup-bk">
+<h2>backup (bk)<a class="headerlink" href="#backup-bk" title="Permalink to this headline">¶</a></h2>
+<p><strong>Usage:</strong> <tt class="docutils literal"><span class="pre">holland</span> <span class="pre">backup</span> <span class="pre">[backup-set1,</span> <span class="pre">backup-set2,</span> <span class="pre">...,</span> <span class="pre">backup-setN]</span></tt></p>
+<p>Runs the backup operation. If no backup-sets are specified,
+all active backup-sets (those defined in the &#8216;backupsets&#8217; variable in
+holland.conf) are backed up.</p>
+<p>One or more backup-sets can be specified directly, in which case only those
+backup-sets are backed up.</p>
+<p>Additional Command Line Arguments:</p>
+<p><tt class="docutils literal"><span class="pre">--dry-run</span></tt> (<tt class="docutils literal"><span class="pre">-n</span></tt>): Can be used here to simulate, but not actually
+run, a backup. This should be used when troubleshooting a particular error
+before trying to run a real backup.</p>
+<p><tt class="docutils literal"><span class="pre">--no-lock</span></tt> (<tt class="docutils literal"><span class="pre">-f</span></tt>): Normally, only one instance of Holland can run at any
+given time using lock-files. Using this flag causes the lock-files to be
+ignored. This has some very clear use-cases but otherwise be mindful of using
+this setting as it can cause backups to fail in some cases.</p>
+<p><tt class="docutils literal"><span class="pre">--abort-immediately</span></tt>: abort on the first backup-set that fails (assuming
+multiple backupsets were specified)</p>
+<p><strong>Examples</strong>:</p>
+<p><tt class="docutils literal"><span class="pre">#</span> <span class="pre">holland</span> <span class="pre">bk</span> <span class="pre">--dry-run</span> <span class="pre">weekly</span></tt>: Attempts a dry-run of the weekly
+backup-set.</p>
+<p><tt class="docutils literal"><span class="pre">#</span> <span class="pre">holland</span> <span class="pre">bk</span> <span class="pre">--no-lock</span> <span class="pre">--abort-immediately</span></tt>: Attempts a backup of all
+the default backup-sets ignoring locks and aborting immediately if one of the
+backup-sets fails.</p>
+</div>
+<div class="section" id="list-backups-lb">
+<h2>list-backups (lb)<a class="headerlink" href="#list-backups-lb" title="Permalink to this headline">¶</a></h2>
+<p><strong>Usage:</strong> <tt class="docutils literal"><span class="pre">holland</span> <span class="pre">list-backups</span></tt></p>
+<p>Provides extended information about available backups.</p>
+</div>
+<div class="section" id="list-plugins-lp">
+<h2>list-plugins (lp)<a class="headerlink" href="#list-plugins-lp" title="Permalink to this headline">¶</a></h2>
+<p><strong>Usage</strong>: <tt class="docutils literal"><span class="pre">holland</span> <span class="pre">list-plugins</span></tt></p>
+<p>Lists all the available (installed) plugins available to Holland.</p>
+</div>
+<div class="section" id="mk-config-mc">
+<h2>mk-config (mc)<a class="headerlink" href="#mk-config-mc" title="Permalink to this headline">¶</a></h2>
+<p><strong>Usage:</strong> <tt class="docutils literal"><span class="pre">holland</span> <span class="pre">mk-config</span> <span class="pre">&lt;provider&gt;</span></tt></p>
+<p>Generates a template backup-set for a particular provider (such as mysqldump).
+By default, the output is sent to standard out but can be copied to a file,
+either by using the <tt class="docutils literal"><span class="pre">--file</span></tt>, <tt class="docutils literal"><span class="pre">--edit</span></tt>, or <tt class="docutils literal"><span class="pre">-name</span></tt> options (see
+below).</p>
+<p>Additional Command Line Arguments:</p>
+<p><tt class="docutils literal"><span class="pre">--edit</span></tt>: Load the file into the system text-editor for further
+modifications.</p>
+<p><tt class="docutils literal"><span class="pre">--file=FILE</span></tt> (<tt class="docutils literal"><span class="pre">-f</span></tt>): Write the output directly to provided file.</p>
+<p><tt class="docutils literal"><span class="pre">--name=NAME</span></tt>: Creates a backup-set usable in Holland, which basically
+means that a file is created of the provided name under the backup-set
+directory.</p>
+<p><tt class="docutils literal"><span class="pre">--provider</span></tt>: Indicates that the default provider configuration should
+be outputted instead. This is really only used when creating a provider
+config specifically - it should not be used for backup-sets.</p>
+<p><strong>Examples</strong>:</p>
+<p><tt class="docutils literal"><span class="pre">#</span> <span class="pre">holland</span> <span class="pre">mk-config</span> <span class="pre">mysql-lvm</span> <span class="pre">&gt;</span> <span class="pre">mysql-lvm.conf</span></tt>: Output the default
+configuration for MySQL-LVM backups and write the contents out to
+mysql-lvm.conf in the current working directory.</p>
+<p><tt class="docutils literal"><span class="pre">#</span> <span class="pre">holland</span> <span class="pre">mc</span> <span class="pre">mysqldump</span> <span class="pre">--name=Bob</span> <span class="pre">--edit</span></tt>: Create a backup-set using
+the mysqldump provider named Bob and allow interactive editing of the
+backup-set before saving the file.</p>
+</div>
+<div class="section" id="purge-pg">
+<h2>purge (pg)<a class="headerlink" href="#purge-pg" title="Permalink to this headline">¶</a></h2>
+<p><strong>Usage:</strong> <tt class="docutils literal"><span class="pre">holland</span> <span class="pre">purge</span> <span class="pre">&lt;backup-set&gt;/&lt;backup-id&gt;</span></tt></p>
+<p>Purges old backups by specifying the backup-set name and set-id.</p>
+<p>For example:
+<tt class="docutils literal"><span class="pre">#</span> <span class="pre">holland</span> <span class="pre">purge</span> <span class="pre">mybackups/20090502_155438</span></tt>: Purge one of the backups
+taken on May 2nd, 2009 from the mybackups backup-set.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Holland Command-Line Reference</a><ul>
+<li><a class="reference internal" href="#help-h">help (h)</a></li>
+<li><a class="reference internal" href="#backup-bk">backup (bk)</a></li>
+<li><a class="reference internal" href="#list-backups-lb">list-backups (lb)</a></li>
+<li><a class="reference internal" href="#list-plugins-lp">list-plugins (lp)</a></li>
+<li><a class="reference internal" href="#mk-config-mc">mk-config (mc)</a></li>
+<li><a class="reference internal" href="#purge-pg">purge (pg)</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intro.html"
+                        title="previous chapter">Introduction to Holland</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="overview.html"
+                        title="next chapter">Usage and Implementation Overview</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/commands.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="overview.html" title="Usage and Implementation Overview"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="Introduction to Holland"
+             >previous</a> |</li>
+        <li><a href="index.html">Holland v documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Rackspace Inc..
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.4.
+    </div>
+  </body>
+</html>
