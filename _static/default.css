@@ -1,6 +1,12 @@
-/**
- * Sphinx stylesheet -- default theme
- * ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/*
+ * default.css_t
+ * ~~~~~~~~~~~~~
+ *
+ * Sphinx stylesheet -- default theme.
+ *
+ * :copyright: Copyright 2007-2010 by the Sphinx team, see AUTHORS.
+ * :license: BSD, see LICENSE for details.
+ *
  */
 
 @import url("basic.css");
@@ -10,14 +16,14 @@
 body {
     font-family: sans-serif;
     font-size: 100%;
-    background-color: #000000;
+    background-color: #11303d;
     color: #000;
     margin: 0;
     padding: 0;
 }
 
 div.document {
-    background-color: #C40022;
+    background-color: #1c4e63;
 }
 
 div.documentwrapper {
@@ -49,13 +55,13 @@ div.footer a {
 }
 
 div.related {
-    background-color: #000000;
+    background-color: #133f52;
     line-height: 30px;
     color: #ffffff;
 }
 
 div.related a {
-    color: #AAAAAA;
+    color: #ffffff;
 }
 
 div.sphinxsidebar {
@@ -98,19 +104,26 @@ div.sphinxsidebar ul {
 }
 
 div.sphinxsidebar a {
-    color: #FFFFFF;
+    color: #98dbcc;
 }
 
 div.sphinxsidebar input {
-    border: 1px solid #FFFFFF;
+    border: 1px solid #98dbcc;
     font-family: sans-serif;
     font-size: 1em;
 }
 
-/* -- body styles ----------------------------------------------------------- */
+
+
+/* -- hyperlink styles ------------------------------------------------------ */
 
 a {
-    color: #333333;
+    color: #355f7c;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #355f7c;
     text-decoration: none;
 }
 
@@ -118,10 +131,9 @@ a:hover {
     text-decoration: underline;
 }
 
-div.body p, div.body dd, div.body li {
-    text-align: justify;
-    line-height: 130%;
-}
+
+
+/* -- body styles ----------------------------------------------------------- */
 
 div.body h1,
 div.body h2,
@@ -132,7 +144,7 @@ div.body h6 {
     font-family: 'Trebuchet MS', sans-serif;
     background-color: #f2f2f2;
     font-weight: normal;
-    color: #500000;
+    color: #20435c;
     border-bottom: 1px solid #ccc;
     margin: 20px -20px 10px -20px;
     padding: 3px 0 3px 10px;
@@ -166,6 +178,18 @@ div.admonition p.admonition-title + p {
     display: inline;
 }
 
+div.admonition p {
+    margin-bottom: 5px;
+}
+
+div.admonition pre {
+    margin-bottom: 5px;
+}
+
+div.admonition ul, div.admonition ol {
+    margin-bottom: 5px;
+}
+
 div.note {
     background-color: #eee;
     border: 1px solid #ccc;
@@ -195,16 +219,38 @@ p.admonition-title:after {
 
 pre {
     padding: 5px;
-    background-color: #DDDDDD;
+    background-color: #eeffcc;
     color: #333333;
     line-height: 120%;
-    border: 1px dotted #888888;
-    /*border-left: none;
-    border-right: none; */
+    border: 1px solid #ac9;
+    border-left: none;
+    border-right: none;
 }
 
 tt {
     background-color: #ecf0f3;
     padding: 0 1px 0 1px;
     font-size: 0.95em;
+}
+
+th {
+    background-color: #ede;
+}
+
+.warning tt {
+    background: #efc2c2;
+}
+
+.note tt {
+    background: #d6d6d6;
+}
+
+.viewcode-back {
+    font-family: sans-serif;
+}
+
+div.viewcode-block:target {
+    background-color: #f4debf;
+    border-top: 1px solid #ac9;
+    border-bottom: 1px solid #ac9;
 }
