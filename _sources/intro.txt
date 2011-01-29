@@ -16,11 +16,11 @@ Dependencies
 The core Holland framework has the following requirements: 
 
 * Python >= 2.3
-* _pkg_resources: http://packages.python.org/distribute/pkg_resources.html
-* _setuptools: http://packages.python.org/distribute
+* ``pkg_resources <http://packages.python.org/distribute/pkg_resources.html>``
+* ``setuptools <http://packages.python.org/distribute>``
 
 Plugins distributed with Holland will have additional requirements. For most
 MySQL plugins you will additionally need:
 
-* _MySQLdb: http://mysql-python.sourceforge.net
+* ``MySQLdb <http://mysql-python.sourceforge.net>``
 * MySQL-4.1+ clients library and tools
