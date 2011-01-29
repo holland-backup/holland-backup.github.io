@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Introduction to Holland &mdash; Holland v1.1.0a1 documentation</title>
+    <title>Introduction to Holland &mdash; Holland v1.0.6 documentation</title>
     <link rel="stylesheet" href="_static/agogo.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '1.1.0a1',
+        VERSION:     '1.0.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,9 +22,9 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Holland v1.1.0a1 documentation" href="index.html" />
-    <link rel="next" title="Holland Config Files" href="config.html" />
-    <link rel="prev" title="Welcome to Holland’s documentation!" href="index.html" /> 
+    <link rel="top" title="Holland v1.0.6 documentation" href="index.html" />
+    <link rel="next" title="Holland Command-Line Reference" href="commands.html" />
+    <link rel="prev" title="Holland Backup Framework" href="index.html" /> 
   </head>
   <body>
     <div class="header-wrapper">
@@ -32,11 +32,11 @@
           <p class="logo"><a href="index.html">
             <img class="logo" src="_static/holland_logo_64x64.png" alt="Logo"/>
           </a></p>
-        <h1><a href="index.html">Holland v1.1.0a1 documentation</a></h1>
+        <h1><a href="index.html">Holland v1.0.6 documentation</a></h1>
         <div class="rel">
-          <a href="index.html" title="Welcome to Holland’s documentation!"
+          <a href="index.html" title="Holland Backup Framework"
              accesskey="P">previous</a> |
-          <a href="config.html" title="Holland Config Files"
+          <a href="commands.html" title="Holland Command-Line Reference"
              accesskey="N">next</a> |
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a>
@@ -61,21 +61,27 @@ focuses on MySQL, however future development will include other database
 platforms and even non-database related applications. Because of it&#8217;s
 plugin structure, Holland can be used to backup anything you want by
 whatever means you want.</p>
-<p>Plugins are as normal Python packages and loaded via setuptools&#8217; entrypoints.</p>
+<p>Plugins are provided as Python &#8220;eggs&#8221; - zip files with Python modules and
+extra metadata information.</p>
 <div class="section" id="dependencies">
 <h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
-<p>The core Holland framework has the following requirements:</p>
+<p>The core Holland framework has the following dependencies (available on any
+remotely modern Linux distribution):</p>
 <ul class="simple">
 <li>Python &gt;= 2.3</li>
-<li><tt class="docutils literal"><span class="pre">pkg_resources</span> <span class="pre">&lt;http://packages.python.org/distribute/pkg_resources.html&gt;</span></tt></li>
-<li><tt class="docutils literal"><span class="pre">setuptools</span> <span class="pre">&lt;http://packages.python.org/distribute&gt;</span></tt></li>
+<li><a class="reference external" href="http://peak.telecommunity.com/DevCenter/PkgResources">pkg_resources</a></li>
+<li><a class="reference external" href="http://peak.telecommunity.com/DevCenter/setuptools">python-setuptools</a></li>
+<li><a class="reference external" href="http://mysql-python.sourceforge.net/">MySQLdb</a></li>
 </ul>
-<p>Plugins distributed with Holland will have additional requirements. For most
-MySQL plugins you will additionally need:</p>
+<p>Additionally, the Maatkit plugin requires:</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">MySQLdb</span> <span class="pre">&lt;http://mysql-python.sourceforge.net&gt;</span></tt></li>
-<li>MySQL-4.1+ clients library and tools</li>
+<li><a class="reference external" href="http://maatkit.org">Maatkit</a></li>
+<li><a class="reference external" href="http://search.cpan.org/~kjalb/TermReadKey/ReadKey.pm">Perl-TermReadKey</a></li>
 </ul>
+<p>For Red-Hat Enterprise Linux 5, all dependencies, except for Maatkti, are
+available directly from the base channels. Red-Hat Enterprise Linux 4,
+EPEL is required for python-setuptools.</p>
+<p>Note that other providers may have additional dependency requirements.</p>
 </div>
 </div>
 
@@ -91,8 +97,9 @@ MySQL plugins you will additionally need:</p>
 <li class="toctree-l2"><a class="reference internal" href="#dependencies">Dependencies</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="config.html">Holland Config Files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="commands.html">Holland Command-Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Usage and Implementation Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Holland Config Files</a></li>
 </ul>
 
           <h3 style="margin-top: 1.5em;">Search</h3>
@@ -113,9 +120,9 @@ MySQL plugins you will additionally need:</p>
     <div class="footer-wrapper">
       <div class="footer">
         <div class="left">
-          <a href="index.html" title="Welcome to Holland’s documentation!"
+          <a href="index.html" title="Holland Backup Framework"
              >previous</a> |
-          <a href="config.html" title="Holland Config Files"
+          <a href="commands.html" title="Holland Command-Line Reference"
              >next</a> |
           <a href="genindex.html" title="General Index"
              >index</a>

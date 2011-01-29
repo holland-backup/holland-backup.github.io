@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Holland Config Files &mdash; Holland v1.1.0a1 documentation</title>
+    <title>Holland Config Files &mdash; Holland v1.0.6 documentation</title>
     <link rel="stylesheet" href="_static/agogo.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '1.1.0a1',
+        VERSION:     '1.0.6',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,9 +22,9 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="Holland v1.1.0a1 documentation" href="index.html" />
-    <link rel="next" title="Holland Command-Line Reference" href="commands.html" />
-    <link rel="prev" title="Introduction to Holland" href="intro.html" /> 
+    <link rel="top" title="Holland v1.0.6 documentation" href="index.html" />
+    <link rel="next" title="Example Provider Configuration [example]" href="provider_configs/example.html" />
+    <link rel="prev" title="Usage and Implementation Overview" href="overview.html" /> 
   </head>
   <body>
     <div class="header-wrapper">
@@ -32,11 +32,11 @@
           <p class="logo"><a href="index.html">
             <img class="logo" src="_static/holland_logo_64x64.png" alt="Logo"/>
           </a></p>
-        <h1><a href="index.html">Holland v1.1.0a1 documentation</a></h1>
+        <h1><a href="index.html">Holland v1.0.6 documentation</a></h1>
         <div class="rel">
-          <a href="intro.html" title="Introduction to Holland"
+          <a href="overview.html" title="Usage and Implementation Overview"
              accesskey="P">previous</a> |
-          <a href="commands.html" title="Holland Command-Line Reference"
+          <a href="provider_configs/example.html" title="Example Provider Configuration [example]"
              accesskey="N">next</a> |
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a>
@@ -53,85 +53,17 @@
           <div class="body">
             
   <div class="section" id="holland-config-files">
-<h1>Holland Config Files<a class="headerlink" href="#holland-config-files" title="Permalink to this headline">¶</a></h1>
+<span id="config"></span><h1>Holland Config Files<a class="headerlink" href="#holland-config-files" title="Permalink to this headline">¶</a></h1>
 <p>By default, Holland&#8217;s configuration files reside in /etc/holland. The main
-configuration file is holland.conf and there is a configuration file for
-each backup.</p>
-<div class="section" id="config-file-syntax">
-<h2>Config File Syntax<a class="headerlink" href="#config-file-syntax" title="Permalink to this headline">¶</a></h2>
-<p>Holland uses ini-like files very similar to MySQL&#8217;s .cnf format. These consist
-of five basic syntax elements</p>
-<ul class="simple">
-<li>comments.  Comments in a config file always start with &#8216;#&#8217; and go to the end
-of a line.</li>
-<li>blank lines.</li>
-<li>sections.  Sections are contained within square brackets and group options
-together.</li>
-<li>options.  Options are in key = value format.  A value may span multiple lines.</li>
-<li>include directives.  As of Holland 1.1.0 the config file format supports
-%include directives in a config file in order to include other config files</li>
-</ul>
-<div class="section" id="multi-line-values">
-<h3>Multi-line values<a class="headerlink" href="#multi-line-values" title="Permalink to this headline">¶</a></h3>
-<p>Holland 1.1 supports option values that span multiple lines. Each additional
-line must start with one-or-more spaces and the value will be considered a
-continuation of the original option.</p>
-<p>A quick multi-line example:</p>
-<div class="highlight-python"><pre>[mysqldump]
-databases = test,
-            dev,
-            staging,
-            other</pre>
-</div>
-<p>This is most commonly used for very long option values - for instance the
-mysqldump plugins accepts lists of patterns to include or exclude and in
-some cases these can get longer than will neatly fit on a standard
-80-character line.</p>
-</div>
-<div class="section" id="include-directives">
-<h3>Include directives<a class="headerlink" href="#include-directives" title="Permalink to this headline">¶</a></h3>
-<p>Include directives allow neatly merging multiple configurations together.
-A include directive starts with %include followed by a path.</p>
-<p>A quick include example:</p>
-<div class="highlight-python"><pre>[mysqldump]
-%include /etc/holland/staging-exclusion.conf</pre>
-</div>
-<p>staging-exclusions.conf:</p>
-<div class="highlight-python"><pre>[mysqldump]
-exclude-databases = production*,
-                    testing*,
-                    mysql*
-
-exclude-tables = *.log</pre>
-</div>
-</div>
-<div class="section" id="examples">
-<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
-<p>Here is a more thorough example that demonstrates all of the features of a
-Holland 1.1 config file.</p>
-<p>daily-backups.conf:</p>
-<div class="highlight-python"><pre># This is the basic backup configuration that is the same across all backup
-# plugins
-[holland:backup]
-plugin = mysqldump  # this notes which backup plugin should be used
-
-# The mysqldump plugin looks for options in a [mysqldump] section
-[mysqldump]
-databases = foo, bar, baz
-file-per-database = yes
-
-# include a global authentication file - this is shared among multiple
-# mysql plugins
-%include /etc/holland/mysql-global-auth.conf</pre>
-</div>
-<p>mysql-global-auth.conf:</p>
-<div class="highlight-python"><pre>[mysql:client]
-user = holland-backup
-password = holland-backup-password
-socket = /tmp/custom_socket_location.sock</pre>
-</div>
-</div>
-</div>
+configuration file is holland.conf, however there are a number of other
+configuration files for configuring default settings for providers and for
+configuring backup sets.</p>
+<p>Each configuration file has one ore more sections, defined by square
+brackets Underneath each section, one or more configuration option
+can be specified. These options are in a standard &#8220;option = value&#8221; format.
+Comments are prefixed by the # sign.</p>
+<p>Note that many settings have default values and, as a result, can either
+be commented out or omitted entirely.</p>
 <div class="section" id="holland-conf-main-config">
 <h2>holland.conf - main config<a class="headerlink" href="#holland-conf-main-config" title="Permalink to this headline">¶</a></h2>
 <p>The main configuration file (usually /etc/holland/holland.conf) defines
@@ -148,7 +80,7 @@ list but usually does not need to be modified.</p>
 
 <span class="target" id="holland-config-backup-directory"></span><dl class="describe">
 <dt>
-<tt class="descname">backup-directory</tt></dt>
+<tt class="descname">backup_directory</tt></dt>
 <dd><p>Top-level directory where backups are held.</p>
 </dd></dl>
 
@@ -168,26 +100,8 @@ default.</p>
 
 <dl class="describe">
 <dt>
-<tt class="descname">path (optional)</tt></dt>
-<dd><p>Defines a command search path for processes spawned by holland</p>
-</dd></dl>
-
-<dl class="describe">
-<dt>
-<tt class="descname">tmpdir (optional)</tt></dt>
-<dd><p>Sets the temporary directory used by holland and its plugin when
-generating temporary files.</p>
-<p>If tmpdir is unset then this will be set the first directory the user
-can create files in from the following list:</p>
-<ol class="arabic simple">
-<li>The directory named by the TMPDIR environment variable.</li>
-<li>The directory named by the TEMP environment variable.</li>
-<li>The directory named by the TMP environment variable.</li>
-<li>A platform-specific location:
-On Windows, the directories C:TEMP, C:TMP, TEMP, and TMP, in that order.
-On all other platforms, the directories /tmp, /var/tmp, and /usr/tmp, in that order.
-As a last resort, the current working directory.</li>
-</ol>
+<tt class="descname">path</tt></dt>
+<dd><p>Defines a path for holland and its spawned processes</p>
 </dd></dl>
 
 </div>
@@ -196,7 +110,7 @@ As a last resort, the current working directory.</li>
 <dl class="describe">
 <dt>
 <tt class="descname">filename</tt></dt>
-<dd><p>The log file holland should write all logging messages to.</p>
+<dd><p>The log file itself.</p>
 </dd></dl>
 
 <dl class="describe">
@@ -210,18 +124,36 @@ As a last resort, the current working directory.</li>
 </div>
 <div class="section" id="provider-configs">
 <h2>Provider Configs<a class="headerlink" href="#provider-configs" title="Permalink to this headline">¶</a></h2>
-<p>These files allow configuring the defaults for all backup configurations that
-use a particular plugin.  This was useful before Holland 1.1&#8217;s %include
-directive to manage global settings for multiple backup configs that use the
-same plugin - for instance daily and weekly mysqldump backups.</p>
-<p>Holland will load the main backup configuration and will merge this configuration
-with the providers/$plugin.conf if it exists.  By default holland looks for the
-providers directory within the same directory as the holland.conf.  So for a
-standard install of Holland there will be /etc/holland/holland.conf and the
-global providers config files will be under /etc/holland/providers/.</p>
-<p>This functionality is largely deprecated as of Holland 1.1 and it is recommended
-that you use %include functionality to achieve the same effect in a more flexible
-way.</p>
+<p>These files control the global settings / defaults for the providers used by
+the backup-sets. Many of these global settings can be overridden if defined
+in a backup-set. Note that each provider&#8217;s configuration file should begin
+with <tt class="docutils literal"><span class="pre">[provider-name]</span></tt>.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="provider_configs/example.html">Example Provider Configuration [example]</a></li>
+<li class="toctree-l1"><a class="reference internal" href="provider_configs/mysqldump.html">mysqldump Provider Configuration [mysqldump]</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="provider_configs/mysqldump.html#database-and-table-filtering">Database and Table filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="provider_configs/mysqldump.html#compression">[compression]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="provider_configs/mysqldump.html#mysql-client">[mysql:client]</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="provider_configs/mysqlhotcopy.html">MySQL Hot Copy Provider Configuration [mysqlhotcopy]</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="provider_configs/mysqlhotcopy.html#database-and-table-filtering">Database and Table filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="provider_configs/mysqlhotcopy.html#mysql-client">[mysql:client]</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="provider_configs/maatkit.html">Maatkit Provider Configuration [maatkit]</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="provider_configs/maatkit.html#database-and-table-filtering">Database and table filtering</a></li>
+<li class="toctree-l2"><a class="reference internal" href="provider_configs/maatkit.html#mysql-client">[mysql:client]</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="provider_configs/mysql-lvm.html">MySQL LVM Provider Configuration [mysql-lvm]</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="provider_configs/mysql-lvm.html#compression">[compression]</a></li>
+<li class="toctree-l2"><a class="reference internal" href="provider_configs/mysql-lvm.html#mysql-client">[mysql:client]</a></li>
+</ul>
+</li>
+</ul>
+</div>
 </div>
 <div class="section" id="backup-set-configs">
 <h2>Backup-Set Configs<a class="headerlink" href="#backup-set-configs" title="Permalink to this headline">¶</a></h2>
@@ -271,14 +203,14 @@ corresponding to the backup-set name followed by a date-encoded directory.</p>
           <h3>Table Of Contents</h3>
           <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction to Holland</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Holland Command-Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Usage and Implementation Overview</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="">Holland Config Files</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#config-file-syntax">Config File Syntax</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#holland-conf-main-config">holland.conf - main config</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#provider-configs">Provider Configs</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#backup-set-configs">Backup-Set Configs</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="commands.html">Holland Command-Line Reference</a></li>
 </ul>
 
           <h3 style="margin-top: 1.5em;">Search</h3>
@@ -299,9 +231,9 @@ corresponding to the backup-set name followed by a date-encoded directory.</p>
     <div class="footer-wrapper">
       <div class="footer">
         <div class="left">
-          <a href="intro.html" title="Introduction to Holland"
+          <a href="overview.html" title="Usage and Implementation Overview"
              >previous</a> |
-          <a href="commands.html" title="Holland Command-Line Reference"
+          <a href="provider_configs/example.html" title="Example Provider Configuration [example]"
              >next</a> |
           <a href="genindex.html" title="General Index"
              >index</a>
