@@ -22,10 +22,7 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Holland v1.0.6 documentation" href="../index.html" />
-    <link rel="up" title="mysqldump Provider Configuration [mysqldump]" href="mysqldump.html" />
-    <link rel="next" title="[compression]" href="compression.html" />
-    <link rel="prev" title="mysqldump Provider Configuration [mysqldump]" href="mysqldump.html" /> 
+    <link rel="top" title="Holland v1.0.6 documentation" href="../index.html" /> 
   </head>
   <body>
     <div class="header-wrapper">
@@ -35,10 +32,6 @@
           </a></p>
         <h1><a href="../index.html">Holland v1.0.6 documentation</a></h1>
         <div class="rel">
-          <a href="mysqldump.html" title="mysqldump Provider Configuration [mysqldump]"
-             accesskey="P">previous</a> |
-          <a href="compression.html" title="[compression]"
-             accesskey="N">next</a> |
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a>
         </div>
@@ -55,10 +48,12 @@
             
   <div class="section" id="database-and-table-filtering">
 <h1>Database and Table filtering<a class="headerlink" href="#database-and-table-filtering" title="Permalink to this headline">¶</a></h1>
-<p><strong>databases</strong> = &lt;glob&gt;</p>
-<p><strong>exclude-databases</strong> = &lt;glob&gt;</p>
-<p><strong>tables</strong> = &lt;glob&gt;</p>
-<p><strong>exclude-tables</strong> = &lt;glob&gt;</p>
+<p><strong>databases</strong> = &lt;glob-list&gt;</p>
+<p><strong>exclude-databases</strong> = &lt;glob-list&gt;</p>
+<p><strong>tables</strong> = &lt;glob-list&gt;</p>
+<p><strong>exclude-tables</strong> = &lt;glob-list&gt;</p>
+<p><strong>engines</strong> = &lt;glob-list&gt;</p>
+<p><strong>exclude-engines</strong> = &lt;glob-list&gt;</p>
 <p>The above options accepts GLOBs in comma-separated lists. Multiple
 filtering options can be specified. When filtering on tables, be sure to
 include both the database and table name.</p>
@@ -71,14 +66,19 @@ opposed to putting quotes around all statements.</p>
 tables = *</pre>
 </div>
 <p>Using database inclusion and exclusions:</p>
-<div class="highlight-python"><pre>databases = drupal*, smf_forum,
-exclude-databases = drupal5</pre>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">databases</span> <span class="o">=</span> <span class="s">&quot;drupal*&quot;</span><span class="p">,</span> <span class="s">&quot;smf_forum&quot;</span><span class="p">,</span>
+<span class="n">exclude</span><span class="o">-</span><span class="n">databases</span> <span class="o">=</span> <span class="n">drupal5</span>
+</pre></div>
 </div>
 <p>Including Tables:</p>
 <div class="highlight-python"><pre>tables = phpBB.sucks, drupal6.node*, smf_forum.*</pre>
 </div>
 <p>Excluding Tables:</p>
 <div class="highlight-python"><pre>exclude-tables = mydb.uselesstable1, x_cart.*, *.sessions</pre>
+</div>
+<p>Excluding Engines:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">exclude</span><span class="o">-</span><span class="n">engines</span> <span class="o">=</span> <span class="n">MyISAM</span><span class="p">,</span> <span class="n">Archive</span>
+</pre></div>
 </div>
 </div>
 
@@ -114,10 +114,6 @@ exclude-databases = drupal5</pre>
     <div class="footer-wrapper">
       <div class="footer">
         <div class="left">
-          <a href="mysqldump.html" title="mysqldump Provider Configuration [mysqldump]"
-             >previous</a> |
-          <a href="compression.html" title="[compression]"
-             >next</a> |
           <a href="../genindex.html" title="General Index"
              >index</a>
             <br/>

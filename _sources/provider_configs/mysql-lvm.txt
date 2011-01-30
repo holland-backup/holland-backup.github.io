@@ -1,8 +1,10 @@
 .. _config-mysql-lvm:
 
-MySQL LVM Provider Configuration [mysql-lvm]
-============================================
+MySQL LVM Backup Plugin Configuration
+=====================================
 
+[mysql-lvm]
+-----------
 **snapshot-size** = <size-in-MB>
 
     The size of the snapshot itself. By default it is 20% of the size of  the 
@@ -40,16 +42,40 @@ MySQL LVM Provider Configuration [mysql-lvm]
     FLUSH TABLES WITH READ LOCK. Should make the FLUSH TABLES WITH READ LOCK
     operation a bit faster.
 
-[compression]
--------------
-.. toctree::
-    :maxdepth: 1
+[tar]
+-----
 
-    compression
+**exclude** = <list-of-patterns>
 
-[mysql:client]
---------------
-.. toctree::
-    :maxdepth: 1
+    This can be used to exclude particular patterns in the MySQL datadir. The
+    patterns are mapped directly to a tar --exclude option.  By default we
+    will exclude the 'mysql.sock' file but other common files that may be
+    worth excluding are binary logs or relay logs that don't need included
+    in the main backup.
 
-    mysqlconfig
+[mysqld]
+--------
+
+These option control the mysqld bootstrap process that is started when
+``innodb-recovery`` is enabled.
+
+**mysqld-exe** = path  (default: first of mysqld on path or /usr/libexec/mysqld)
+
+    Specify the path to find the mysqld server binary that should be used.
+
+**user** = <string> (default: "mysql")
+
+    User to run mysqld as.
+
+**innodb-buffer-pool-size** = <size> (default: 128M)
+
+    Size of the InnoDB buffer pool.  This should be significantly smaller than
+    the main instance's buffer pool to avoid swapping.
+
+**tmpdir**
+
+    tmpdir setting to use for the bootstrap mysql process
+
+.. include:: compression.rst
+
+.. include:: mysqlconfig.rst

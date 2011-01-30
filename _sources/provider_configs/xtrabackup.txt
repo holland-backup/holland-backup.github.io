@@ -1,0 +1,31 @@
+.. _config-xtrabackup:
+
+Xtrabackup Plugin Configuration
+===============================
+Note: The xtrabackup plugin currently supports --stream mode only.
+
+[xtrabackup]
+------------
+
+**global-defaults** = <path> (default: /etc/my.cnf)
+
+  Path to the global my.cnf.  This is passed to innobackup-1.5.1 via the
+  --defaults-file opton.
+
+**innobackupex** = <path> (default: innobackupex-1.5.1)
+
+  Name of the innobackupex script to use
+
+**slave-info** = <boolean>
+
+    Whether to include replication information in the backup
+
+**no-lock** = <boolean>
+
+    Whether to lock at the end of the backup while archiving non-InnoDB data.
+    This is useful if you are entirely or almost entirely using InnoDB and
+    non-InnoDB tables can be easily synchronized by other methods.
+
+.. include:: compression.rst
+
+.. include:: mysqlconfig.rst

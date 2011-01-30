@@ -1,4 +1,4 @@
-MySQL connection info [mysql:client]
+[mysql:client]
 ------------------------------------
 
 These are optional and, if left undefined, Holland will try to login using

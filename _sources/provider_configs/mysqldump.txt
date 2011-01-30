@@ -1,7 +1,19 @@
 .. _config-mysqldump:
 
-mysqldump Provider Configuration [mysqldump]
-============================================
+MySQLDump Backup Plugin Configuration
+=====================================
+
+[mysqldump]
+-----------
+**extra-defaults** = yes | no (default: no)
+
+    Allow mysqldump to read global configuration files.  By default this
+    plugin will run mysqldump with --defaults-file=<generate-config.cnf> and
+    mysqldump will only read the options defined by holland.  If you would
+    prefer mysqldump to additionally read defaults from /etc/my.cnf you
+    can enable extra-defaults and holland will execute mysqldump with
+    --defaults-extra-file and holland mysqldump settings will simply
+    override and be in addition to the global settings.
 
 **mysql-binpath** = /path/to/mysql/bin
 
@@ -49,6 +61,11 @@ mysqldump Provider Configuration [mysqldump]
         up a slave and only after the slave has been turned off 
         (ie, this can be used with the **stop-slave** option).
     
+**max-allowed-packet** = size (default: 128M)
+
+   Specify an explicit max-allowed-packet option to pass to the mysqldump
+   command executed by this plugin.
+
 **dump-routines** = yes | no
 
     Whether or not to backup routines in the backup set directly. Routines
@@ -107,25 +124,17 @@ mysqldump Provider Configuration [mysqldump]
     Can optionally specify additional options directly to ``mysqldump`` if
     there is no native Holland option for it.
 
-Database and Table filtering
-----------------------------
-.. toctree::
-    :maxdepth: 1
+**estimate-method** = plugin | const:<size> 
 
-    databasefiltering
+    Change how this plugin estimates the backup size.  By default the MySQL
+    metadata (either information schema or SHOW TABLE STATUS) will be crawled
+    and the data+index size will be used as an estimate.  You can largely skip
+    this overhead by specifying a constant size.  Note this plugin will still
+    need to look at SHOW DATABASES/SHOW TABLES to perform any requested table
+    filtering.
 
+.. include:: databasefiltering.rst
 
-[compression]
--------------
-.. toctree::
-    :maxdepth: 1
+.. include:: compression.rst
 
-    compression
-
-
-[mysql:client]
---------------
-.. toctree::
-    :maxdepth: 1
-
-    mysqlconfig
+.. include:: mysqlconfig.rst

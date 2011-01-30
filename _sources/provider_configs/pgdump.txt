@@ -1,0 +1,36 @@
+.. _config-pgdump:
+
+PGDump Backup Plugin
+====================
+
+[pgdump]
+--------
+
+**format** = plain | tar | custom (default: custom)
+
+    Format to specify to pg_dump.
+
+**role** = <name>
+
+    Speicfy the role name used to create the dump.  This will be passed
+    to pg_dump --role and also used when determining what databases to
+    backup.
+
+**additional-options** = <string>
+
+    Specifiy additional options to be passed to the pg_dump command.
+
+.. include:: compression.rst
+
+[pgauth]
+--------
+
+Authentication settings
+
+**username** = <string>
+
+**password** = <string>
+
+**hostname** = <string>
+
+**port** = <string>

@@ -56,17 +56,17 @@
 <h1>Usage and Implementation Overview<a class="headerlink" href="#usage-and-implementation-overview" title="Permalink to this headline">¶</a></h1>
 <p>Because Holland is very pluggable, it may first seem a bit confusing when
 it comes to configuring Holland to do something useful. Out of the box,
-Holland is designed to backup MySQL databases using the mysqldump provider.
+Holland is designed to backup MySQL databases using the mysqldump plugins.
 This is the simplest setup, and may be sufficient for most people. However,
 others may wish to have more fine-grained control over their backups and/or
 use another method other than mysqldump.</p>
 <p>For instance, one can configure a backup set to backup certain databases
 using mysqldump, others using the mysql-lvm plugins etc. All this is done
-by a mix of providers and backup-sets.</p>
+by a mix of pluginss and backup-sets.</p>
 <div class="section" id="backup-sets">
 <h2>Backup-Sets<a class="headerlink" href="#backup-sets" title="Permalink to this headline">¶</a></h2>
-<p>Each backup-set implements exactly one provider and will inherit the default
-values of that provider. These values can be overridden to adjust the
+<p>Each backup-set implements exactly one plugins and will inherit the default
+values of that plugins. These values can be overridden to adjust the
 behavior of the backup set. This includes defining what databases or tables
 to include (or exclude) in the backup, the type of compression used (if
 any), what locking method to use, among other things.</p>
@@ -74,44 +74,55 @@ any), what locking method to use, among other things.</p>
 <div class="section" id="providers">
 <h2>Providers<a class="headerlink" href="#providers" title="Permalink to this headline">¶</a></h2>
 <p>Providers essentially provide a backup service for use in a backup set.
-As of Holland 0.5, there are 5 providers:</p>
+As of Holland 1.0.6, there are 5 backup plugins:</p>
 <ul>
 <li><p class="first">mysqldump</p>
 <blockquote>
 <p>Uses the <tt class="docutils literal"><span class="pre">mysqldump</span></tt> utility to backup databases.</p>
 </blockquote>
 </li>
-<li><p class="first">Example</p>
-<blockquote>
-<p>This is used solely as a template for designing providers. It otherwise
-does nothing.</p>
-</blockquote>
-</li>
-<li><p class="first">MySQL + LVM</p>
+<li><p class="first">mysql-lvm/mysqldump-lvm</p>
 <blockquote>
 <p>Backup MySQL databases using LVM snapshots which allows for near lockless
-or fully lockless (when transactional engines are used) backups.</p>
-</blockquote>
+or fully lockless (when transactional engines are used) backups.
+Holland&#8217;s mysql-lvm package includes two LVM plugins:</p>
+<ul>
+<li><p class="first">mysql-lvm - archives the MySQL datadir on a snapshot using tar</p>
+</li>
+<li><dl class="first docutils">
+<dt>mysqldump-lvm - runs mysqldump against a temporary mysql instance</dt>
+<dd><p class="first last">running on the snapshot. This supports all the same
+options as the normal mysqldump plugin but can
+reduce locking incurred by mysqldump by using the
+snapshot data.</p>
+</dd>
+</dl>
 </li>
 </ul>
-<p>There are also plans to eventually implement the following providers:</p>
-<ul>
-<li><p class="first">MySQL Cluster</p>
+</blockquote>
+</li>
+<li><p class="first">xtrabackup</p>
 <blockquote>
-<p>MySQL Cluster already offers a simple way of producing lockless backups,
-however these methods do not often include table-creation data,
-routines, etc. In addition, backups from the Cluster are stored on
-each of the Data Nodes.</p>
-<p>Therefore, this provider would facilitate backing up and aggregating
-the Cluster backups into one centralized location, as well as backing
-up the periphery data necessary should a full restore be necessary.</p>
+<p>Backup MySQL databases using Percona&#8217;s xtrabackup InnoDB hot backup
+utility. This works well for heavy InnoDB deployment particularly where
+LVM or other filesystem snapshots do not.
+Currently this is limited to performing streaming backups with tar4ibd
+which may not be suitable for all environments.</p>
+</blockquote>
+</li>
+<li><p class="first">pgdump</p>
+<blockquote>
+<p>Backup Postgres databases using the pg_dump utility.</p>
 </blockquote>
 </li>
 </ul>
 <p>As Holland is a framework, it can actually backup most anything as long
-as there is a provider for it. This includes things that have nothing to do
+as there is a plugins for it. This includes things that have nothing to do
 with databases. The idea is to present an easy to use and clear method
 of backing up and restoring backups no matter the source.</p>
+<p>If the current plugins do not meet your needs and you have idea for new ways
+of running backups through holland join the discussion list at:</p>
+<p><a class="reference external" href="https://launchpad.net/~holland-discuss">https://launchpad.net/~holland-discuss</a></p>
 </div>
 </div>
 

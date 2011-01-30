@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>[compression] &mdash; Holland v1.0.6 documentation</title>
+    <title>PGDump Backup Plugin &mdash; Holland v1.0.6 documentation</title>
     <link rel="stylesheet" href="../_static/agogo.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -22,7 +22,9 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="Holland v1.0.6 documentation" href="../index.html" /> 
+    <link rel="top" title="Holland v1.0.6 documentation" href="../index.html" />
+    <link rel="up" title="Holland Config Files" href="../config.html" />
+    <link rel="prev" title="Xtrabackup Plugin Configuration" href="xtrabackup.html" /> 
   </head>
   <body>
     <div class="header-wrapper">
@@ -32,6 +34,8 @@
           </a></p>
         <h1><a href="../index.html">Holland v1.0.6 documentation</a></h1>
         <div class="rel">
+          <a href="xtrabackup.html" title="Xtrabackup Plugin Configuration"
+             accesskey="P">previous</a> |
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a>
         </div>
@@ -46,8 +50,24 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="compression">
-<h1>[compression]<a class="headerlink" href="#compression" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="pgdump-backup-plugin">
+<span id="config-pgdump"></span><h1>PGDump Backup Plugin<a class="headerlink" href="#pgdump-backup-plugin" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="pgdump">
+<h2>[pgdump]<a class="headerlink" href="#pgdump" title="Permalink to this headline">¶</a></h2>
+<p><strong>format</strong> = plain | tar | custom (default: custom)</p>
+<blockquote>
+Format to specify to pg_dump.</blockquote>
+<p><strong>role</strong> = &lt;name&gt;</p>
+<blockquote>
+Speicfy the role name used to create the dump.  This will be passed
+to pg_dump &#8211;role and also used when determining what databases to
+backup.</blockquote>
+<p><strong>additional-options</strong> = &lt;string&gt;</p>
+<blockquote>
+Specifiy additional options to be passed to the pg_dump command.</blockquote>
+</div>
+<div class="section" id="compression">
+<h2>[compression]<a class="headerlink" href="#compression" title="Permalink to this headline">¶</a></h2>
 <p>Specify various compression settings, such as compression utility,
 compression level, etc.</p>
 <p><strong>method</strong> = gzip | pigz | bzip | lzop | lzma</p>
@@ -68,6 +88,15 @@ compression ratio, but the faster the backup will take. Generally,
 setting the lever to 1 or 2 results in favorable compression of
 textual data and is noticeably faster than the higher levels.
 Setting the level to 0 effectively disables compression.</blockquote>
+</div>
+<div class="section" id="pgauth">
+<h2>[pgauth]<a class="headerlink" href="#pgauth" title="Permalink to this headline">¶</a></h2>
+<p>Authentication settings</p>
+<p><strong>username</strong> = &lt;string&gt;</p>
+<p><strong>password</strong> = &lt;string&gt;</p>
+<p><strong>hostname</strong> = &lt;string&gt;</p>
+<p><strong>port</strong> = &lt;string&gt;</p>
+</div>
 </div>
 
 
@@ -102,10 +131,12 @@ Setting the level to 0 effectively disables compression.</blockquote>
     <div class="footer-wrapper">
       <div class="footer">
         <div class="left">
+          <a href="xtrabackup.html" title="Xtrabackup Plugin Configuration"
+             >previous</a> |
           <a href="../genindex.html" title="General Index"
              >index</a>
             <br/>
-            <a href="../_sources/provider_configs/compression.txt"
+            <a href="../_sources/provider_configs/pgdump.txt"
                rel="nofollow">Show Source</a>
         </div>
 

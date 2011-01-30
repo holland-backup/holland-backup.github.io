@@ -1,13 +1,17 @@
 Database and Table filtering
 ----------------------------
 
-**databases** = <glob>
+**databases** = <glob-list>
 
-**exclude-databases** = <glob>
+**exclude-databases** = <glob-list>
 
-**tables** = <glob>
+**tables** = <glob-list>
 
-**exclude-tables** = <glob>
+**exclude-tables** = <glob-list>
+
+**engines** = <glob-list>
+
+**exclude-engines** = <glob-list>
 
 The above options accepts GLOBs in comma-separated lists. Multiple 
 filtering options can be specified. When filtering on tables, be sure to 
@@ -26,7 +30,7 @@ Default (backup everything)::
 
 Using database inclusion and exclusions::
 
- databases = drupal*, smf_forum, 
+ databases = "drupal*", "smf_forum",
  exclude-databases = drupal5
 
 Including Tables::
@@ -36,4 +40,9 @@ Including Tables::
 Excluding Tables::
 
   exclude-tables = mydb.uselesstable1, x_cart.*, *.sessions
+
+Excluding Engines::
+
+  exclude-engines = MyISAM, Archive
+
 

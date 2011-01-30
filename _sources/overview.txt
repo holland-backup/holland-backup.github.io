@@ -3,20 +3,20 @@ Usage and Implementation Overview
 
 Because Holland is very pluggable, it may first seem a bit confusing when
 it comes to configuring Holland to do something useful. Out of the box,
-Holland is designed to backup MySQL databases using the mysqldump provider.
+Holland is designed to backup MySQL databases using the mysqldump plugins.
 This is the simplest setup, and may be sufficient for most people. However, 
 others may wish to have more fine-grained control over their backups and/or 
 use another method other than mysqldump.
 
 For instance, one can configure a backup set to backup certain databases
 using mysqldump, others using the mysql-lvm plugins etc. All this is done
-by a mix of providers and backup-sets.
+by a mix of pluginss and backup-sets.
 
 Backup-Sets
 ^^^^^^^^^^^
 
-Each backup-set implements exactly one provider and will inherit the default
-values of that provider. These values can be overridden to adjust the
+Each backup-set implements exactly one plugins and will inherit the default
+values of that plugins. These values can be overridden to adjust the
 behavior of the backup set. This includes defining what databases or tables
 to include (or exclude) in the backup, the type of compression used (if 
 any), what locking method to use, among other things.
@@ -25,36 +25,43 @@ Providers
 ^^^^^^^^^
 
 Providers essentially provide a backup service for use in a backup set. 
-As of Holland 0.5, there are 5 providers:
+As of Holland 1.0.6, there are 5 backup plugins:
 
 * mysqldump
 
     Uses the ``mysqldump`` utility to backup databases.
 
-* Example
-
-    This is used solely as a template for designing providers. It otherwise
-    does nothing.
-
-* MySQL + LVM
+* mysql-lvm/mysqldump-lvm
 
     Backup MySQL databases using LVM snapshots which allows for near lockless 
     or fully lockless (when transactional engines are used) backups.
+    Holland's mysql-lvm package includes two LVM plugins:
     
-There are also plans to eventually implement the following providers:    
-    
-* MySQL Cluster
+    + mysql-lvm - archives the MySQL datadir on a snapshot using tar
+    + mysqldump-lvm - runs mysqldump against a temporary mysql instance 
+                      running on the snapshot. This supports all the same
+                      options as the normal mysqldump plugin but can
+                      reduce locking incurred by mysqldump by using the
+                      snapshot data.
+ 
+* xtrabackup
 
-    MySQL Cluster already offers a simple way of producing lockless backups,
-    however these methods do not often include table-creation data,
-    routines, etc. In addition, backups from the Cluster are stored on 
-    each of the Data Nodes.
-    
-    Therefore, this provider would facilitate backing up and aggregating
-    the Cluster backups into one centralized location, as well as backing
-    up the periphery data necessary should a full restore be necessary.
+    Backup MySQL databases using Percona's xtrabackup InnoDB hot backup 
+    utility. This works well for heavy InnoDB deployment particularly where
+    LVM or other filesystem snapshots do not.
+    Currently this is limited to performing streaming backups with tar4ibd
+    which may not be suitable for all environments.
+
+* pgdump
+
+    Backup Postgres databases using the pg_dump utility.
 
 As Holland is a framework, it can actually backup most anything as long
-as there is a provider for it. This includes things that have nothing to do 
+as there is a plugins for it. This includes things that have nothing to do 
 with databases. The idea is to present an easy to use and clear method
 of backing up and restoring backups no matter the source.
+
+If the current plugins do not meet your needs and you have idea for new ways
+of running backups through holland join the discussion list at:
+
+https://launchpad.net/~holland-discuss

@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>mysqldump Provider Configuration [mysqldump] &mdash; Holland v1.0.6 documentation</title>
+    <title>MySQLDump Backup Plugin Configuration &mdash; Holland v1.0.6 documentation</title>
     <link rel="stylesheet" href="../_static/agogo.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -24,8 +24,8 @@
     <script type="text/javascript" src="../_static/doctools.js"></script>
     <link rel="top" title="Holland v1.0.6 documentation" href="../index.html" />
     <link rel="up" title="Holland Config Files" href="../config.html" />
-    <link rel="next" title="Database and Table filtering" href="databasefiltering.html" />
-    <link rel="prev" title="Example Provider Configuration [example]" href="example.html" /> 
+    <link rel="next" title="MySQL LVM Backup Plugin Configuration" href="mysql-lvm.html" />
+    <link rel="prev" title="Holland Config Files" href="../config.html" /> 
   </head>
   <body>
     <div class="header-wrapper">
@@ -35,9 +35,9 @@
           </a></p>
         <h1><a href="../index.html">Holland v1.0.6 documentation</a></h1>
         <div class="rel">
-          <a href="example.html" title="Example Provider Configuration [example]"
+          <a href="../config.html" title="Holland Config Files"
              accesskey="P">previous</a> |
-          <a href="databasefiltering.html" title="Database and Table filtering"
+          <a href="mysql-lvm.html" title="MySQL LVM Backup Plugin Configuration"
              accesskey="N">next</a> |
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a>
@@ -53,8 +53,19 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="mysqldump-provider-configuration-mysqldump">
-<span id="config-mysqldump"></span><h1>mysqldump Provider Configuration [mysqldump]<a class="headerlink" href="#mysqldump-provider-configuration-mysqldump" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="mysqldump-backup-plugin-configuration">
+<span id="config-mysqldump"></span><h1>MySQLDump Backup Plugin Configuration<a class="headerlink" href="#mysqldump-backup-plugin-configuration" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="mysqldump">
+<h2>[mysqldump]<a class="headerlink" href="#mysqldump" title="Permalink to this headline">¶</a></h2>
+<p><strong>extra-defaults</strong> = yes | no (default: no)</p>
+<blockquote>
+Allow mysqldump to read global configuration files.  By default this
+plugin will run mysqldump with &#8211;defaults-file=&lt;generate-config.cnf&gt; and
+mysqldump will only read the options defined by holland.  If you would
+prefer mysqldump to additionally read defaults from /etc/my.cnf you
+can enable extra-defaults and holland will execute mysqldump with
+&#8211;defaults-extra-file and holland mysqldump settings will simply
+override and be in addition to the global settings.</blockquote>
 <p><strong>mysql-binpath</strong> = /path/to/mysql/bin</p>
 <blockquote>
 Defines the location of the MySQL binary utilities. If not provided,
@@ -107,6 +118,10 @@ up a slave and only after the slave has been turned off
 </li>
 </ul>
 </blockquote>
+<p><strong>max-allowed-packet</strong> = size (default: 128M)</p>
+<blockquote>
+Specify an explicit max-allowed-packet option to pass to the mysqldump
+command executed by this plugin.</blockquote>
 <p><strong>dump-routines</strong> = yes | no</p>
 <blockquote>
 Whether or not to backup routines in the backup set directly. Routines
@@ -158,29 +173,87 @@ be difficult if multiple databases are defined in the backup set.</blockquote>
 <blockquote>
 Can optionally specify additional options directly to <tt class="docutils literal"><span class="pre">mysqldump</span></tt> if
 there is no native Holland option for it.</blockquote>
+<p><strong>estimate-method</strong> = plugin | const:&lt;size&gt;</p>
+<blockquote>
+Change how this plugin estimates the backup size.  By default the MySQL
+metadata (either information schema or SHOW TABLE STATUS) will be crawled
+and the data+index size will be used as an estimate.  You can largely skip
+this overhead by specifying a constant size.  Note this plugin will still
+need to look at SHOW DATABASES/SHOW TABLES to perform any requested table
+filtering.</blockquote>
+</div>
 <div class="section" id="database-and-table-filtering">
 <h2>Database and Table filtering<a class="headerlink" href="#database-and-table-filtering" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="databasefiltering.html">Database and Table filtering</a></li>
-</ul>
+<p><strong>databases</strong> = &lt;glob-list&gt;</p>
+<p><strong>exclude-databases</strong> = &lt;glob-list&gt;</p>
+<p><strong>tables</strong> = &lt;glob-list&gt;</p>
+<p><strong>exclude-tables</strong> = &lt;glob-list&gt;</p>
+<p><strong>engines</strong> = &lt;glob-list&gt;</p>
+<p><strong>exclude-engines</strong> = &lt;glob-list&gt;</p>
+<p>The above options accepts GLOBs in comma-separated lists. Multiple
+filtering options can be specified. When filtering on tables, be sure to
+include both the database and table name.</p>
+<p>Be careful with quotes. Normally these are not needed, but  when quotes
+are necessary, be sure to only quote each filtering statement, as
+opposed to putting quotes around all statements.</p>
+<p>Below are a few examples of how these can be applied:</p>
+<p>Default (backup everything):</p>
+<div class="highlight-python"><pre>databases = *
+tables = *</pre>
+</div>
+<p>Using database inclusion and exclusions:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">databases</span> <span class="o">=</span> <span class="s">&quot;drupal*&quot;</span><span class="p">,</span> <span class="s">&quot;smf_forum&quot;</span><span class="p">,</span>
+<span class="n">exclude</span><span class="o">-</span><span class="n">databases</span> <span class="o">=</span> <span class="n">drupal5</span>
+</pre></div>
+</div>
+<p>Including Tables:</p>
+<div class="highlight-python"><pre>tables = phpBB.sucks, drupal6.node*, smf_forum.*</pre>
+</div>
+<p>Excluding Tables:</p>
+<div class="highlight-python"><pre>exclude-tables = mydb.uselesstable1, x_cart.*, *.sessions</pre>
+</div>
+<p>Excluding Engines:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">exclude</span><span class="o">-</span><span class="n">engines</span> <span class="o">=</span> <span class="n">MyISAM</span><span class="p">,</span> <span class="n">Archive</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="compression">
 <h2>[compression]<a class="headerlink" href="#compression" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="compression.html">[compression]</a></li>
-</ul>
-</div>
+<p>Specify various compression settings, such as compression utility,
+compression level, etc.</p>
+<p><strong>method</strong> = gzip | pigz | bzip | lzop | lzma</p>
+<blockquote>
+Define which compression method to use. Note that <tt class="docutils literal"><span class="pre">lzop</span></tt> and
+<tt class="docutils literal"><span class="pre">lzma</span></tt> may not be available on every system and may need to be compiled
+/ installed.</blockquote>
+<p><strong>inline</strong> = yes | no</p>
+<blockquote>
+Whether or not to pipe the output of mysqldump into the compression
+utility. Enabling this is recommended since it usually only marginally
+impacts performance, particularly when using a lower compression
+level.</blockquote>
+<p><strong>level</strong> = 0-9</p>
+<blockquote>
+Specify the compression ratio. The lower the number, the lower the
+compression ratio, but the faster the backup will take. Generally,
+setting the lever to 1 or 2 results in favorable compression of
+textual data and is noticeably faster than the higher levels.
+Setting the level to 0 effectively disables compression.</blockquote>
 </div>
 <div class="section" id="mysql-client">
 <h2>[mysql:client]<a class="headerlink" href="#mysql-client" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="mysqlconfig.html">MySQL connection info [mysql:client]</a></li>
-</ul>
-</div>
+<p>These are optional and, if left undefined, Holland will try to login using
+the standard .my.cnf conventions.</p>
+<p><strong>user</strong> = &lt;user&gt;</p>
+<p>The user to connect to MySQL as.</p>
+<p><strong>password</strong> = &lt;password&gt;</p>
+<p>The password for the MySQL user</p>
+<p><strong>socket</strong> = &lt;socket&gt;</p>
+<p>The socket file to connect to MySQL with.</p>
+<p><strong>host</strong> = &lt;host&gt;</p>
+<p>This would be used for connecting to MySQL remotely.</p>
+<p><strong>port</strong> = &lt;port&gt;</p>
+<p>Used if MySQL is running on a port other than 3306.</p>
 </div>
 </div>
 
@@ -216,9 +289,9 @@ there is no native Holland option for it.</blockquote>
     <div class="footer-wrapper">
       <div class="footer">
         <div class="left">
-          <a href="example.html" title="Example Provider Configuration [example]"
+          <a href="../config.html" title="Holland Config Files"
              >previous</a> |
-          <a href="databasefiltering.html" title="Database and Table filtering"
+          <a href="mysql-lvm.html" title="MySQL LVM Backup Plugin Configuration"
              >next</a> |
           <a href="../genindex.html" title="General Index"
              >index</a>
