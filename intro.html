@@ -61,27 +61,21 @@ focuses on MySQL, however future development will include other database
 platforms and even non-database related applications. Because of it&#8217;s
 plugin structure, Holland can be used to backup anything you want by
 whatever means you want.</p>
-<p>Plugins are provided as Python &#8220;eggs&#8221; - zip files with Python modules and
-extra metadata information.</p>
 <div class="section" id="dependencies">
 <h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
 <p>The core Holland framework has the following dependencies (available on any
 remotely modern Linux distribution):</p>
 <ul class="simple">
 <li>Python &gt;= 2.3</li>
-<li><a class="reference external" href="http://peak.telecommunity.com/DevCenter/PkgResources">pkg_resources</a></li>
-<li><a class="reference external" href="http://peak.telecommunity.com/DevCenter/setuptools">python-setuptools</a></li>
-<li><a class="reference external" href="http://mysql-python.sourceforge.net/">MySQLdb</a></li>
+<li><a class="reference external" href="http://packages.python.org/distribute/pkg_resources.html">pkg_resources</a></li>
+<li><a class="reference external" href="http://packages.python.org/distribute/">python-setuptools</a></li>
 </ul>
-<p>Additionally, the Maatkit plugin requires:</p>
-<ul class="simple">
-<li><a class="reference external" href="http://maatkit.org">Maatkit</a></li>
-<li><a class="reference external" href="http://search.cpan.org/~kjalb/TermReadKey/ReadKey.pm">Perl-TermReadKey</a></li>
-</ul>
-<p>For Red-Hat Enterprise Linux 5, all dependencies, except for Maatkti, are
-available directly from the base channels. Red-Hat Enterprise Linux 4,
-EPEL is required for python-setuptools.</p>
-<p>Note that other providers may have additional dependency requirements.</p>
+<p>MySQL based plugins additional require the MySQLdb python connector:
+* <a class="reference external" href="http://mysql-python.sourceforge.net/">MySQLdb</a></p>
+<p>For Red-Hat Enterprise Linux 5, all dependencies are available directly from
+the base channels.  Red-Hat Enterprise Linux 4, EPEL is required for
+python-setuptools.</p>
+<p>Note that other plugins may have additional dependency requirements.</p>
 </div>
 </div>
 

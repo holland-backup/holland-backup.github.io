@@ -43,13 +43,11 @@ MySQL LVM Provider Configuration [mysql-lvm]
 [compression]
 -------------
 .. toctree::
-    :maxdepth: 1
 
     compression
 
 [mysql:client]
 --------------
 .. toctree::
-    :maxdepth: 1
 
     mysqlconfig
