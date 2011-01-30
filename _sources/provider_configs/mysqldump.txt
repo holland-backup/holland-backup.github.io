@@ -110,7 +110,7 @@ mysqldump Provider Configuration [mysqldump]
 Database and Table filtering
 ----------------------------
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     databasefiltering
 
@@ -118,7 +118,7 @@ Database and Table filtering
 [compression]
 -------------
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     compression
 
@@ -126,6 +126,6 @@ Database and Table filtering
 [mysql:client]
 --------------
 .. toctree::
-    :maxdepth: 2
+    :maxdepth: 1
 
     mysqlconfig

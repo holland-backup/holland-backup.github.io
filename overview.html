@@ -61,8 +61,7 @@ This is the simplest setup, and may be sufficient for most people. However,
 others may wish to have more fine-grained control over their backups and/or
 use another method other than mysqldump.</p>
 <p>For instance, one can configure a backup set to backup certain databases
-using Maatkit, others using the mysqlhotcopy (not to be confused with the
-utility that comes with MySQL of the same name), etc. All this is done
+using mysqldump, others using the mysql-lvm plugins etc. All this is done
 by a mix of providers and backup-sets.</p>
 <div class="section" id="backup-sets">
 <h2>Backup-Sets<a class="headerlink" href="#backup-sets" title="Permalink to this headline">¶</a></h2>
@@ -80,23 +79,6 @@ As of Holland 0.5, there are 5 providers:</p>
 <li><p class="first">mysqldump</p>
 <blockquote>
 <p>Uses the <tt class="docutils literal"><span class="pre">mysqldump</span></tt> utility to backup databases.</p>
-</blockquote>
-</li>
-<li><p class="first">MySQL Hot-Copy</p>
-<blockquote>
-<p>Backs up the actual files that comprise one&#8217;s MyISAM tables. While this
-does require locking the tables involved in the backup, this can often
-result in a much faster backup over using <tt class="docutils literal"><span class="pre">mysqldump</span></tt>. It does NOT
-handle transactional tables (such as InnoDB). Note that this provider
-has not been extensively tested and is more of a proof of concept.</p>
-</blockquote>
-</li>
-<li><p class="first">Maatkit</p>
-<blockquote>
-<p>Uses the <tt class="docutils literal"><span class="pre">mk-parallel-dump</span></tt> utility which, under certain circumstances,
-is faster than a standard <tt class="docutils literal"><span class="pre">mysqldump</span></tt>. Note that this provider is
-really more of a proof of concept. It should normally not be used for
-production cases.</p>
 </blockquote>
 </li>
 <li><p class="first">Example</p>
