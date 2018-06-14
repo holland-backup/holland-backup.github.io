@@ -1,36 +1,40 @@
 .. _config-pgdump:
 
-PGDump Backup Plugin
-====================
+pgdump Provider Configuration [pgdump]
+======================================
+
+Backs up a PostgreSQL instance using the pgdump utility.
 
 [pgdump]
 --------
 
-**format** = plain | tar | custom (default: custom)
+**format** = custom | tar | plain (default: custom)
 
-    Format to specify to pg_dump.
+    Defines the --format option for pg_dump.  This defaults to --format=custom.
+    The custom format is required for pg_restore to do partial restore as well
+    as enabling parallel restores.
 
-**role** = <name>
+**additional-options** = <command-string>
 
-    Speicfy the role name used to create the dump.  This will be passed
-    to pg_dump --role and also used when determining what databases to
-    backup.
+    Pass additional options to the pg_dump command
 
-**additional-options** = <string>
-
-    Specifiy additional options to be passed to the pg_dump command.
-
-.. include:: compression.rst
+.. include:: compression.txt
 
 [pgauth]
 --------
 
-Authentication settings
+**username** = <name>
 
-**username** = <string>
+    Username for pg_dump to authenticate with
 
 **password** = <string>
 
+    Password for pg_dump to authenticate with
+
 **hostname** = <string>
 
-**port** = <string>
+    Hostname for pg_dump to connect with
+
+**port** = <integer>
+
+    TCP port for pg_dump to connect on

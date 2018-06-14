@@ -14,16 +14,15 @@ Dependencies
 The core Holland framework has the following dependencies (available on any
 remotely modern Linux distribution):
 
-* Python >= 2.3
-* `pkg_resources <http://packages.python.org/distribute/pkg_resources.html>`_
-* `python-setuptools <http://packages.python.org/distribute/>`_
+* Python >= 2.6
+* pkg_resources
+* python-setuptools
+* future 
+* six
+* ConfigParser
 
 MySQL based plugins additional require the MySQLdb python connector:
 
 * `MySQLdb <http://mysql-python.sourceforge.net/>`_
-
-For Red-Hat Enterprise Linux 5, all dependencies are available directly from
-the base channels.  Red-Hat Enterprise Linux 4, EPEL is required for
-python-setuptools. 
 
 Note that other plugins may have additional dependency requirements.

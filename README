@@ -1,1 +1,5 @@
 This repo is for the docs.hollandbackup.org site.
+
+Documents have been build using sphinx-build-3 1.7.2
+
+To rebuild, install sphinx-build-3 and run 'make html'

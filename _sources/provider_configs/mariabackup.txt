@@ -1,17 +1,17 @@
-.. _config-xtrabackup:
+.. _config-mariabackup:
 
-Xtrabackup Provider Configuration [xtrabackup]
-==============================================
+Mariabackup Provider Configuration [mariabackup]
+================================================
 
-Backs up a MySQL instance using Percona's Xtrabackup tool.
+Backs up a MySQL instance using ``mariabackup`` tool.
 
-[xtrabackup]
-------------
+[mariabackup]
+-------------
 
 **global-defaults** = <path> (default: /etc/my.cnf)
 
-    The MySQL configuration file for xtrabackup to parse.  This is !include'd
-    into the my.cnf the xtrabackup plugin generates
+    The MySQL configuration file for mariabackup to parse.  This is !include'd
+    into the my.cnf the mariabackup plugin generates
 
 **innobackupex** = <name> (default: innobackupex-1.5.1)
 
@@ -26,15 +26,9 @@ Backs up a MySQL instance using Percona's Xtrabackup tool.
     is pass to the innobackupex script.  Usually innobackupex will detect this
     by itself and this should not need to be set.
 
-**stream** = tar|xbstream|yes|no (default: tar)
+**stream** = mbstream(default: tar)
 
-    Whether to generate a streaming backup. 
-
-.. versionchanged:: 1.0.8
-   'tar' and 'xbstream' are now valid options.  The old stream = yes is
-   now equivalent to stream = tar and stream = no disables streaming
-   entirely and will result in a normal directory copy with xtrabackup
-       
+    Placeholder
 
 **apply-logs** = yes | no (default: yes)
 
@@ -43,8 +37,6 @@ Backs up a MySQL instance using Percona's Xtrabackup tool.
     In this case, even if apply-logs = yes (the default), the prepare stage
     will be skipped.  Even with an uncompressed, non-streaming backup you may
     want to disable apply-logs if you wish to use incremental backups.
-
-    .. versionadded:: 1.0.8
 
 **slave-info** = yes | no (default: yes)
     
@@ -60,11 +52,7 @@ Backs up a MySQL instance using Percona's Xtrabackup tool.
 
 **tmpdir** = <path> (default: ``${backup_directory}``)
 
-    The path for the innobackupex --tmpdir option. By default this will use the
-    current holland backup directory to workaround the following bug:
-    https://bugs.launchpad.net/percona-xtrabackup/+bug/1007446
-
-    .. versionadded:: 1.0.8
+    The path for the innobackupex --tmpdir option.
 
 **additional-options** = <option>[, <option>...]
 
@@ -73,10 +61,10 @@ Backs up a MySQL instance using Percona's Xtrabackup tool.
 
 **pre-command** = <command-string>
 
-    A command to run prior to running this xtrabackup run.  This can be used,
+    A command to run prior to running this mariabackup run.  This can be used,
     for instance, to generate a mysqldump schema dump prior to running
-    xtrabackup.  instances of ${backup_directory} will be replaced with the
-    current holland backup directory where the xtrabackup data will be stored.
+    mariabackup.  instances of ${backup_directory} will be replaced with the
+    current holland backup directory where the mariabackup data will be stored.
 
 .. include:: compression.txt
 
