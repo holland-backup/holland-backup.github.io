@@ -4,11 +4,14 @@
 Specify various compression settings, such as compression utility,
 compression level, etc.
 
-**method** = gzip | pigz | bzip | lzop | lzma 
+**method** = gzip | pigz | bzip | lzop | lzma | gpg
 
     Define which compression method to use. Note that some methods may 
     not be available by default on every system and may need to be compiled
     or installed.
+
+    For gpg compression, a key should already exist(``gpg --gen-key``)
+    and ``default-recipient`` must be configured in ``~/.gnupg/gpg.conf``.
     
 **inline** = yes | no
 
