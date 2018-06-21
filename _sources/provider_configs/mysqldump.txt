@@ -1,19 +1,12 @@
 .. _config-mysqldump:
 
-MySQLDump Backup Plugin Configuration
-=====================================
+mysqldump Provider Configuration [mysqldump]
+============================================
+
+Backs up a MySQL database using the mysqldump tool.
 
 [mysqldump]
 -----------
-**extra-defaults** = yes | no (default: no)
-
-    Allow mysqldump to read global configuration files.  By default this
-    plugin will run mysqldump with --defaults-file=<generate-config.cnf> and
-    mysqldump will only read the options defined by holland.  If you would
-    prefer mysqldump to additionally read defaults from /etc/my.cnf you
-    can enable extra-defaults and holland will execute mysqldump with
-    --defaults-extra-file and holland mysqldump settings will simply
-    override and be in addition to the global settings.
 
 **mysql-binpath** = /path/to/mysql/bin
 
@@ -60,17 +53,29 @@ MySQLDump Backup Plugin Configuration
         databases or backup-set. This should only be used when backing
         up a slave and only after the slave has been turned off 
         (ie, this can be used with the **stop-slave** option).
-    
-**max-allowed-packet** = size (default: 128M)
+ 
+**exclude-invalid-views** =  yes | no (default: no)
 
-   Specify an explicit max-allowed-packet option to pass to the mysqldump
-   command executed by this plugin.
+    Whether to automate exclusion of invalid views that would otherwise cause
+    mysqldump to fail.  This adds additional overhead so this option is not
+    enabled by default.
 
-**dump-routines** = yes | no
+    When enabled, thos option will scan the INFORMATION_SCHEMA.VIEWS table and
+    execute SHOW FIELDS against each view.  If a view is detects as invalid, an
+    ignore-table option will be added to exclude the table.  Additionally, the
+    plugin will attempt to save the view definion to 'invalid_views.sql' in the
+    backupset's backup directory.
+
+    .. versionadded:: 1.0.8
+
+**dump-routines** = yes | no (default: yes)
 
     Whether or not to backup routines in the backup set directly. Routines
     are stored in the 'mysql' database, but it can sometimes be convenient
     to include them in a backup-set directly.
+
+    .. versionchanged:: 1.0.8
+       This option now enabled by default.
     
 **dump-events** = yes | no
 
@@ -78,19 +83,29 @@ MySQLDump Backup Plugin Configuration
     stored in the 'mysql' database. Nonetheless, it can sometimes be 
     convenient to include them in the backup-set directly. 
     
-    **Note**: This feature requires MySQL 5.1 or later.
+    **Note**: This feature requires MySQL 5.1 or later. The mysqldump plugin
+    will automatically disable events if the version of mysqldump is too old.
+
+    .. versionchanged:: 1.0.8
+       This option is now enabled by default
+
     
 **stop-slave** = yes | no
 
-    This is useful only when running Holland on a MySQL slave. Instructs
-    Holland to suspend slave services on the server prior to running
-    the backup. Suspending the slave does not change the backups, but does
-    prevent the slave from spooling up relay logs. The default is not
-    to suspend the slave (if applicable).
+    Stops the SQL_THREAD during the backup. This means that writes
+    from the master will continue to spool but will not be replayed.
+    This helps avoid lock wait timeouts among things while still
+    allowing data to be spooled from the master.
+
+    Note that previous versions of Holland prior to 1.0.6 simply
+    ran a STOP SLAVE instead, which suspends both replication
+    threads.
 
 **bin-log-position** = yes | no
 
     Record the binary log name and position at the time of the backup.
+    The information provied by this option is collected just before 
+    locking the database.
     
     Note that if both 'stop-slave' and 'bin-log-position' are enabled, 
     Holland will grab the master binary log name and position at the time 
@@ -119,22 +134,39 @@ MySQLDump Backup Plugin Configuration
     one file, however this means that restore a single database can
     be difficult if multiple databases are defined in the backup set.
     
-**additional-options** = <mysqldump arguments>
+**additional-options** = <mysqldump argument>[, <mysqldump argument>]
 
     Can optionally specify additional options directly to ``mysqldump`` if
-    there is no native Holland option for it.
+    there is no native Holland option available.  This option accepts a comma
+    delimited list of arguments to pass on the commandline. 
 
-**estimate-method** = plugin | const:<size> 
+**extra-defaults** = yes | no (default: no)
 
-    Change how this plugin estimates the backup size.  By default the MySQL
-    metadata (either information schema or SHOW TABLE STATUS) will be crawled
-    and the data+index size will be used as an estimate.  You can largely skip
-    this overhead by specifying a constant size.  Note this plugin will still
-    need to look at SHOW DATABASES/SHOW TABLES to perform any requested table
-    filtering.
+    This option controls whether mysqldump will only read options as set by
+    holland or if additional options from global config files are read.  By
+    default, the plugin only uses optons as set in the backupset config and
+    includes authentication credentials only from the [client] section in
+    ~/.my.cnf.
 
-.. include:: databasefiltering.rst
+**estimate-method** = plugin | const:<size> (default: plugin)
 
-.. include:: compression.rst
+    This option will skip some of the heavyweight queries necessary to
+    calculate the size of tables to be backed up.  If a constant size is
+    specified, then only table names are evaluated and only if table filtering
+    is being used. Additionally, engines will be looked up via SHOW CREATE
+    TABLE if lock-method = auto-detect, in order for the plugin to determine if
+    tables are using a transactional storage engine.  With 'plugin', the
+    default behavior of reading both size information and table names from the
+    information schema is used, which may be slow particularly for a large
+    number of tables.
 
-.. include:: mysqlconfig.rst
+Database and Table filtering
+----------------------------
+.. toctree::
+    :maxdepth: 1
+
+    databasefiltering
+
+.. include:: compression.txt
+
+.. include:: mysqlconfig.txt

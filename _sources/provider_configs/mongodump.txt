@@ -1,0 +1,26 @@
+.. _config-mongodump:
+
+mongodump Provider Configuration [mongodump]
+============================================
+
+This plugin performs logical backups of a MongoDB by using the ``mongodump`` utility.
+
+[mongodump]
+-----------
+**host** = <string>
+
+    Hostname for mongodump to connect with
+
+**username** = <name>
+
+    Username for mongodump to authenticate with
+
+**password** = <string>
+
+    Password for mongodump to authenticate with
+
+**port** = <integer>
+
+    TCP port for mongodump to connect on
+
+.. include:: compression.txt
