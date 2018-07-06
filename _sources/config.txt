@@ -75,7 +75,7 @@ two sections :ref:`[holland]<holland-config>` and :ref:`[logging]<logging-config
     Define the format of the log message. This options should be in the format 
     defined by the 'logging' python library.
 
-    .. versionadded:: 1.0.7
+    .. versionadded:: 1.1.0
 
 Provider Configs
 ----------------
