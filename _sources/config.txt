@@ -107,6 +107,9 @@ put the following at the top of the backup set configuration file::
     plugin = <plugin>
     backups-to-keep = #
     estimated-size-factor = #
+    historic-size = <yes|no>
+    historic-size-factor = #
+    historic-estimated-size-factor = #
 
 Configuration Options
 ^^^^^^^^^^^^^^^^^^^^^
@@ -128,6 +131,9 @@ Configuration Options
     is multiplied against what each individual plugin reports its 
     estimated backup size when Holland is verifying sufficient free
     space for the backupset.
+
+    As of Holland 1.1.1, the 'historic' backup size will be used. If Holland
+    is unable to determine that size, it will default back to this.
 
 **auto-purge-failures** = yes | no
 
@@ -185,6 +191,30 @@ Configuration Options
 
     .. versionadded:: 1.0.7
 
+**historic-size** = yes | no
+
+    Defaults to yes. Check for the 'backup.conf' file in the 'newest' spooled folder for the running "backupset".
+    If the configuration file exists and contains 'estimated-size' and 'on-disk-size', these values will be used
+    to decide if holland has enough free space for a backupset. This means Holland will use values from the previous
+    backup to estimate the size of the next backup.
+
+    .. versionadded:: 1.1.1
+
+**historic-size-factor** = #
+
+    Defaults to '1.5'. If the estimated size of the database has changed by more than this multiple, the 'estimated-size-factor' value
+    will be used to determine if there is sufficient free space for the backupset.
+
+    .. versionadded:: 1.1.1
+
+**historic-estimated-size-factor** = #
+
+    Defaults to '1.1'. Specifies the scale factor when Holland decides if there is enough
+    free space to perform a backup. Holland will throw an error if the system
+    has less free space than the last backup size multiplied by this value
+
+    .. versionadded:: 1.1.1
+
 For all hook commands, Holland will perform simple text substitution  
 on the three parameters:
 
@@ -201,7 +231,6 @@ For example::
     
     [mysqldump]
     ...
-
 
 Backup-Set files are defined in the "backupsets" directory which is,
 by default, ``/etc/holland/backupsets``. The name of the backup-set is 
