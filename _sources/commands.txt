@@ -6,7 +6,7 @@ Here are the commands available from the 'holland' command-line tool:
 
 help (h)
 --------
-**Usage**: ``holland help <command>``
+**Usage**: ``holland <command> --help(-h)``
 
 Provides basic information about the provided command. If no command is
 provided, it displays global help instead.

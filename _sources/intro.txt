@@ -20,9 +20,11 @@ remotely modern Linux distribution):
 * future 
 * six
 * ConfigParser
+* ArgParser
 
 MySQL based plugins additional require the MySQLdb python connector:
 
-* `MySQLdb <http://mysql-python.sourceforge.net/>`_
+* Python 2: `MySQLdb(mysql-python) <http://mysql-python.sourceforge.net/>`_
+* Python 3: `MySQLdb(mysqlclient-python) <https://github.com/PyMySQL/mysqlclient-python>`_
 
 Note that other plugins may have additional dependency requirements.
