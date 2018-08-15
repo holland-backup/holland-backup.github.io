@@ -4,7 +4,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD_Test   := $(shell command -v sphinx-build-3 2>>/dev/null )
-ifdef SPHINXBUILD
+ifdef SPHINXBUILD_Test
     SPHINXBUILD = sphinx-build-3
     SPHINXTYPEARG = '-M'
 else
