@@ -17,14 +17,15 @@ ifndef SPHINXBUILD
     ifdef SPHINXBUILD_Test
         SPHINXBUILD = sphinx-build-3
         SPHINXTYPEARG = '-M'
-	endif
-    SPHINXBUILD_Test := $(shell command -v sphinx-1.0-build 2>>/dev/null )
-    ifdef SPHINXBUILD_Test
-        SPHINXBUILD = sphinx-1.0-build
-	    SPHINXTYPEARG = '-b'
     else
-        SPHINXBUILD = sphinx-build
-        SPHINXTYPEARG = '-b'
+        SPHINXBUILD_Test := $(shell command -v sphinx-1.0-build 2>>/dev/null )
+        ifdef SPHINXBUILD_Test
+            SPHINXBUILD = sphinx-1.0-build
+	        SPHINXTYPEARG = '-b'
+        else
+            SPHINXBUILD = sphinx-build
+            SPHINXTYPEARG = '-b'
+	    endif
     endif
 endif
 
