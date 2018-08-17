@@ -1,19 +1,37 @@
 # Minimal makefile for Sphinx documentation
 #
-
-# You can set these variables from the command line.
-SPHINXOPTS    =
-SPHINXBUILD_Test   := $(shell command -v sphinx-build-3 2>>/dev/null )
-ifdef SPHINXBUILD_Test
-    SPHINXBUILD = sphinx-build-3
-    SPHINXTYPEARG = '-M'
-else
-    SPHINXBUILD = sphinx-build
-    SPHINXTYPEARG = '-b'
-endif
-SPHINXPROJ    = docs.hollandbackup.org
 SOURCEDIR     = _sources
 BUILDDIR      = _build
+SPHINXOPTS    =
+
+# You can declare the SPHINXBUILD command or you can let the Makefile
+# try to find one
+SPHINXBUILD =
+
+# If you're declaring a SPHINXBUILD command make sure you included the
+# correct build arguments
+SPHINXTYPEARG =
+
+ifndef SPHINXBUILD
+    SPHINXBUILD_Test   := $(shell command -v sphinx-build-3 2>>/dev/null )
+    ifdef SPHINXBUILD_Test
+        SPHINXBUILD = sphinx-build-3
+        SPHINXTYPEARG = '-M'
+	endif
+    SPHINXBUILD_Test := $(shell command -v sphinx-1.0-build 2>>/dev/null )
+    ifdef SPHINXBUILD_Test
+        SPHINXBUILD = sphinx-1.0-build
+	    SPHINXTYPEARG = '-b'
+    else
+        SPHINXBUILD = sphinx-build
+        SPHINXTYPEARG = '-b'
+    endif
+endif
+
+ifndef SPHINXTYPEARG
+    $(error SPHINXTYPEARG is not set)
+endif
+
 
 # Put it first so that "make" without argument is like "make help".
 help:
