@@ -15,7 +15,7 @@ compression level, etc.
     
 **inline** = yes | no
 
-    Whether or not to pipe the output of mysqldump into the compression
+    Whether or not to pipe the output of backup command into the compression
     utility. Enabling this is recommended since it usually only marginally
     impacts performance, particularly when using a lower compression
     level.

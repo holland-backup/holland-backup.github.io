@@ -12,11 +12,14 @@ Backs up a PostgreSQL instance using the pgdump utility.
 
     Defines the --format option for pg_dump.  This defaults to --format=custom.
     The custom format is required for pg_restore to do partial restore as well
-    as enabling parallel restores.
+    as enabling parallel restores. If set to custom, the --compress option will be 
+    passed to pgdump
 
 **additional-options** = <command-string>
 
     Pass additional options to the pg_dump command
+
+**Only the 'level' option will be used if 'format=custom'**
 
 .. include:: compression.txt
 
