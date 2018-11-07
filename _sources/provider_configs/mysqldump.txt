@@ -134,6 +134,15 @@ Backs up a MySQL database using the mysqldump tool.
     one file, however this means that restore a single database can
     be difficult if multiple databases are defined in the backup set.
     
+**arg-per-database** = JSON object
+
+    If file-per-database is enable this argument is ued to specify mysqldump
+    arguments per database. It takes a JSON object with the database names as keys.
+    Example: {"employee1": "--no-data"} Adds the '--no-data' argument to the mysqldump
+    command when backing up the 'employee1' database
+
+    .. versionadded:: 1.0.9
+
 **additional-options** = <mysqldump argument>[, <mysqldump argument>]
 
     Can optionally specify additional options directly to ``mysqldump`` if
