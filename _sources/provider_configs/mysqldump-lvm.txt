@@ -67,6 +67,14 @@ mysqldump. This effectively produces a non-blocking logical backup.
 
     Path to the --tmpdir that mysqld should use.
 
+**log-error ** = <path>  (default: tempdir/holland_lvm.log)
+
+    Define path for mysqld's error log. The default location get cleaned up by Holland after
+    the backup is complete. This settings allows the user to define the log file in another location
+    and can be useful for debugging issue with the MySQL instance running on the snapshot.
+
+    .. versionadded:: 1.0.9
+
 [mysqldump]
 -----------
 

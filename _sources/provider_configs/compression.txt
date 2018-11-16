@@ -4,7 +4,7 @@
 Specify various compression settings, such as compression utility,
 compression level, etc.
 
-**method** = gzip | pigz | bzip | lzop | lzma | gpg
+**method** = gzip| gzip-rsyncable | pigz | bzip2 | pbzip2 | lzop | lzma | gpg | zstd
 
     Define which compression method to use. Note that some methods may 
     not be available by default on every system and may need to be compiled
