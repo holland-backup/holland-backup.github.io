@@ -1,0 +1,318 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Usage and Implementation Overview &mdash; Holland Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/holland_logo_64x64.png"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Holland Config Files" href="config.html" />
+    <link rel="prev" title="Holland Command-Line Reference" href="commands.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Holland
+          
+
+          
+            
+            <img src="_static/holland_logo_64x64.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1.11
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction to Holland</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Holland Command-Line Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage and Implementation Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#backup-sets">Backup-Sets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#providers">Providers</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="config.html">Holland Config Files</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Holland</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Usage and Implementation Overview</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/overview.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="usage-and-implementation-overview">
+<h1>Usage and Implementation Overview<a class="headerlink" href="#usage-and-implementation-overview" title="Permalink to this headline">¶</a></h1>
+<p>Because Holland is very pluggable, it may first seem a bit confusing when
+it comes to configuring Holland to do something useful. Out of the box,
+Holland is designed to backup MySQL databases using the mysqldump provider.
+This is the simplest setup, and may be sufficient for most people. However,
+others may wish to have more fine-grained control over their backups and/or
+use another method other than mysqldump.</p>
+<p>For instance, one can configure a backup set to backup certain databases
+using mysqldump, others using the mysql-lvm plugins etc. All this is done
+by a mix of providers and backup-sets.</p>
+<div class="section" id="backup-sets">
+<h2>Backup-Sets<a class="headerlink" href="#backup-sets" title="Permalink to this headline">¶</a></h2>
+<p>Each backup-set implements exactly one provider and will inherit the default
+values of that provider. These values can be overridden to adjust the
+behavior of the backup set. This includes defining what databases or tables
+to include (or exclude) in the backup, the type of compression used (if
+any), what locking method to use, among other things.</p>
+</div>
+<div class="section" id="providers">
+<h2>Providers<a class="headerlink" href="#providers" title="Permalink to this headline">¶</a></h2>
+<p>Providers essentially provide a backup service for use in a backup set.</p>
+<ul>
+<li><p class="first">mysqldump</p>
+<blockquote>
+<div><p>Uses the <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> utility to backup databases.</p>
+</div></blockquote>
+</li>
+<li><p class="first">MySQL + LVM</p>
+<blockquote>
+<div><p>Backup MySQL databases using LVM snapshots which allows for near lockless
+or fully lockless (when transactional engines are used) backups.</p>
+</div></blockquote>
+</li>
+<li><p class="first">mysqldump + LVM</p>
+<blockquote>
+<div><p>This plugin creates an LVM snapshot, starts a mysql instance using the snapshot
+as it’s datadir, and then use the <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> utility to backup the databases.</p>
+</div></blockquote>
+</li>
+<li><p class="first">XtraBackup</p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.8.</span></p>
+</div>
+<p>Backup MySQL databases using Percona’s
+<a class="reference external" href="http://www.percona.com/software/percona-xtrabackup">XtraBackup</a> tool.
+This provides a near lockless backup when using the InnoDB storage engine.</p>
+</div></blockquote>
+</li>
+<li><p class="first">pgdump</p>
+<blockquote>
+<div><p>Backup PostgreSQL databases using the <code class="docutils literal notranslate"><span class="pre">pgdump</span></code> utility.</p>
+</div></blockquote>
+</li>
+<li><p class="first">mariabackup</p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="versionmodified">New in version 1.1.0.</span></p>
+</div>
+<p>Backup MySQL databases using MariaDB’s
+<a class="reference external" href="https://mariadb.com/kb/en/library/mariabackup-options/">mariabackup</a> tool.</p>
+</div></blockquote>
+</li>
+<li><p class="first">mongodump</p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="versionmodified">New in version 1.1.0.</span></p>
+</div>
+<p>This plugin performs logical backups of a MongoDB by using the <code class="docutils literal notranslate"><span class="pre">mongodump</span></code> utility.</p>
+</div></blockquote>
+</li>
+<li><p class="first">Example</p>
+<blockquote>
+<div><p>This is used solely as a template for designing providers. It otherwise
+does nothing.</p>
+</div></blockquote>
+</li>
+</ul>
+<p>As Holland is a framework, it can actually backup most anything as long
+as there is a provider for it. This includes things that have nothing to do
+with databases. The idea is to present an easy to use and clear method
+of backing up and restoring backups no matter the source.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="config.html" class="btn btn-neutral float-right" title="Holland Config Files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="commands.html" class="btn btn-neutral" title="Holland Command-Line Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Holland Core Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.1.11',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

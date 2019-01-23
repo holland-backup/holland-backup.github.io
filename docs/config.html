@@ -1,0 +1,496 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Holland Config Files &mdash; Holland Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/holland_logo_64x64.png"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="mysqldump Provider Configuration [mysqldump]" href="provider_configs/mysqldump.html" />
+    <link rel="prev" title="Usage and Implementation Overview" href="overview.html" /> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> Holland
+          
+
+          
+            
+            <img src="_static/holland_logo_64x64.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1.11
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="intro.html">Introduction to Holland</a></li>
+<li class="toctree-l1"><a class="reference internal" href="commands.html">Holland Command-Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Usage and Implementation Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Holland Config Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#holland-conf-main-config">holland.conf - main config</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#holland">[holland]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#logging">[logging]</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#provider-configs">Provider Configs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="provider_configs/mysqldump.html">mysqldump Provider Configuration [mysqldump]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="provider_configs/mysql-lvm.html">MySQL LVM Provider Configuration [mysql-lvm]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="provider_configs/mysqldump-lvm.html">mysqldump LVM Provider Configuration [mysqldump-lvm]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="provider_configs/xtrabackup.html">Xtrabackup Provider Configuration [xtrabackup]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="provider_configs/pgdump.html">pgdump Provider Configuration [pgdump]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="provider_configs/mongodump.html">mongodump Provider Configuration [mongodump]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="provider_configs/mariabackup.html">Mariabackup Provider Configuration [mariabackup]</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#backup-set-configs">Backup-Set Configs</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-options">Configuration Options</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Holland</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Holland Config Files</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/config.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="holland-config-files">
+<span id="config"></span><h1>Holland Config Files<a class="headerlink" href="#holland-config-files" title="Permalink to this headline">¶</a></h1>
+<p>By default, Holland’s configuration files reside in /etc/holland. The main
+configuration file is holland.conf, however there are a number of other
+configuration files for configuring default settings for providers and for
+configuring backup sets.</p>
+<p>Each configuration file has one ore more sections, defined by square
+brackets Underneath each section, one or more configuration option
+can be specified. These options are in a standard “option = value” format.
+Comments are prefixed by the # sign.</p>
+<p>Note that many settings have default values and, as a result, can either
+be commented out or omitted entirely.</p>
+<div class="section" id="holland-conf-main-config">
+<h2>holland.conf - main config<a class="headerlink" href="#holland-conf-main-config" title="Permalink to this headline">¶</a></h2>
+<p>The main configuration file (usually /etc/holland/holland.conf) defines
+both global settings as well as the active backup sets. It is divided into
+two sections <a class="reference internal" href="#holland-config"><span class="std std-ref">[holland]</span></a> and <a class="reference internal" href="#logging-config"><span class="std std-ref">[logging]</span></a>.</p>
+<div class="section" id="holland">
+<span id="holland-config"></span><h3>[holland]<a class="headerlink" href="#holland" title="Permalink to this headline">¶</a></h3>
+<dl class="describe">
+<dt>
+<code class="descname">plugin-dirs</code></dt>
+<dd><p>Defines where the plugins can be found. This can be a comma-separated
+list but usually does not need to be modified.</p>
+</dd></dl>
+
+<span class="target" id="holland-config-backup-directory"></span><dl class="describe">
+<dt>
+<code class="descname">backup_directory</code></dt>
+<dd><p>Top-level directory where backups are held.</p>
+</dd></dl>
+
+<span class="target" id="holland-config-backupsets"></span><dl class="describe">
+<dt>
+<code class="descname">backupsets</code></dt>
+<dd><p>A comma-separated list of all the backup sets Holland should backup.
+Each backup set is defined in <code class="docutils literal notranslate"><span class="pre">/etc/holland/backupsets/&lt;name&gt;.conf</span></code> by
+default.</p>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">umask</code></dt>
+<dd><p>Sets the umask of the resulting backup files.</p>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">path</code></dt>
+<dd><p>Defines a path for holland and its spawned processes</p>
+</dd></dl>
+
+</div>
+<div class="section" id="logging">
+<span id="logging-config"></span><h3>[logging]<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h3>
+<dl class="describe">
+<dt>
+<code class="descname">filename</code></dt>
+<dd><p>The log file itself.</p>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">level</code></dt>
+<dd><p>Sets the verbosity of Holland’s logging process. Available options are
+<code class="docutils literal notranslate"><span class="pre">debug</span></code>, <code class="docutils literal notranslate"><span class="pre">info</span></code>, <code class="docutils literal notranslate"><span class="pre">warning</span></code>, <code class="docutils literal notranslate"><span class="pre">error</span></code>, and <code class="docutils literal notranslate"><span class="pre">critical</span></code></p>
+</dd></dl>
+
+<dl class="describe">
+<dt>
+<code class="descname">format</code></dt>
+<dd><p>Define the format of the log message. This options should be in the format
+defined by the ‘logging’ python library.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.1.0.</span></p>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="provider-configs">
+<h2>Provider Configs<a class="headerlink" href="#provider-configs" title="Permalink to this headline">¶</a></h2>
+<p>These files control the global settings / defaults for the providers used by
+the backup-sets. Many of these global settings can be overridden if defined
+in a backup-set. Note that each provider’s configuration file should begin
+with <code class="docutils literal notranslate"><span class="pre">[provider-name]</span></code>.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="provider_configs/mysqldump.html">mysqldump Provider Configuration [mysqldump]</a></li>
+<li class="toctree-l1"><a class="reference internal" href="provider_configs/mysql-lvm.html">MySQL LVM Provider Configuration [mysql-lvm]</a></li>
+<li class="toctree-l1"><a class="reference internal" href="provider_configs/mysqldump-lvm.html">mysqldump LVM Provider Configuration [mysqldump-lvm]</a></li>
+<li class="toctree-l1"><a class="reference internal" href="provider_configs/xtrabackup.html">Xtrabackup Provider Configuration [xtrabackup]</a></li>
+<li class="toctree-l1"><a class="reference internal" href="provider_configs/pgdump.html">pgdump Provider Configuration [pgdump]</a></li>
+<li class="toctree-l1"><a class="reference internal" href="provider_configs/mongodump.html">mongodump Provider Configuration [mongodump]</a></li>
+<li class="toctree-l1"><a class="reference internal" href="provider_configs/mariabackup.html">Mariabackup Provider Configuration [mariabackup]</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="backup-set-configs">
+<h2>Backup-Set Configs<a class="headerlink" href="#backup-set-configs" title="Permalink to this headline">¶</a></h2>
+<p>Backup-Set configuration files largely inherit the configuration options of
+the specified provider. To define a provider for the backup set, you must
+put the following at the top of the backup set configuration file:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">holland</span><span class="p">:</span><span class="n">backup</span><span class="p">]</span>
+<span class="n">plugin</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">plugin</span><span class="o">&gt;</span>
+<span class="n">backups</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">keep</span> <span class="o">=</span> <span class="c1">#</span>
+<span class="n">estimated</span><span class="o">-</span><span class="n">size</span><span class="o">-</span><span class="n">factor</span> <span class="o">=</span> <span class="c1">#</span>
+<span class="n">historic</span><span class="o">-</span><span class="n">size</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">yes</span><span class="o">|</span><span class="n">no</span><span class="o">&gt;</span>
+<span class="n">historic</span><span class="o">-</span><span class="n">size</span><span class="o">-</span><span class="n">factor</span> <span class="o">=</span> <span class="c1">#</span>
+<span class="n">historic</span><span class="o">-</span><span class="n">estimated</span><span class="o">-</span><span class="n">size</span><span class="o">-</span><span class="n">factor</span> <span class="o">=</span> <span class="c1">#</span>
+</pre></div>
+</div>
+<div class="section" id="configuration-options">
+<h3>Configuration Options<a class="headerlink" href="#configuration-options" title="Permalink to this headline">¶</a></h3>
+<p><strong>plugin</strong> = &lt;plugin&gt;</p>
+<blockquote>
+<div>This is the name of the provider that will be used for the backup-set.
+This is required in order for the backup-set to function.</div></blockquote>
+<p><strong>backups-to-keep</strong> = #</p>
+<blockquote>
+<div>Specifies the number of backups to keep for a backup-set.
+Defaults to retaining 1 backup.</div></blockquote>
+<p><strong>estimated-size-factor</strong> = #</p>
+<blockquote>
+<div><p>Specifies the scale factor when Holland decides if there is enough
+free space to perform a backup.  The default is 1.0 and this number
+is multiplied against what each individual plugin reports its
+estimated backup size when Holland is verifying sufficient free
+space for the backupset.</p>
+<p>As of Holland 1.1.1, the ‘historic’ backup size will be used. If Holland
+is unable to determine that size, it will default back to this.</p>
+</div></blockquote>
+<p><strong>auto-purge-failures</strong> = yes | no</p>
+<blockquote>
+<div>Specifies whether to keep a failed backup or to automatically remove
+the backup directory.  By default this is on with the intention that
+whatever process is calling holland will retry when a backup fails.
+This behavior can be disabled by setting auto-purge-failures = no when
+partial backups might be useful or when troubleshooting a backup failure.</div></blockquote>
+<p><strong>purge-policy</strong> = manual | before-backup | after-backup</p>
+<blockquote>
+<div><p>Specifies when to run the purge routine on a backupset.  By default this is
+run after a new successful backup completes.  Up to <code class="docutils literal notranslate"><span class="pre">backups-to-keep</span></code>
+backups will be retained including the most recent.</p>
+<p><code class="docutils literal notranslate"><span class="pre">purge-policy</span></code> = <code class="docutils literal notranslate"><span class="pre">before-backup</span></code> will run the purge routine just before
+a new backup starts.  This will retain up to <code class="docutils literal notranslate"><span class="pre">backups-to-keep</span></code> backups
+before the new backup is even started allowing purging all previous
+backups if <code class="docutils literal notranslate"><span class="pre">backups-to-keep</span></code> is set to 0.  This behavior is useful if
+some other process is retaining backups off-server and disk space is at a
+premium.</p>
+<p><code class="docutils literal notranslate"><span class="pre">purge-policy</span></code> = manual will never run the purge routine automatically.
+Either <code class="docutils literal notranslate"><span class="pre">holland</span> <span class="pre">purge</span></code> must be run externally or an explicit removal of
+desired backup directories can be done at some later time.</p>
+</div></blockquote>
+<p><strong>before-backup-command</strong> = string</p>
+<blockquote>
+<div><p>Run a shell command before a backup starts.  This allows a command to
+perform some action before the backup starts such as setting up an
+iptables rule (taking a mysql slave out of a load balancer) or aborting
+the backup based on some external condition.</p>
+<p>The backup will fail if this command exits with a non-zero status.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.7.</span></p>
+</div>
+</div></blockquote>
+<p><strong>after-backup-command</strong> = string</p>
+<blockquote>
+<div><p>Run a shell command after a backup completes.  This allows a command to
+perform some action when a backup completes successfully such as sending
+out a success notification.</p>
+<p>The backup will fail if this command exits with a non-zero status.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.7.</span></p>
+</div>
+</div></blockquote>
+<p><strong>failed-backup-command</strong> = string</p>
+<blockquote>
+<div><p>Run a shell command if a backup starts.  This allows some command to
+perform some action when a backup fails such as sending out a failure
+notification.</p>
+<p>The backup will fail if this command exits with a non-zero status.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.7.</span></p>
+</div>
+</div></blockquote>
+<p><strong>historic-size</strong> = yes | no</p>
+<blockquote>
+<div><p>Defaults to yes. Check for the ‘backup.conf’ file in the ‘newest’ spooled folder for the running “backupset”.
+If the configuration file exists and contains ‘estimated-size’ and ‘on-disk-size’, these values will be used
+to decide if holland has enough free space for a backupset. This means Holland will use values from the previous
+backup to estimate the size of the next backup.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.1.1.</span></p>
+</div>
+</div></blockquote>
+<p><strong>historic-size-factor</strong> = #</p>
+<blockquote>
+<div><p>Defaults to ‘1.5’. If the estimated size of the database has changed by more than this multiple, the ‘estimated-size-factor’ value
+will be used to determine if there is sufficient free space for the backupset.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.1.1.</span></p>
+</div>
+</div></blockquote>
+<p><strong>historic-estimated-size-factor</strong> = #</p>
+<blockquote>
+<div><p>Defaults to ‘1.1’. Specifies the scale factor when Holland decides if there is enough
+free space to perform a backup. Holland will throw an error if the system
+has less free space than the last backup size multiplied by this value</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.1.1.</span></p>
+</div>
+</div></blockquote>
+<p>For all hook commands, Holland will perform simple text substitution
+on the three parameters:</p>
+<blockquote>
+<div><ul class="simple">
+<li>hook - name of the hook being called (one of: before-backup-command, after-backup-command, failed-backup-command)</li>
+<li>backupdir - path to the current backup directory (e.g. /var/spool/holland/mysqldump/YYYYmmdd_HHMMSS)</li>
+<li>backupset - name of the backupset being run (e.g. ‘mysql-lvm’)</li>
+</ul>
+</div></blockquote>
+<p>For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[holland:backup]
+plugin = mysqldump
+before-backup-command = /usr/local/bin/my-custom-script --hook ${hook} --backupset ${backupset} --backupdir ${backupdir}
+after-backup-command = echo ${backupset} completed successfully.  Files are in ${backupdir}
+
+[mysqldump]
+...
+</pre></div>
+</div>
+<p>Backup-Set files are defined in the “backupsets” directory which is,
+by default, <code class="docutils literal notranslate"><span class="pre">/etc/holland/backupsets</span></code>. The name of the backup-set is
+defined by its configuration filename and can really be most anything. That
+means backup-sets can be organized in any arbitrary way, although backup
+set files must end in .conf. The file extension is not part of the name of
+the backup-set.</p>
+<p>As noted above, in order for a backup-set to be active, it must be listed in
+the <a class="reference internal" href="#holland-config-backupsets"><span class="std std-ref">backupsets</span></a> variable.</p>
+<p>Backups are placed under the directory defined in the
+<a class="reference internal" href="#holland-config-backup-directory"><span class="std std-ref">backup_directory</span></a>
+section of the main configuration file. Each backup resides under a directory
+corresponding to the backup-set name followed by a date-encoded directory.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="provider_configs/mysqldump.html" class="btn btn-neutral float-right" title="mysqldump Provider Configuration [mysqldump]" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="overview.html" class="btn btn-neutral" title="Usage and Implementation Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Holland Core Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.1.11',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

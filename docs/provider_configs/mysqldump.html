@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>mysqldump Provider Configuration [mysqldump] &mdash; Holland Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/holland_logo_64x64.png"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Database and Table filtering" href="databasefiltering.html" />
+    <link rel="prev" title="Holland Config Files" href="../config.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Holland
+          
+
+          
+            
+            <img src="../_static/holland_logo_64x64.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1.11
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction to Holland</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands.html">Holland Command-Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Usage and Implementation Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../config.html">Holland Config Files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../config.html#holland-conf-main-config">holland.conf - main config</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../config.html#provider-configs">Provider Configs</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mysqldump Provider Configuration [mysqldump]</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mysqldump">[mysqldump]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#database-and-table-filtering">Database and Table filtering</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compression">[compression]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mysql-connection-info-mysql-client">MySQL connection info [mysql:client]</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mysql-lvm.html">MySQL LVM Provider Configuration [mysql-lvm]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mysqldump-lvm.html">mysqldump LVM Provider Configuration [mysqldump-lvm]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xtrabackup.html">Xtrabackup Provider Configuration [xtrabackup]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pgdump.html">pgdump Provider Configuration [pgdump]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mongodump.html">mongodump Provider Configuration [mongodump]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mariabackup.html">Mariabackup Provider Configuration [mariabackup]</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#backup-set-configs">Backup-Set Configs</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Holland</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../config.html">Holland Config Files</a> &raquo;</li>
+        
+      <li>mysqldump Provider Configuration [mysqldump]</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/provider_configs/mysqldump.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mysqldump-provider-configuration-mysqldump">
+<span id="config-mysqldump"></span><h1>mysqldump Provider Configuration [mysqldump]<a class="headerlink" href="#mysqldump-provider-configuration-mysqldump" title="Permalink to this headline">¶</a></h1>
+<p>Backs up a MySQL database using the mysqldump tool.</p>
+<div class="section" id="mysqldump">
+<h2>[mysqldump]<a class="headerlink" href="#mysqldump" title="Permalink to this headline">¶</a></h2>
+<p><strong>mysql-binpath</strong> = /path/to/mysql/bin</p>
+<blockquote>
+<div>Defines the location of the MySQL binary utilities. If not provided,
+Holland will use whatever is in the path.</div></blockquote>
+<p><strong>lock-method</strong> = flush-lock | lock-tables | single-transaction | auto-detect | none</p>
+<blockquote>
+<div><p>Defines which lock method to use. By default, auto-detect will be used.</p>
+<ul>
+<li><p class="first">flush-lock</p>
+<blockquote>
+<div><p>flush-lock will place a global lock on all tables involved in the backup
+regardless of whether or not they are in the backup-set. If
+file-per-database is enabled, then flush-lock will lock all tables
+for every database being backed up. In other words, this option may not
+make much sense when using file-per-database.</p>
+</div></blockquote>
+</li>
+<li><p class="first">lock-tables</p>
+<blockquote>
+<div><p>lock-tables will lock all tables involved in the backup. If
+file-per-database is enabled, then lock-tables will only lock all the
+tables associated with that database.</p>
+</div></blockquote>
+</li>
+<li><p class="first">single-transaction</p>
+<blockquote>
+<div><p>Forces the use of <code class="docutils literal notranslate"><span class="pre">--single-transaction</span></code> which enabled
+semi-transparent backups of transactional tables. Forcing this
+can cause inconsistencies with non-transactional tables, however.
+While non-transactional tables will still lock, they will only
+lock when they are actually being backed up. <strong>Use this setting
+with extreme caution when backing non-transactional tables.</strong></p>
+</div></blockquote>
+</li>
+<li><p class="first">auto-detect</p>
+<blockquote>
+<div><p>Let Holland decide which option to use by checking to see if
+a database or backup-set only contains transactional tables. If
+so, <code class="docutils literal notranslate"><span class="pre">--single-transaction</span></code> will be used. Otherwise,
+<code class="docutils literal notranslate"><span class="pre">--lock-tables</span></code> will be used.</p>
+</div></blockquote>
+</li>
+<li><p class="first">none</p>
+<blockquote>
+<div><p>Does absolutely no explicit locking when backing up the
+databases or backup-set. This should only be used when backing
+up a slave and only after the slave has been turned off
+(ie, this can be used with the <strong>stop-slave</strong> option).</p>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p><strong>exclude-invalid-views</strong> =  yes | no (default: no)</p>
+<blockquote>
+<div><p>Whether to automate exclusion of invalid views that would otherwise cause
+mysqldump to fail.  This adds additional overhead so this option is not
+enabled by default.</p>
+<p>When enabled, thos option will scan the INFORMATION_SCHEMA.VIEWS table and
+execute SHOW FIELDS against each view.  If a view is detects as invalid, an
+ignore-table option will be added to exclude the table.  Additionally, the
+plugin will attempt to save the view definion to ‘invalid_views.sql’ in the
+backupset’s backup directory.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.8.</span></p>
+</div>
+</div></blockquote>
+<p><strong>dump-routines</strong> = yes | no (default: yes)</p>
+<blockquote>
+<div><p>Whether or not to backup routines in the backup set directly. Routines
+are stored in the ‘mysql’ database, but it can sometimes be convenient
+to include them in a backup-set directly.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 1.0.8: </span>This option now enabled by default.</p>
+</div>
+</div></blockquote>
+<p><strong>dump-events</strong> = yes | no</p>
+<blockquote>
+<div><p>Whether or not to dump events explicitly. Like routines, events are
+stored in the ‘mysql’ database. Nonetheless, it can sometimes be
+convenient to include them in the backup-set directly.</p>
+<p><strong>Note</strong>: This feature requires MySQL 5.1 or later. The mysqldump plugin
+will automatically disable events if the version of mysqldump is too old.</p>
+<div class="versionchanged">
+<p><span class="versionmodified">Changed in version 1.0.8: </span>This option is now enabled by default</p>
+</div>
+</div></blockquote>
+<p><strong>stop-slave</strong> = yes | no</p>
+<blockquote>
+<div><p>Stops the SQL_THREAD during the backup. This means that writes
+from the master will continue to spool but will not be replayed.
+This helps avoid lock wait timeouts among things while still
+allowing data to be spooled from the master.</p>
+<p>Note that previous versions of Holland prior to 1.0.6 simply
+ran a STOP SLAVE instead, which suspends both replication
+threads.</p>
+</div></blockquote>
+<p><strong>bin-log-position</strong> = yes | no</p>
+<blockquote>
+<div><p>Record the binary log name and position at the time of the backup.
+The information provied by this option is collected just before
+locking the database.</p>
+<p>Note that if both ‘stop-slave’ and ‘bin-log-position’ are enabled,
+Holland will grab the master binary log name and position at the time
+of the backup which can be useful in using the backup to create slaves
+or for point in time recovery using the master’s binary log. This
+information is found within the ‘backup.conf’ file located in the
+backup-set destination directory
+(/var/spool/holland/&lt;backup-set&gt;/&lt;backup&gt; by default). For example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">mysql</span><span class="p">:</span><span class="n">replication</span><span class="p">]</span>
+<span class="n">slave_master_log_pos</span> <span class="o">=</span> <span class="mi">4512</span>
+<span class="n">slave_master_log_file</span> <span class="o">=</span> <span class="mi">260792</span><span class="o">-</span><span class="n">mmm</span><span class="o">-</span><span class="n">agent1</span><span class="o">-</span><span class="nb">bin</span><span class="o">-</span><span class="n">log</span><span class="o">.</span><span class="mi">000001</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p><strong>flush-logs</strong> = yes | no</p>
+<blockquote>
+<div>Whether or not to run FLUSH LOGS in MySQL with the backup. When FLUSH
+LOGS is actually executed depends on which if database filtering is being
+used and whether or not file-per-database is enabled. Generally speaking,
+it does not make sense to use flush-logs with file-per-database since the
+binary logs will not be consistent with the backup.</div></blockquote>
+<p><strong>file-per-database</strong> = yes | no</p>
+<blockquote>
+<div>Whether or not to split up each database into its own file. Note that
+it can be more consistent an efficient to backup all databases into
+one file, however this means that restore a single database can
+be difficult if multiple databases are defined in the backup set.</div></blockquote>
+<p><strong>arg-per-database</strong> = JSON object</p>
+<blockquote>
+<div><p>If file-per-database is enable this argument is ued to specify mysqldump
+arguments per database. It takes a JSON object with the database names as keys.
+Example: {“employee1”: “–no-data”} Adds the ‘–no-data’ argument to the mysqldump
+command when backing up the ‘employee1’ database</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.0.9.</span></p>
+</div>
+</div></blockquote>
+<p><strong>additional-options</strong> = &lt;mysqldump argument&gt;[, &lt;mysqldump argument&gt;]</p>
+<blockquote>
+<div>Can optionally specify additional options directly to <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> if
+there is no native Holland option available.  This option accepts a comma
+delimited list of arguments to pass on the commandline.</div></blockquote>
+<p><strong>extra-defaults</strong> = yes | no (default: no)</p>
+<blockquote>
+<div>This option controls whether mysqldump will only read options as set by
+holland or if additional options from global config files are read.  By
+default, the plugin only uses optons as set in the backupset config and
+includes authentication credentials only from the [client] section in
+~/.my.cnf.</div></blockquote>
+<p><strong>estimate-method</strong> = plugin | const:&lt;size&gt; (default: plugin)</p>
+<blockquote>
+<div>This option will skip some of the heavyweight queries necessary to
+calculate the size of tables to be backed up.  If a constant size is
+specified, then only table names are evaluated and only if table filtering
+is being used. Additionally, engines will be looked up via SHOW CREATE
+TABLE if lock-method = auto-detect, in order for the plugin to determine if
+tables are using a transactional storage engine.  With ‘plugin’, the
+default behavior of reading both size information and table names from the
+information schema is used, which may be slow particularly for a large
+number of tables.</div></blockquote>
+</div>
+<div class="section" id="database-and-table-filtering">
+<h2>Database and Table filtering<a class="headerlink" href="#database-and-table-filtering" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="databasefiltering.html">Database and Table filtering</a></li>
+</ul>
+</div>
+</div>
+<div class="section" id="compression">
+<h2>[compression]<a class="headerlink" href="#compression" title="Permalink to this headline">¶</a></h2>
+<p>Specify various compression settings, such as compression utility,
+compression level, etc.</p>
+<p><strong>method</strong> = gzip| gzip-rsyncable | pigz | bzip2 | pbzip2 | lzop | lzma | gpg | zstd</p>
+<blockquote>
+<div><p>Define which compression method to use. Note that some methods may
+not be available by default on every system and may need to be compiled
+or installed.</p>
+<p>For gpg compression, a key should already exist(<code class="docutils literal notranslate"><span class="pre">gpg</span> <span class="pre">--gen-key</span></code>)
+and <code class="docutils literal notranslate"><span class="pre">default-recipient</span></code> must be configured in <code class="docutils literal notranslate"><span class="pre">~/.gnupg/gpg.conf</span></code>.</p>
+</div></blockquote>
+<p><strong>inline</strong> = yes | no</p>
+<blockquote>
+<div>Whether or not to pipe the output of the backup command into the compression
+utility. Enabling this is recommended since it usually only marginally
+impacts performance, particularly when using a lower compression
+level.</div></blockquote>
+<p><strong>level</strong> = 0-9</p>
+<blockquote>
+<div>Specify the compression ratio. The lower the number, the lower the
+compression ratio, but the faster the backup will take. Generally,
+setting the lever to 1 or 2 results in favorable compression of
+textual data and is noticeably faster than the higher levels.
+Setting the level to 0 effectively disables compression.</div></blockquote>
+<p><strong>bin-path</strong> = &lt;full path to utility&gt;</p>
+<blockquote>
+<div>This only needs to be defined if the compression utility is not in the
+usual places or not in the system path.</div></blockquote>
+</div>
+<div class="section" id="mysql-connection-info-mysql-client">
+<h2>MySQL connection info [mysql:client]<a class="headerlink" href="#mysql-connection-info-mysql-client" title="Permalink to this headline">¶</a></h2>
+<p>These are optional and, if left undefined, Holland will try to login using
+the standard .my.cnf conventions.</p>
+<p><strong>user</strong> = &lt;user&gt;</p>
+<p>The user to connect to MySQL as.</p>
+<p><strong>password</strong> = &lt;password&gt;</p>
+<p>The password for the MySQL user</p>
+<p><strong>socket</strong> = &lt;socket&gt;</p>
+<p>The socket file to connect to MySQL with.</p>
+<p><strong>host</strong> = &lt;host&gt;</p>
+<p>This would be used for connecting to MySQL remotely.</p>
+<p><strong>port</strong> = &lt;port&gt;</p>
+<p>Used if MySQL is running on a port other than 3306.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="databasefiltering.html" class="btn btn-neutral float-right" title="Database and Table filtering" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../config.html" class="btn btn-neutral" title="Holland Config Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Holland Core Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.1.11',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

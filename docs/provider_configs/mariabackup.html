@@ -1,0 +1,345 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Mariabackup Provider Configuration [mariabackup] &mdash; Holland Documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/holland_logo_64x64.png"/>
+  
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="mongodump Provider Configuration [mongodump]" href="mongodump.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Holland
+          
+
+          
+            
+            <img src="../_static/holland_logo_64x64.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1.11
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction to Holland</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands.html">Holland Command-Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Usage and Implementation Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../config.html">Holland Config Files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../config.html#holland-conf-main-config">holland.conf - main config</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../config.html#provider-configs">Provider Configs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mysqldump.html">mysqldump Provider Configuration [mysqldump]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mysql-lvm.html">MySQL LVM Provider Configuration [mysql-lvm]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mysqldump-lvm.html">mysqldump LVM Provider Configuration [mysqldump-lvm]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xtrabackup.html">Xtrabackup Provider Configuration [xtrabackup]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pgdump.html">pgdump Provider Configuration [pgdump]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mongodump.html">mongodump Provider Configuration [mongodump]</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Mariabackup Provider Configuration [mariabackup]</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mariabackup">[mariabackup]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compression">[compression]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mysql-connection-info-mysql-client">MySQL connection info [mysql:client]</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#backup-set-configs">Backup-Set Configs</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Holland</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../config.html">Holland Config Files</a> &raquo;</li>
+        
+      <li>Mariabackup Provider Configuration [mariabackup]</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/provider_configs/mariabackup.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="mariabackup-provider-configuration-mariabackup">
+<span id="config-mariabackup"></span><h1>Mariabackup Provider Configuration [mariabackup]<a class="headerlink" href="#mariabackup-provider-configuration-mariabackup" title="Permalink to this headline">¶</a></h1>
+<p>Backs up a MySQL instance using <code class="docutils literal notranslate"><span class="pre">mariabackup</span></code> tool.</p>
+<div class="section" id="mariabackup">
+<h2>[mariabackup]<a class="headerlink" href="#mariabackup" title="Permalink to this headline">¶</a></h2>
+<p><strong>global-defaults</strong> = &lt;path&gt; (default: /etc/my.cnf)</p>
+<blockquote>
+<div>The MySQL configuration file for mariabackup to parse.  This is !include’d
+into the my.cnf the mariabackup plugin generates</div></blockquote>
+<p><strong>innobackupex</strong> = &lt;name&gt; (default: innobackupex-1.5.1)</p>
+<blockquote>
+<div>The path to the innobackupex script to run. If this is a relative path
+this will be found in holland’s environment PATH as configured in
+/etc/holland/holland.conf.</div></blockquote>
+<p><strong>ibbackup</strong> = &lt;name&gt;</p>
+<blockquote>
+<div>The path to the ibbackup command to use.  By default, no –ibbackup option
+is pass to the innobackupex script.  Usually innobackupex will detect this
+by itself and this should not need to be set.</div></blockquote>
+<p><strong>stream</strong> = mbstream(default: tar)</p>
+<blockquote>
+<div>Placeholder</div></blockquote>
+<p><strong>apply-logs</strong> = yes | no (default: yes)</p>
+<blockquote>
+<div>Whether to run <code class="docutils literal notranslate"><span class="pre">innobackupex</span> <span class="pre">--apply-logs</span></code> at the end of the backup. This
+is only supported when performing a non-streaming, non-compressed backup.
+In this case, even if apply-logs = yes (the default), the prepare stage
+will be skipped.  Even with an uncompressed, non-streaming backup you may
+want to disable apply-logs if you wish to use incremental backups.</div></blockquote>
+<p><strong>slave-info</strong> = yes | no (default: yes)</p>
+<blockquote>
+<div>Whether to enable the –slave-info innobackupex option</div></blockquote>
+<p><strong>safe-slave-backup</strong> = yes | no (default: yes)</p>
+<blockquote>
+<div>Whether to enable the –safe-slave-backup innobackupex option.</div></blockquote>
+<p><strong>no-lock</strong> = yes | no (default: no)</p>
+<blockquote>
+<div>Whether to enable the –no-lock innobackupex option</div></blockquote>
+<p><strong>tmpdir</strong> = &lt;path&gt; (default: <code class="docutils literal notranslate"><span class="pre">${backup_directory}</span></code>)</p>
+<blockquote>
+<div>The path for the innobackupex –tmpdir option.</div></blockquote>
+<p><strong>additional-options</strong> = &lt;option&gt;[, &lt;option&gt;…]</p>
+<blockquote>
+<div>A list of additional options to pass to innobackupex.  This is a comma
+separated list of options.</div></blockquote>
+<p><strong>pre-command</strong> = &lt;command-string&gt;</p>
+<blockquote>
+<div>A command to run prior to running this mariabackup run.  This can be used,
+for instance, to generate a mysqldump schema dump prior to running
+mariabackup.  instances of ${backup_directory} will be replaced with the
+current holland backup directory where the mariabackup data will be stored.</div></blockquote>
+</div>
+<div class="section" id="compression">
+<h2>[compression]<a class="headerlink" href="#compression" title="Permalink to this headline">¶</a></h2>
+<p>Specify various compression settings, such as compression utility,
+compression level, etc.</p>
+<p><strong>method</strong> = gzip| gzip-rsyncable | pigz | bzip2 | pbzip2 | lzop | lzma | gpg | zstd</p>
+<blockquote>
+<div><p>Define which compression method to use. Note that some methods may
+not be available by default on every system and may need to be compiled
+or installed.</p>
+<p>For gpg compression, a key should already exist(<code class="docutils literal notranslate"><span class="pre">gpg</span> <span class="pre">--gen-key</span></code>)
+and <code class="docutils literal notranslate"><span class="pre">default-recipient</span></code> must be configured in <code class="docutils literal notranslate"><span class="pre">~/.gnupg/gpg.conf</span></code>.</p>
+</div></blockquote>
+<p><strong>inline</strong> = yes | no</p>
+<blockquote>
+<div>Whether or not to pipe the output of the backup command into the compression
+utility. Enabling this is recommended since it usually only marginally
+impacts performance, particularly when using a lower compression
+level.</div></blockquote>
+<p><strong>level</strong> = 0-9</p>
+<blockquote>
+<div>Specify the compression ratio. The lower the number, the lower the
+compression ratio, but the faster the backup will take. Generally,
+setting the lever to 1 or 2 results in favorable compression of
+textual data and is noticeably faster than the higher levels.
+Setting the level to 0 effectively disables compression.</div></blockquote>
+<p><strong>bin-path</strong> = &lt;full path to utility&gt;</p>
+<blockquote>
+<div>This only needs to be defined if the compression utility is not in the
+usual places or not in the system path.</div></blockquote>
+</div>
+<div class="section" id="mysql-connection-info-mysql-client">
+<h2>MySQL connection info [mysql:client]<a class="headerlink" href="#mysql-connection-info-mysql-client" title="Permalink to this headline">¶</a></h2>
+<p>These are optional and, if left undefined, Holland will try to login using
+the standard .my.cnf conventions.</p>
+<p><strong>user</strong> = &lt;user&gt;</p>
+<p>The user to connect to MySQL as.</p>
+<p><strong>password</strong> = &lt;password&gt;</p>
+<p>The password for the MySQL user</p>
+<p><strong>socket</strong> = &lt;socket&gt;</p>
+<p>The socket file to connect to MySQL with.</p>
+<p><strong>host</strong> = &lt;host&gt;</p>
+<p>This would be used for connecting to MySQL remotely.</p>
+<p><strong>port</strong> = &lt;port&gt;</p>
+<p>Used if MySQL is running on a port other than 3306.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="mongodump.html" class="btn btn-neutral" title="mongodump Provider Configuration [mongodump]" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2018, Holland Core Team.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.1.11',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

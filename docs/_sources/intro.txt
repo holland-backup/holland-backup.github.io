@@ -1,0 +1,30 @@
+Introduction to Holland
+=======================
+
+Holland is an Open Source backup framework originally developed by Rackspace 
+and written in Python. It's goal is to help facilitate backing up databases 
+with greater configurability, consistency, and ease. Holland currently 
+focuses on MySQL, however future development will include other database 
+platforms and even non-database related applications. Because of it's 
+plugin structure, Holland can be used to backup anything you want by 
+whatever means you want.
+
+Dependencies
+------------
+The core Holland framework has the following dependencies (available on any
+remotely modern Linux distribution):
+
+* Python >= 2.6
+* pkg_resources
+* python-setuptools
+* future 
+* six
+* ConfigParser
+* ArgParser
+
+MySQL based plugins additional require the MySQLdb python connector:
+
+* Python 2: `MySQLdb(mysql-python) <http://mysql-python.sourceforge.net/>`_
+* Python 3: `MySQLdb(mysqlclient-python) <https://github.com/PyMySQL/mysqlclient-python>`_
+
+Note that other plugins may have additional dependency requirements.
