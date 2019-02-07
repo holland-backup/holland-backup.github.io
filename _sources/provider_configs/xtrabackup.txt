@@ -19,6 +19,8 @@ Backs up a MySQL instance using Percona's Xtrabackup tool.
     this will be found in holland's environment PATH as configured in
     /etc/holland/holland.conf.
     
+.. versionchanged:: 1.1.12
+   For xtrabackup version 8.0 or greater, this option is ignored
     
 **ibbackup** = <name>    
     
@@ -35,6 +37,9 @@ Backs up a MySQL instance using Percona's Xtrabackup tool.
    now equivalent to stream = tar and stream = no disables streaming
    entirely and will result in a normal directory copy with xtrabackup
        
+.. versionchanged:: 1.1.12
+   For xtrabackup version 8.0 or greater,'xstream' will be used unless
+   this value is set to 'no'
 
 **apply-logs** = yes | no (default: yes)
 
