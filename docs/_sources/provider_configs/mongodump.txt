@@ -23,4 +23,8 @@ This plugin performs logical backups of a MongoDB by using the ``mongodump`` uti
 
     TCP port for mongodump to connect on
 
+**uri** = <string>
+    Use a connection string instead of a host, username, and password
+    .. versionadded:: 1.1.14
+
 .. include:: compression.txt
