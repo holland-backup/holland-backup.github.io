@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                1.1.12
+                1.1.14
               </div>
             
           
@@ -282,6 +282,16 @@ Setting the level to 0 effectively disables compression.</div></blockquote>
 <blockquote>
 <div>This only needs to be defined if the compression utility is not in the
 usual places or not in the system path.</div></blockquote>
+<p><strong>split</strong> = yes | no</p>
+<blockquote>
+<div><p>Defautls to no. If set the backup will be piped through the split command.
+This may be useful for user’s with large databases, as some backup systems perform
+better with many smaller files instead of 1 large one. This defaults to 1GB file size,
+so this option isn’t helpful if your dumps are smaller than that.</p>
+<div class="versionadded">
+<p><span class="versionmodified">New in version 1.1.13.</span></p>
+</div>
+</div></blockquote>
 </div>
 <div class="section" id="mysql-connection-info-mysql-client">
 <h2>MySQL connection info [mysql:client]<a class="headerlink" href="#mysql-connection-info-mysql-client" title="Permalink to this headline">¶</a></h2>
@@ -342,7 +352,7 @@ the standard .my.cnf conventions.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.1.12',
+            VERSION:'1.1.14',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
