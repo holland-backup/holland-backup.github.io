@@ -38,6 +38,8 @@ compression level, etc.
     Defautls to no. If set the backup will be piped through the split command.
     This may be useful for user's with large databases, as some backup systems perform
     better with many smaller files instead of 1 large one. This defaults to 1GB file size,
-    so this option isn't helpful if your dumps are smaller than that.
+    so this option isn't helpful if your dumps are smaller than that. 
+
+    For python2.6, this option will be disabled if the subprocess32 module isn't avaiable.
 
     .. versionadded:: 1.1.13

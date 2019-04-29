@@ -62,7 +62,7 @@
             
             
               <div class="version">
-                1.1.14
+                1.1.15
               </div>
             
           
@@ -190,6 +190,7 @@ usual places or not in the system path.</div></blockquote>
 This may be useful for user’s with large databases, as some backup systems perform
 better with many smaller files instead of 1 large one. This defaults to 1GB file size,
 so this option isn’t helpful if your dumps are smaller than that.</p>
+<p>For python2.6, this option will be disabled if the subprocess32 module isn’t avaiable.</p>
 <div class="versionadded">
 <p><span class="versionmodified">New in version 1.1.13.</span></p>
 </div>
@@ -229,7 +230,7 @@ so this option isn’t helpful if your dumps are smaller than that.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'1.1.14',
+            VERSION:'1.1.15',
             LANGUAGE:'None',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
