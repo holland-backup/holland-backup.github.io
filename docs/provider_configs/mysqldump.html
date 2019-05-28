@@ -19,35 +19,36 @@
   
 
   
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Database and Table filtering" href="databasefiltering.html" />
     <link rel="prev" title="Holland Config Files" href="../config.html" /> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -64,7 +65,7 @@
             
             
               <div class="version">
-                1.1.15
+                1.1.16
               </div>
             
           
@@ -186,13 +187,14 @@
 <h2>[mysqldump]<a class="headerlink" href="#mysqldump" title="Permalink to this headline">¶</a></h2>
 <p><strong>mysql-binpath</strong> = /path/to/mysql/bin</p>
 <blockquote>
-<div>Defines the location of the MySQL binary utilities. If not provided,
-Holland will use whatever is in the path.</div></blockquote>
+<div><p>Defines the location of the MySQL binary utilities. If not provided,
+Holland will use whatever is in the path.</p>
+</div></blockquote>
 <p><strong>lock-method</strong> = flush-lock | lock-tables | single-transaction | auto-detect | none</p>
 <blockquote>
 <div><p>Defines which lock method to use. By default, auto-detect will be used.</p>
 <ul>
-<li><p class="first">flush-lock</p>
+<li><p>flush-lock</p>
 <blockquote>
 <div><p>flush-lock will place a global lock on all tables involved in the backup
 regardless of whether or not they are in the backup-set. If
@@ -201,14 +203,14 @@ for every database being backed up. In other words, this option may not
 make much sense when using file-per-database.</p>
 </div></blockquote>
 </li>
-<li><p class="first">lock-tables</p>
+<li><p>lock-tables</p>
 <blockquote>
 <div><p>lock-tables will lock all tables involved in the backup. If
 file-per-database is enabled, then lock-tables will only lock all the
 tables associated with that database.</p>
 </div></blockquote>
 </li>
-<li><p class="first">single-transaction</p>
+<li><p>single-transaction</p>
 <blockquote>
 <div><p>Forces the use of <code class="docutils literal notranslate"><span class="pre">--single-transaction</span></code> which enabled
 semi-transparent backups of transactional tables. Forcing this
@@ -218,7 +220,7 @@ lock when they are actually being backed up. <strong>Use this setting
 with extreme caution when backing non-transactional tables.</strong></p>
 </div></blockquote>
 </li>
-<li><p class="first">auto-detect</p>
+<li><p>auto-detect</p>
 <blockquote>
 <div><p>Let Holland decide which option to use by checking to see if
 a database or backup-set only contains transactional tables. If
@@ -226,7 +228,7 @@ so, <code class="docutils literal notranslate"><span class="pre">--single-transa
 <code class="docutils literal notranslate"><span class="pre">--lock-tables</span></code> will be used.</p>
 </div></blockquote>
 </li>
-<li><p class="first">none</p>
+<li><p>none</p>
 <blockquote>
 <div><p>Does absolutely no explicit locking when backing up the
 databases or backup-set. This should only be used when backing
@@ -247,7 +249,7 @@ ignore-table option will be added to exclude the table.  Additionally, the
 plugin will attempt to save the view definion to ‘invalid_views.sql’ in the
 backupset’s backup directory.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.0.8.</span></p>
+<p><span class="versionmodified added">New in version 1.0.8.</span></p>
 </div>
 </div></blockquote>
 <p><strong>dump-routines</strong> = yes | no (default: yes)</p>
@@ -256,7 +258,7 @@ backupset’s backup directory.</p>
 are stored in the ‘mysql’ database, but it can sometimes be convenient
 to include them in a backup-set directly.</p>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 1.0.8: </span>This option now enabled by default.</p>
+<p><span class="versionmodified changed">Changed in version 1.0.8: </span>This option now enabled by default.</p>
 </div>
 </div></blockquote>
 <p><strong>dump-events</strong> = yes | no</p>
@@ -267,7 +269,7 @@ convenient to include them in the backup-set directly.</p>
 <p><strong>Note</strong>: This feature requires MySQL 5.1 or later. The mysqldump plugin
 will automatically disable events if the version of mysqldump is too old.</p>
 <div class="versionchanged">
-<p><span class="versionmodified">Changed in version 1.0.8: </span>This option is now enabled by default</p>
+<p><span class="versionmodified changed">Changed in version 1.0.8: </span>This option is now enabled by default</p>
 </div>
 </div></blockquote>
 <p><strong>stop-slave</strong> = yes | no</p>
@@ -300,17 +302,19 @@ backup-set destination directory
 </div></blockquote>
 <p><strong>flush-logs</strong> = yes | no</p>
 <blockquote>
-<div>Whether or not to run FLUSH LOGS in MySQL with the backup. When FLUSH
+<div><p>Whether or not to run FLUSH LOGS in MySQL with the backup. When FLUSH
 LOGS is actually executed depends on which if database filtering is being
 used and whether or not file-per-database is enabled. Generally speaking,
 it does not make sense to use flush-logs with file-per-database since the
-binary logs will not be consistent with the backup.</div></blockquote>
+binary logs will not be consistent with the backup.</p>
+</div></blockquote>
 <p><strong>file-per-database</strong> = yes | no</p>
 <blockquote>
-<div>Whether or not to split up each database into its own file. Note that
+<div><p>Whether or not to split up each database into its own file. Note that
 it can be more consistent an efficient to backup all databases into
 one file, however this means that restore a single database can
-be difficult if multiple databases are defined in the backup set.</div></blockquote>
+be difficult if multiple databases are defined in the backup set.</p>
+</div></blockquote>
 <p><strong>arg-per-database</strong> = JSON object</p>
 <blockquote>
 <div><p>If file-per-database is enable this argument is ued to specify mysqldump
@@ -318,24 +322,26 @@ arguments per database. It takes a JSON object with the database names as keys.
 Example: {“employee1”: “–no-data”} Adds the ‘–no-data’ argument to the mysqldump
 command when backing up the ‘employee1’ database</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.0.9.</span></p>
+<p><span class="versionmodified added">New in version 1.0.9.</span></p>
 </div>
 </div></blockquote>
 <p><strong>additional-options</strong> = &lt;mysqldump argument&gt;[, &lt;mysqldump argument&gt;]</p>
 <blockquote>
-<div>Can optionally specify additional options directly to <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> if
+<div><p>Can optionally specify additional options directly to <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> if
 there is no native Holland option available.  This option accepts a comma
-delimited list of arguments to pass on the commandline.</div></blockquote>
+delimited list of arguments to pass on the commandline.</p>
+</div></blockquote>
 <p><strong>extra-defaults</strong> = yes | no (default: no)</p>
 <blockquote>
-<div>This option controls whether mysqldump will only read options as set by
+<div><p>This option controls whether mysqldump will only read options as set by
 holland or if additional options from global config files are read.  By
 default, the plugin only uses optons as set in the backupset config and
 includes authentication credentials only from the [client] section in
-~/.my.cnf.</div></blockquote>
+~/.my.cnf.</p>
+</div></blockquote>
 <p><strong>estimate-method</strong> = plugin | const:&lt;size&gt; (default: plugin)</p>
 <blockquote>
-<div>This option will skip some of the heavyweight queries necessary to
+<div><p>This option will skip some of the heavyweight queries necessary to
 calculate the size of tables to be backed up.  If a constant size is
 specified, then only table names are evaluated and only if table filtering
 is being used. Additionally, engines will be looked up via SHOW CREATE
@@ -343,7 +349,8 @@ TABLE if lock-method = auto-detect, in order for the plugin to determine if
 tables are using a transactional storage engine.  With ‘plugin’, the
 default behavior of reading both size information and table names from the
 information schema is used, which may be slow particularly for a large
-number of tables.</div></blockquote>
+number of tables.</p>
+</div></blockquote>
 </div>
 <div class="section" id="database-and-table-filtering">
 <h2>Database and Table filtering<a class="headerlink" href="#database-and-table-filtering" title="Permalink to this headline">¶</a></h2>
@@ -367,21 +374,24 @@ and <code class="docutils literal notranslate"><span class="pre">default-recipie
 </div></blockquote>
 <p><strong>inline</strong> = yes | no</p>
 <blockquote>
-<div>Whether or not to pipe the output of the backup command into the compression
+<div><p>Whether or not to pipe the output of the backup command into the compression
 utility. Enabling this is recommended since it usually only marginally
 impacts performance, particularly when using a lower compression
-level.</div></blockquote>
+level.</p>
+</div></blockquote>
 <p><strong>level</strong> = 0-9</p>
 <blockquote>
-<div>Specify the compression ratio. The lower the number, the lower the
+<div><p>Specify the compression ratio. The lower the number, the lower the
 compression ratio, but the faster the backup will take. Generally,
 setting the lever to 1 or 2 results in favorable compression of
 textual data and is noticeably faster than the higher levels.
-Setting the level to 0 effectively disables compression.</div></blockquote>
+Setting the level to 0 effectively disables compression.</p>
+</div></blockquote>
 <p><strong>bin-path</strong> = &lt;full path to utility&gt;</p>
 <blockquote>
-<div>This only needs to be defined if the compression utility is not in the
-usual places or not in the system path.</div></blockquote>
+<div><p>This only needs to be defined if the compression utility is not in the
+usual places or not in the system path.</p>
+</div></blockquote>
 <p><strong>split</strong> = yes | no</p>
 <blockquote>
 <div><p>Defautls to no. If set the backup will be piped through the split command.
@@ -390,7 +400,7 @@ better with many smaller files instead of 1 large one. This defaults to 1GB file
 so this option isn’t helpful if your dumps are smaller than that.</p>
 <p>For python2.6, this option will be disabled if the subprocess32 module isn’t avaiable.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.1.13.</span></p>
+<p><span class="versionmodified added">New in version 1.1.13.</span></p>
 </div>
 </div></blockquote>
 </div>
@@ -422,7 +432,7 @@ the standard .my.cnf conventions.</p>
         <a href="databasefiltering.html" class="btn btn-neutral float-right" title="Database and Table filtering" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../config.html" class="btn btn-neutral" title="Holland Config Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../config.html" class="btn btn-neutral float-left" title="Holland Config Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -431,7 +441,7 @@ the standard .my.cnf conventions.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Holland Core Team.
+        &copy; Copyright 2019, Holland Core Team
 
     </p>
   </div>
@@ -448,35 +458,16 @@ the standard .my.cnf conventions.</p>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'1.1.15',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>

@@ -19,35 +19,36 @@
   
 
   
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
-  
-    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="mongodump Provider Configuration [mongodump]" href="mongodump.html" />
     <link rel="prev" title="Xtrabackup Provider Configuration [xtrabackup]" href="xtrabackup.html" /> 
-
-  
-  <script src="../_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -64,7 +65,7 @@
             
             
               <div class="version">
-                1.1.15
+                1.1.16
               </div>
             
           
@@ -185,13 +186,15 @@
 <h2>[pgdump]<a class="headerlink" href="#pgdump" title="Permalink to this headline">¶</a></h2>
 <p><strong>format</strong> = custom | tar | plain (default: custom)</p>
 <blockquote>
-<div>Defines the –format option for pg_dump.  This defaults to –format=custom.
+<div><p>Defines the –format option for pg_dump.  This defaults to –format=custom.
 The custom format is required for pg_restore to do partial restore as well
 as enabling parallel restores. If set to custom, the –compress option will be
-passed to pgdump</div></blockquote>
+passed to pgdump</p>
+</div></blockquote>
 <p><strong>additional-options</strong> = &lt;command-string&gt;</p>
 <blockquote>
-<div>Pass additional options to the pg_dump command</div></blockquote>
+<div><p>Pass additional options to the pg_dump command</p>
+</div></blockquote>
 <p><strong>Only the ‘level’ option will be used if ‘format=custom’</strong></p>
 </div>
 <div class="section" id="compression">
@@ -208,21 +211,24 @@ and <code class="docutils literal notranslate"><span class="pre">default-recipie
 </div></blockquote>
 <p><strong>inline</strong> = yes | no</p>
 <blockquote>
-<div>Whether or not to pipe the output of the backup command into the compression
+<div><p>Whether or not to pipe the output of the backup command into the compression
 utility. Enabling this is recommended since it usually only marginally
 impacts performance, particularly when using a lower compression
-level.</div></blockquote>
+level.</p>
+</div></blockquote>
 <p><strong>level</strong> = 0-9</p>
 <blockquote>
-<div>Specify the compression ratio. The lower the number, the lower the
+<div><p>Specify the compression ratio. The lower the number, the lower the
 compression ratio, but the faster the backup will take. Generally,
 setting the lever to 1 or 2 results in favorable compression of
 textual data and is noticeably faster than the higher levels.
-Setting the level to 0 effectively disables compression.</div></blockquote>
+Setting the level to 0 effectively disables compression.</p>
+</div></blockquote>
 <p><strong>bin-path</strong> = &lt;full path to utility&gt;</p>
 <blockquote>
-<div>This only needs to be defined if the compression utility is not in the
-usual places or not in the system path.</div></blockquote>
+<div><p>This only needs to be defined if the compression utility is not in the
+usual places or not in the system path.</p>
+</div></blockquote>
 <p><strong>split</strong> = yes | no</p>
 <blockquote>
 <div><p>Defautls to no. If set the backup will be piped through the split command.
@@ -231,7 +237,7 @@ better with many smaller files instead of 1 large one. This defaults to 1GB file
 so this option isn’t helpful if your dumps are smaller than that.</p>
 <p>For python2.6, this option will be disabled if the subprocess32 module isn’t avaiable.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.1.13.</span></p>
+<p><span class="versionmodified added">New in version 1.1.13.</span></p>
 </div>
 </div></blockquote>
 </div>
@@ -239,16 +245,20 @@ so this option isn’t helpful if your dumps are smaller than that.</p>
 <h2>[pgauth]<a class="headerlink" href="#pgauth" title="Permalink to this headline">¶</a></h2>
 <p><strong>username</strong> = &lt;name&gt;</p>
 <blockquote>
-<div>Username for pg_dump to authenticate with</div></blockquote>
+<div><p>Username for pg_dump to authenticate with</p>
+</div></blockquote>
 <p><strong>password</strong> = &lt;string&gt;</p>
 <blockquote>
-<div>Password for pg_dump to authenticate with</div></blockquote>
+<div><p>Password for pg_dump to authenticate with</p>
+</div></blockquote>
 <p><strong>hostname</strong> = &lt;string&gt;</p>
 <blockquote>
-<div>Hostname for pg_dump to connect with</div></blockquote>
+<div><p>Hostname for pg_dump to connect with</p>
+</div></blockquote>
 <p><strong>port</strong> = &lt;integer&gt;</p>
 <blockquote>
-<div>TCP port for pg_dump to connect on</div></blockquote>
+<div><p>TCP port for pg_dump to connect on</p>
+</div></blockquote>
 </div>
 </div>
 
@@ -263,7 +273,7 @@ so this option isn’t helpful if your dumps are smaller than that.</p>
         <a href="mongodump.html" class="btn btn-neutral float-right" title="mongodump Provider Configuration [mongodump]" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="xtrabackup.html" class="btn btn-neutral" title="Xtrabackup Provider Configuration [xtrabackup]" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="xtrabackup.html" class="btn btn-neutral float-left" title="Xtrabackup Provider Configuration [xtrabackup]" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -272,7 +282,7 @@ so this option isn’t helpful if your dumps are smaller than that.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2018, Holland Core Team.
+        &copy; Copyright 2019, Holland Core Team
 
     </p>
   </div>
@@ -289,35 +299,16 @@ so this option isn’t helpful if your dumps are smaller than that.</p>
   
 
 
-  
-
-    <script type="text/javascript">
-        var DOCUMENTATION_OPTIONS = {
-            URL_ROOT:'../',
-            VERSION:'1.1.15',
-            LANGUAGE:'None',
-            COLLAPSE_INDEX:false,
-            FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
-        };
-    </script>
-      <script type="text/javascript" src="../_static/jquery.js"></script>
-      <script type="text/javascript" src="../_static/underscore.js"></script>
-      <script type="text/javascript" src="../_static/doctools.js"></script>
-
-  
-
-  
-  
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
-  
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
