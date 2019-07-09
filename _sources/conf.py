@@ -24,9 +24,9 @@ copyright = '2018, Holland Core Team'
 author = 'Holland Core Team'
 
 # The short X.Y version
-version = '1.1.15'
+version = '1.1.17'
 # The full version, including alpha/beta/rc tags
-release = '1.1.15'
+release = '1.1.17'
 
 
 # -- General configuration ---------------------------------------------------

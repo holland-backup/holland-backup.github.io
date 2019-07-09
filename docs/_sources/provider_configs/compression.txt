@@ -33,6 +33,12 @@ compression level, etc.
     This only needs to be defined if the compression utility is not in the
     usual places or not in the system path.
 
+**options** = <string>
+
+    Add commandline options to the configuration compression command.
+
+    options = "-Q4"
+
 **split** = yes | no
 
     Defautls to no. If set the backup will be piped through the split command.
