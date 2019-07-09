@@ -20,7 +20,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Holland'
-copyright = '2018, Holland Core Team'
+copyright = '2019, Holland Core Team'
 author = 'Holland Core Team'
 
 # The short X.Y version
