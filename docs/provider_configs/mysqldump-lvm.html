@@ -19,39 +19,34 @@
   
 
   
-  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+
+  
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script type="text/javascript" src="../_static/jquery.js"></script>
-        <script type="text/javascript" src="../_static/underscore.js"></script>
-        <script type="text/javascript" src="../_static/doctools.js"></script>
-        <script type="text/javascript" src="../_static/language_data.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
-
-<<<<<<< HEAD
-=======
   
->>>>>>> 88471dcc829cbf9e2c90140dbea863a562e5fba5
+
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Xtrabackup Provider Configuration [xtrabackup]" href="xtrabackup.html" />
     <link rel="prev" title="MySQL LVM Provider Configuration [mysql-lvm]" href="mysql-lvm.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -68,11 +63,7 @@
             
             
               <div class="version">
-<<<<<<< HEAD
                 1.1.17
-=======
-                1.1.16
->>>>>>> 88471dcc829cbf9e2c90140dbea863a562e5fba5
               </div>
             
           
@@ -197,68 +188,58 @@ mysqldump. This effectively produces a non-blocking logical backup.</p>
 <h2>[mysql-lvm]<a class="headerlink" href="#mysql-lvm" title="Permalink to this headline">¶</a></h2>
 <p><strong>snapshot-size</strong> = &lt;size-in-MB&gt;</p>
 <blockquote>
-<div><p>The size of the snapshot itself. By default it is 20% of the size of  the
+<div>The size of the snapshot itself. By default it is 20% of the size of  the
 MySQL LVM mount or the remaining free-space in the Volume Group (if there
 is less than 20% available) up to 15GB. If snapshot-size is defined, the
-number represents the size of the snapshot in megabytes.</p>
-</div></blockquote>
+number represents the size of the snapshot in megabytes.</div></blockquote>
 <p><strong>snapshot-name</strong> = &lt;name&gt;</p>
 <blockquote>
-<div><p>The name of the snapshot, the default being the name of the MySQL LVM
-volume + “_snapshot” (ie Storage-MySQL_snapshot)</p>
-</div></blockquote>
+<div>The name of the snapshot, the default being the name of the MySQL LVM
+volume + “_snapshot” (ie Storage-MySQL_snapshot)</div></blockquote>
 <p><strong>snapshot-mountpoint</strong> = &lt;path&gt;</p>
 <blockquote>
-<div><p>Where to mount the snapshot. By default a randomly generated directory
-under /tmp is used.</p>
-</div></blockquote>
+<div>Where to mount the snapshot. By default a randomly generated directory
+under /tmp is used.</div></blockquote>
 <p><strong>innodb-recovery</strong> = yes | no (default: no)</p>
 <blockquote>
-<div><p>Whether or not to run an InnoDB recovery operation. This avoids needing
+<div>Whether or not to run an InnoDB recovery operation. This avoids needing
 to do so during a restore, though will make the backup process itself
-take longer.</p>
-</div></blockquote>
+take longer.</div></blockquote>
 <p><strong>lock-tables</strong> = yes | no (default: yes)</p>
 <blockquote>
-<div><p>Whether or not to run a FLUSH TABLES WITH READ LOCK to grab various
+<div>Whether or not to run a FLUSH TABLES WITH READ LOCK to grab various
 bits of information (such as the binary log name and position). Disabling
 this requires that binary logging is disabled and InnoDB is being used
 exclusively. Otherwise, it is possible that the backup could contain
-crashed tables.</p>
-</div></blockquote>
+crashed tables.</div></blockquote>
 <p><strong>extra-flush-tables</strong> = yes | no (default: yes)</p>
 <blockquote>
-<div><p>Whether or not to run a FLUSH TABLES before running the full
+<div>Whether or not to run a FLUSH TABLES before running the full
 FLUSH TABLES WITH READ LOCK. Should make the FLUSH TABLES WITH READ LOCK
-operation a bit faster.</p>
-</div></blockquote>
+operation a bit faster.</div></blockquote>
 </div>
 <div class="section" id="mysqld">
 <h2>[mysqld]<a class="headerlink" href="#mysqld" title="Permalink to this headline">¶</a></h2>
 <p><strong>mysqld-exe</strong> = &lt;path&gt;[, &lt;path&gt;…] (default: mysqld in PATH, /usr/libexec/mysqld)</p>
 <blockquote>
-<div><p>This provides a list of locations where the mysqld process to use might be
-found.  This is searched in order of entries in this list.</p>
-</div></blockquote>
+<div>This provides a list of locations where the mysqld process to use might be
+found.  This is searched in order of entries in this list.</div></blockquote>
 <p><strong>user</strong> = &lt;name&gt;</p>
 <blockquote>
-<div><p>The –user parameter to use with mysqld.</p>
-</div></blockquote>
+<div>The –user parameter to use with mysqld.</div></blockquote>
 <p><strong>innodb-buffer-pool-size</strong> = &lt;size&gt; (default: 128M)</p>
 <blockquote>
-<div><p>How large to size the innodb-buffer-pool-size.</p>
-</div></blockquote>
+<div>How large to size the innodb-buffer-pool-size.</div></blockquote>
 <p><strong>tmpdir</strong> = &lt;path&gt;  (default: system tempdir)</p>
 <blockquote>
-<div><p>Path to the –tmpdir that mysqld should use.</p>
-</div></blockquote>
+<div>Path to the –tmpdir that mysqld should use.</div></blockquote>
 <p><strong>log-error</strong> = &lt;path&gt;  (default: tempdir/holland_lvm.log)</p>
 <blockquote>
 <div><p>Define path for mysqld’s error log. The default location get cleaned up by Holland after
 the backup is complete. This settings allows the user to define the log file in another location
 and can be useful for debugging issue with the MySQL instance running on the snapshot.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.0.9.</span></p>
+<p><span class="versionmodified">New in version 1.0.9.</span></p>
 </div>
 </div></blockquote>
 </div>
@@ -285,32 +266,25 @@ and <code class="docutils literal notranslate"><span class="pre">default-recipie
 </div></blockquote>
 <p><strong>inline</strong> = yes | no</p>
 <blockquote>
-<div><p>Whether or not to pipe the output of the backup command into the compression
+<div>Whether or not to pipe the output of the backup command into the compression
 utility. Enabling this is recommended since it usually only marginally
 impacts performance, particularly when using a lower compression
-level.</p>
-</div></blockquote>
+level.</div></blockquote>
 <p><strong>level</strong> = 0-9</p>
 <blockquote>
-<div><p>Specify the compression ratio. The lower the number, the lower the
+<div>Specify the compression ratio. The lower the number, the lower the
 compression ratio, but the faster the backup will take. Generally,
 setting the lever to 1 or 2 results in favorable compression of
 textual data and is noticeably faster than the higher levels.
-Setting the level to 0 effectively disables compression.</p>
-</div></blockquote>
+Setting the level to 0 effectively disables compression.</div></blockquote>
 <p><strong>bin-path</strong> = &lt;full path to utility&gt;</p>
 <blockquote>
-<<<<<<< HEAD
 <div>This only needs to be defined if the compression utility is not in the
 usual places or not in the system path.</div></blockquote>
 <p><strong>options</strong> = &lt;string&gt;</p>
 <blockquote>
 <div><p>Add commandline options to the configuration compression command.</p>
 <p>options = “-Q4”</p>
-=======
-<div><p>This only needs to be defined if the compression utility is not in the
-usual places or not in the system path.</p>
->>>>>>> 88471dcc829cbf9e2c90140dbea863a562e5fba5
 </div></blockquote>
 <p><strong>split</strong> = yes | no</p>
 <blockquote>
@@ -320,7 +294,7 @@ better with many smaller files instead of 1 large one. This defaults to 1GB file
 so this option isn’t helpful if your dumps are smaller than that.</p>
 <p>For python2.6, this option will be disabled if the subprocess32 module isn’t avaiable.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.1.13.</span></p>
+<p><span class="versionmodified">New in version 1.1.13.</span></p>
 </div>
 </div></blockquote>
 </div>
@@ -352,7 +326,7 @@ the standard .my.cnf conventions.</p>
         <a href="xtrabackup.html" class="btn btn-neutral float-right" title="Xtrabackup Provider Configuration [xtrabackup]" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="mysql-lvm.html" class="btn btn-neutral float-left" title="MySQL LVM Provider Configuration [mysql-lvm]" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="mysql-lvm.html" class="btn btn-neutral" title="MySQL LVM Provider Configuration [mysql-lvm]" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -361,11 +335,7 @@ the standard .my.cnf conventions.</p>
 
   <div role="contentinfo">
     <p>
-<<<<<<< HEAD
-        &copy; Copyright 2018, Holland Core Team
-=======
         &copy; Copyright 2019, Holland Core Team
->>>>>>> 88471dcc829cbf9e2c90140dbea863a562e5fba5
 
     </p>
   </div>
@@ -382,7 +352,6 @@ the standard .my.cnf conventions.</p>
   
 
 
-<<<<<<< HEAD
   
 
     
@@ -407,18 +376,11 @@ the standard .my.cnf conventions.</p>
 
   <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-=======
->>>>>>> 88471dcc829cbf9e2c90140dbea863a562e5fba5
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
