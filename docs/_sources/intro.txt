@@ -9,12 +9,14 @@ platforms and even non-database related applications. Because of it's
 plugin structure, Holland can be used to backup anything you want by 
 whatever means you want.
 
+Python2 support has been removed as of holland 1.2.0
+
 Dependencies
 ------------
 The core Holland framework has the following dependencies (available on any
 remotely modern Linux distribution):
 
-* Python >= 2.6
+* Python >= 3.6
 * pkg_resources
 * python-setuptools
 * future 
@@ -24,7 +26,6 @@ remotely modern Linux distribution):
 
 MySQL based plugins additional require the MySQLdb python connector:
 
-* Python 2: `MySQLdb(mysql-python) <http://mysql-python.sourceforge.net/>`_
 * Python 3: `MySQLdb(mysqlclient-python) <https://github.com/PyMySQL/mysqlclient-python>`_
 
 Note that other plugins may have additional dependency requirements.

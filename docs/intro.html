@@ -19,34 +19,36 @@
   
 
   
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
 
-  
-  
     
 
   
-
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Holland Command-Line Reference" href="commands.html" />
     <link rel="prev" title="Holland Backup Framework" href="index.html" /> 
-
-  
-  <script src="_static/js/modernizr.min.js"></script>
-
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
-
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search">
+        <div class="wy-side-nav-search" >
           
 
           
@@ -63,7 +65,7 @@
             
             
               <div class="version">
-                1.1.21
+                1.2.0
               </div>
             
           
@@ -168,12 +170,13 @@ focuses on MySQL, however future development will include other database
 platforms and even non-database related applications. Because of it’s
 plugin structure, Holland can be used to backup anything you want by
 whatever means you want.</p>
+<p>Python2 support has been removed as of holland 1.2.0</p>
 <div class="section" id="dependencies">
 <h2>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h2>
 <p>The core Holland framework has the following dependencies (available on any
 remotely modern Linux distribution):</p>
 <ul class="simple">
-<li>Python &gt;= 2.6</li>
+<li>Python &gt;= 3.6</li>
 <li>pkg_resources</li>
 <li>python-setuptools</li>
 <li>future</li>
@@ -183,7 +186,6 @@ remotely modern Linux distribution):</p>
 </ul>
 <p>MySQL based plugins additional require the MySQLdb python connector:</p>
 <ul class="simple">
-<li>Python 2: <a class="reference external" href="http://mysql-python.sourceforge.net/">MySQLdb(mysql-python)</a></li>
 <li>Python 3: <a class="reference external" href="https://github.com/PyMySQL/mysqlclient-python">MySQLdb(mysqlclient-python)</a></li>
 </ul>
 <p>Note that other plugins may have additional dependency requirements.</p>
@@ -201,7 +203,7 @@ remotely modern Linux distribution):</p>
         <a href="commands.html" class="btn btn-neutral float-right" title="Holland Command-Line Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Holland Backup Framework" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral float-left" title="Holland Backup Framework" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -227,35 +229,16 @@ remotely modern Linux distribution):</p>
   
 
 
-  
-
-    
-    
-      <script type="text/javascript">
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'./',
-              VERSION:'1.1.21',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script type="text/javascript" src="_static/jquery.js"></script>
-        <script type="text/javascript" src="_static/underscore.js"></script>
-        <script type="text/javascript" src="_static/doctools.js"></script>
-    
-
-  
-
-  <script type="text/javascript" src="_static/js/theme.js"></script>
-
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script> 
+  </script>
+
+  
+  
+    
+   
 
 </body>
 </html>
