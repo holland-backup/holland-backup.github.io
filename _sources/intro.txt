@@ -19,13 +19,10 @@ remotely modern Linux distribution):
 * Python >= 3.6
 * pkg_resources
 * python-setuptools
-* future 
-* six
 * ConfigParser
-* ArgParser
 
 MySQL based plugins additional require the MySQLdb python connector:
 
-* Python 3: `MySQLdb(mysqlclient-python) <https://github.com/PyMySQL/mysqlclient-python>`_
+* pyMySQL
 
 Note that other plugins may have additional dependency requirements.
