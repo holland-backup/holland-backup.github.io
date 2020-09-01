@@ -64,7 +64,7 @@
             
             
               <div class="version">
-                1.2.1
+                1.2.2
               </div>
             
           
@@ -185,50 +185,61 @@
 <h2>[mariabackup]<a class="headerlink" href="#mariabackup" title="Permalink to this headline">¶</a></h2>
 <p><strong>global-defaults</strong> = &lt;path&gt; (default: /etc/my.cnf)</p>
 <blockquote>
-<div>The MySQL configuration file for mariabackup to parse.  This is !include’d
-into the my.cnf the mariabackup plugin generates</div></blockquote>
+<div><p>The MySQL configuration file for mariabackup to parse.  This is !include’d
+into the my.cnf the mariabackup plugin generates</p>
+</div></blockquote>
 <p><strong>innobackupex</strong> = &lt;name&gt; (default: innobackupex-1.5.1)</p>
 <blockquote>
-<div>The path to the innobackupex script to run. If this is a relative path
+<div><p>The path to the innobackupex script to run. If this is a relative path
 this will be found in holland’s environment PATH as configured in
-/etc/holland/holland.conf.</div></blockquote>
+/etc/holland/holland.conf.</p>
+</div></blockquote>
 <p><strong>ibbackup</strong> = &lt;name&gt;</p>
 <blockquote>
-<div>The path to the ibbackup command to use.  By default, no –ibbackup option
+<div><p>The path to the ibbackup command to use.  By default, no –ibbackup option
 is pass to the innobackupex script.  Usually innobackupex will detect this
-by itself and this should not need to be set.</div></blockquote>
+by itself and this should not need to be set.</p>
+</div></blockquote>
 <p><strong>stream</strong> = mbstream(default: tar)</p>
 <blockquote>
-<div>Placeholder</div></blockquote>
+<div><p>Placeholder</p>
+</div></blockquote>
 <p><strong>apply-logs</strong> = yes | no (default: yes)</p>
 <blockquote>
-<div>Whether to run <code class="docutils literal notranslate"><span class="pre">innobackupex</span> <span class="pre">--apply-logs</span></code> at the end of the backup. This
+<div><p>Whether to run <code class="docutils literal notranslate"><span class="pre">innobackupex</span> <span class="pre">--apply-logs</span></code> at the end of the backup. This
 is only supported when performing a non-streaming, non-compressed backup.
 In this case, even if apply-logs = yes (the default), the prepare stage
 will be skipped.  Even with an uncompressed, non-streaming backup you may
-want to disable apply-logs if you wish to use incremental backups.</div></blockquote>
+want to disable apply-logs if you wish to use incremental backups.</p>
+</div></blockquote>
 <p><strong>slave-info</strong> = yes | no (default: yes)</p>
 <blockquote>
-<div>Whether to enable the –slave-info innobackupex option</div></blockquote>
+<div><p>Whether to enable the –slave-info innobackupex option</p>
+</div></blockquote>
 <p><strong>safe-slave-backup</strong> = yes | no (default: yes)</p>
 <blockquote>
-<div>Whether to enable the –safe-slave-backup innobackupex option.</div></blockquote>
+<div><p>Whether to enable the –safe-slave-backup innobackupex option.</p>
+</div></blockquote>
 <p><strong>no-lock</strong> = yes | no (default: no)</p>
 <blockquote>
-<div>Whether to enable the –no-lock innobackupex option</div></blockquote>
+<div><p>Whether to enable the –no-lock innobackupex option</p>
+</div></blockquote>
 <p><strong>tmpdir</strong> = &lt;path&gt; (default: <code class="docutils literal notranslate"><span class="pre">${backup_directory}</span></code>)</p>
 <blockquote>
-<div>The path for the innobackupex –tmpdir option.</div></blockquote>
+<div><p>The path for the innobackupex –tmpdir option.</p>
+</div></blockquote>
 <p><strong>additional-options</strong> = &lt;option&gt;[, &lt;option&gt;…]</p>
 <blockquote>
-<div>A list of additional options to pass to innobackupex.  This is a comma
-separated list of options.</div></blockquote>
+<div><p>A list of additional options to pass to innobackupex.  This is a comma
+separated list of options.</p>
+</div></blockquote>
 <p><strong>pre-command</strong> = &lt;command-string&gt;</p>
 <blockquote>
-<div>A command to run prior to running this mariabackup run.  This can be used,
+<div><p>A command to run prior to running this mariabackup run.  This can be used,
 for instance, to generate a mysqldump schema dump prior to running
 mariabackup.  instances of ${backup_directory} will be replaced with the
-current holland backup directory where the mariabackup data will be stored.</div></blockquote>
+current holland backup directory where the mariabackup data will be stored.</p>
+</div></blockquote>
 </div>
 <div class="section" id="compression">
 <h2>[compression]<a class="headerlink" href="#compression" title="Permalink to this headline">¶</a></h2>
@@ -244,21 +255,24 @@ and <code class="docutils literal notranslate"><span class="pre">default-recipie
 </div></blockquote>
 <p><strong>inline</strong> = yes | no</p>
 <blockquote>
-<div>Whether or not to pipe the output of the backup command into the compression
+<div><p>Whether or not to pipe the output of the backup command into the compression
 utility. Enabling this is recommended since it usually only marginally
 impacts performance, particularly when using a lower compression
-level.</div></blockquote>
+level.</p>
+</div></blockquote>
 <p><strong>level</strong> = 0-9</p>
 <blockquote>
-<div>Specify the compression ratio. The lower the number, the lower the
+<div><p>Specify the compression ratio. The lower the number, the lower the
 compression ratio, but the faster the backup will take. Generally,
 setting the lever to 1 or 2 results in favorable compression of
 textual data and is noticeably faster than the higher levels.
-Setting the level to 0 effectively disables compression.</div></blockquote>
+Setting the level to 0 effectively disables compression.</p>
+</div></blockquote>
 <p><strong>bin-path</strong> = &lt;full path to utility&gt;</p>
 <blockquote>
-<div>This only needs to be defined if the compression utility is not in the
-usual places or not in the system path.</div></blockquote>
+<div><p>This only needs to be defined if the compression utility is not in the
+usual places or not in the system path.</p>
+</div></blockquote>
 <p><strong>options</strong> = &lt;string&gt;</p>
 <blockquote>
 <div><p>Add commandline options to the configuration compression command.</p>
@@ -272,7 +286,7 @@ better with many smaller files instead of 1 large one. This defaults to 1GB file
 so this option isn’t helpful if your dumps are smaller than that.</p>
 <p>For python2.6, this option will be disabled if the subprocess32 module isn’t avaiable.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.1.13.</span></p>
+<p><span class="versionmodified added">New in version 1.1.13.</span></p>
 </div>
 </div></blockquote>
 </div>

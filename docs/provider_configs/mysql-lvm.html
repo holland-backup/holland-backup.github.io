@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                1.2.1
+                1.2.2
               </div>
             
           
@@ -190,43 +190,51 @@ that this volume be separate from the one storing the resulting backups.</p>
 <h2>[mysql-lvm]<a class="headerlink" href="#mysql-lvm" title="Permalink to this headline">¶</a></h2>
 <p><strong>snapshot-size</strong> = &lt;size-in-MB&gt;</p>
 <blockquote>
-<div>The size of the snapshot itself. By default it is 20% of the size of  the
+<div><p>The size of the snapshot itself. By default it is 20% of the size of  the
 MySQL LVM mount or the remaining free-space in the Volume Group (if there
 is less than 20% available) up to 15GB. If snapshot-size is defined, the
-number represents the size of the snapshot in megabytes.</div></blockquote>
+number represents the size of the snapshot in megabytes.</p>
+</div></blockquote>
 <p><strong>snapshot-name</strong> = &lt;name&gt;</p>
 <blockquote>
-<div>The name of the snapshot, the default being the name of the MySQL LVM
-volume + “_snapshot” (ie Storage-MySQL_snapshot)</div></blockquote>
+<div><p>The name of the snapshot, the default being the name of the MySQL LVM
+volume + “_snapshot” (ie Storage-MySQL_snapshot)</p>
+</div></blockquote>
 <p><strong>snapshot-mountpoint</strong> = &lt;path&gt;</p>
 <blockquote>
-<div>Where to mount the snapshot. By default a randomly generated directory
-under /tmp is used.</div></blockquote>
+<div><p>Where to mount the snapshot. By default a randomly generated directory
+under /tmp is used.</p>
+</div></blockquote>
 <p><strong>innodb-recovery</strong> = yes | no (default: no)</p>
 <blockquote>
-<div>Whether or not to run an InnoDB recovery operation. This avoids needing
+<div><p>Whether or not to run an InnoDB recovery operation. This avoids needing
 to do so during a restore, though will make the backup process itself
-take longer.</div></blockquote>
+take longer.</p>
+</div></blockquote>
 <p><strong>force-innodb-backup</strong> = yes | no (default: no)</p>
 <blockquote>
-<div>Whether to attempt a backup even if the mysql-lvm plugin thinks it cannot obtain a good
+<div><p>Whether to attempt a backup even if the mysql-lvm plugin thinks it cannot obtain a good
 backup.  This can occur when innodb data files are outside of the mysql datadir or exist
-on entirely separate logical volumes.</div></blockquote>
+on entirely separate logical volumes.</p>
+</div></blockquote>
 <p><strong>lock-tables</strong> = yes | no (default: yes)</p>
 <blockquote>
-<div>Whether or not to run a FLUSH TABLES WITH READ LOCK to grab various
+<div><p>Whether or not to run a FLUSH TABLES WITH READ LOCK to grab various
 bits of information (such as the binary log name and position). Disabling
 this requires that binary logging is disabled and InnoDB is being used
 exclusively. Otherwise, it is possible that the backup could contain
-crashed tables.</div></blockquote>
+crashed tables.</p>
+</div></blockquote>
 <p><strong>extra-flush-tables</strong> = yes | no (default: yes)</p>
 <blockquote>
-<div>Whether or not to run a FLUSH TABLES before running the full
+<div><p>Whether or not to run a FLUSH TABLES before running the full
 FLUSH TABLES WITH READ LOCK. Should make the FLUSH TABLES WITH READ LOCK
-operation a bit faster.</div></blockquote>
+operation a bit faster.</p>
+</div></blockquote>
 <p><strong>archive-method</strong>      = tar | dir (default: tar)</p>
 <blockquote>
-<div>Create a tar file of the datadir, or just copy it.</div></blockquote>
+<div><p>Create a tar file of the datadir, or just copy it.</p>
+</div></blockquote>
 </div>
 <div class="section" id="tar">
 <h2>[tar]<a class="headerlink" href="#tar" title="Permalink to this headline">¶</a></h2>
@@ -261,21 +269,24 @@ and <code class="docutils literal notranslate"><span class="pre">default-recipie
 </div></blockquote>
 <p><strong>inline</strong> = yes | no</p>
 <blockquote>
-<div>Whether or not to pipe the output of the backup command into the compression
+<div><p>Whether or not to pipe the output of the backup command into the compression
 utility. Enabling this is recommended since it usually only marginally
 impacts performance, particularly when using a lower compression
-level.</div></blockquote>
+level.</p>
+</div></blockquote>
 <p><strong>level</strong> = 0-9</p>
 <blockquote>
-<div>Specify the compression ratio. The lower the number, the lower the
+<div><p>Specify the compression ratio. The lower the number, the lower the
 compression ratio, but the faster the backup will take. Generally,
 setting the lever to 1 or 2 results in favorable compression of
 textual data and is noticeably faster than the higher levels.
-Setting the level to 0 effectively disables compression.</div></blockquote>
+Setting the level to 0 effectively disables compression.</p>
+</div></blockquote>
 <p><strong>bin-path</strong> = &lt;full path to utility&gt;</p>
 <blockquote>
-<div>This only needs to be defined if the compression utility is not in the
-usual places or not in the system path.</div></blockquote>
+<div><p>This only needs to be defined if the compression utility is not in the
+usual places or not in the system path.</p>
+</div></blockquote>
 <p><strong>options</strong> = &lt;string&gt;</p>
 <blockquote>
 <div><p>Add commandline options to the configuration compression command.</p>
@@ -289,7 +300,7 @@ better with many smaller files instead of 1 large one. This defaults to 1GB file
 so this option isn’t helpful if your dumps are smaller than that.</p>
 <p>For python2.6, this option will be disabled if the subprocess32 module isn’t avaiable.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.1.13.</span></p>
+<p><span class="versionmodified added">New in version 1.1.13.</span></p>
 </div>
 </div></blockquote>
 </div>

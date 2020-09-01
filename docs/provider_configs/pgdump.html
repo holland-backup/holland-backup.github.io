@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                1.2.1
+                1.2.2
               </div>
             
           
@@ -186,13 +186,15 @@
 <h2>[pgdump]<a class="headerlink" href="#pgdump" title="Permalink to this headline">¶</a></h2>
 <p><strong>format</strong> = custom | tar | plain (default: custom)</p>
 <blockquote>
-<div>Defines the –format option for pg_dump.  This defaults to –format=custom.
+<div><p>Defines the –format option for pg_dump.  This defaults to –format=custom.
 The custom format is required for pg_restore to do partial restore as well
 as enabling parallel restores. If set to custom, the –compress option will be
-passed to pgdump</div></blockquote>
+passed to pgdump</p>
+</div></blockquote>
 <p><strong>additional-options</strong> = &lt;command-string&gt;</p>
 <blockquote>
-<div>Pass additional options to the pg_dump command</div></blockquote>
+<div><p>Pass additional options to the pg_dump command</p>
+</div></blockquote>
 <p><strong>Only the ‘level’ option will be used if ‘format=custom’</strong></p>
 </div>
 <div class="section" id="compression">
@@ -209,21 +211,24 @@ and <code class="docutils literal notranslate"><span class="pre">default-recipie
 </div></blockquote>
 <p><strong>inline</strong> = yes | no</p>
 <blockquote>
-<div>Whether or not to pipe the output of the backup command into the compression
+<div><p>Whether or not to pipe the output of the backup command into the compression
 utility. Enabling this is recommended since it usually only marginally
 impacts performance, particularly when using a lower compression
-level.</div></blockquote>
+level.</p>
+</div></blockquote>
 <p><strong>level</strong> = 0-9</p>
 <blockquote>
-<div>Specify the compression ratio. The lower the number, the lower the
+<div><p>Specify the compression ratio. The lower the number, the lower the
 compression ratio, but the faster the backup will take. Generally,
 setting the lever to 1 or 2 results in favorable compression of
 textual data and is noticeably faster than the higher levels.
-Setting the level to 0 effectively disables compression.</div></blockquote>
+Setting the level to 0 effectively disables compression.</p>
+</div></blockquote>
 <p><strong>bin-path</strong> = &lt;full path to utility&gt;</p>
 <blockquote>
-<div>This only needs to be defined if the compression utility is not in the
-usual places or not in the system path.</div></blockquote>
+<div><p>This only needs to be defined if the compression utility is not in the
+usual places or not in the system path.</p>
+</div></blockquote>
 <p><strong>options</strong> = &lt;string&gt;</p>
 <blockquote>
 <div><p>Add commandline options to the configuration compression command.</p>
@@ -237,7 +242,7 @@ better with many smaller files instead of 1 large one. This defaults to 1GB file
 so this option isn’t helpful if your dumps are smaller than that.</p>
 <p>For python2.6, this option will be disabled if the subprocess32 module isn’t avaiable.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.1.13.</span></p>
+<p><span class="versionmodified added">New in version 1.1.13.</span></p>
 </div>
 </div></blockquote>
 </div>
@@ -245,16 +250,20 @@ so this option isn’t helpful if your dumps are smaller than that.</p>
 <h2>[pgauth]<a class="headerlink" href="#pgauth" title="Permalink to this headline">¶</a></h2>
 <p><strong>username</strong> = &lt;name&gt;</p>
 <blockquote>
-<div>Username for pg_dump to authenticate with</div></blockquote>
+<div><p>Username for pg_dump to authenticate with</p>
+</div></blockquote>
 <p><strong>password</strong> = &lt;string&gt;</p>
 <blockquote>
-<div>Password for pg_dump to authenticate with</div></blockquote>
+<div><p>Password for pg_dump to authenticate with</p>
+</div></blockquote>
 <p><strong>hostname</strong> = &lt;string&gt;</p>
 <blockquote>
-<div>Hostname for pg_dump to connect with</div></blockquote>
+<div><p>Hostname for pg_dump to connect with</p>
+</div></blockquote>
 <p><strong>port</strong> = &lt;integer&gt;</p>
 <blockquote>
-<div>TCP port for pg_dump to connect on</div></blockquote>
+<div><p>TCP port for pg_dump to connect on</p>
+</div></blockquote>
 </div>
 </div>
 

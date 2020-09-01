@@ -65,7 +65,7 @@
             
             
               <div class="version">
-                1.2.1
+                1.2.2
               </div>
             
           
@@ -185,56 +185,56 @@ any), what locking method to use, among other things.</p>
 <h2>Providers<a class="headerlink" href="#providers" title="Permalink to this headline">¶</a></h2>
 <p>Providers essentially provide a backup service for use in a backup set.</p>
 <ul>
-<li><p class="first">mysqldump</p>
+<li><p>mysqldump</p>
 <blockquote>
 <div><p>Uses the <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> utility to backup databases.</p>
 </div></blockquote>
 </li>
-<li><p class="first">MySQL + LVM</p>
+<li><p>MySQL + LVM</p>
 <blockquote>
 <div><p>Backup MySQL databases using LVM snapshots which allows for near lockless
 or fully lockless (when transactional engines are used) backups.</p>
 </div></blockquote>
 </li>
-<li><p class="first">mysqldump + LVM</p>
+<li><p>mysqldump + LVM</p>
 <blockquote>
 <div><p>This plugin creates an LVM snapshot, starts a mysql instance using the snapshot
 as it’s datadir, and then use the <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> utility to backup the databases.</p>
 </div></blockquote>
 </li>
-<li><p class="first">XtraBackup</p>
+<li><p>XtraBackup</p>
 <blockquote>
 <div><div class="versionadded">
-<p><span class="versionmodified">New in version 1.0.8.</span></p>
+<p><span class="versionmodified added">New in version 1.0.8.</span></p>
 </div>
 <p>Backup MySQL databases using Percona’s
 <a class="reference external" href="http://www.percona.com/software/percona-xtrabackup">XtraBackup</a> tool.
 This provides a near lockless backup when using the InnoDB storage engine.</p>
 </div></blockquote>
 </li>
-<li><p class="first">pgdump</p>
+<li><p>pgdump</p>
 <blockquote>
 <div><p>Backup PostgreSQL databases using the <code class="docutils literal notranslate"><span class="pre">pgdump</span></code> utility.</p>
 </div></blockquote>
 </li>
-<li><p class="first">mariabackup</p>
+<li><p>mariabackup</p>
 <blockquote>
 <div><div class="versionadded">
-<p><span class="versionmodified">New in version 1.1.0.</span></p>
+<p><span class="versionmodified added">New in version 1.1.0.</span></p>
 </div>
 <p>Backup MySQL databases using MariaDB’s
 <a class="reference external" href="https://mariadb.com/kb/en/library/mariabackup-options/">mariabackup</a> tool.</p>
 </div></blockquote>
 </li>
-<li><p class="first">mongodump</p>
+<li><p>mongodump</p>
 <blockquote>
 <div><div class="versionadded">
-<p><span class="versionmodified">New in version 1.1.0.</span></p>
+<p><span class="versionmodified added">New in version 1.1.0.</span></p>
 </div>
 <p>This plugin performs logical backups of a MongoDB by using the <code class="docutils literal notranslate"><span class="pre">mongodump</span></code> utility.</p>
 </div></blockquote>
 </li>
-<li><p class="first">Example</p>
+<li><p>Example</p>
 <blockquote>
 <div><p>This is used solely as a template for designing providers. It otherwise
 does nothing.</p>
