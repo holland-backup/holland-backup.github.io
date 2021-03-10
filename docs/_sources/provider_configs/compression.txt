@@ -46,11 +46,6 @@ compression level, etc.
     better with many smaller files instead of 1 large one. This defaults to 1GB file size,
     so this option isn't helpful if your dumps are smaller than that. 
 
+    For python2.6, this option will be disabled if the subprocess32 module isn't avaiable.
 
     .. versionadded:: 1.1.13
-
-**splitsize** = integer
-
-    Defautls to 1. Minimum of 1 with no max. Set the size in gb for the split command.
-
-    .. versionadded:: 1.2.4
