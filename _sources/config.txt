@@ -222,7 +222,7 @@ Configuration Options
 
     .. versionadded:: 1.2.7
 
-    ::
+::
     $ ls -l /var/spool/holland/default/
     total 0
     drwxrwx---. 3 root root 58 Aug 18 16:18 20210818_161856

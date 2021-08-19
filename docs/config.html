@@ -408,13 +408,15 @@ Disabling the symlink creation process and be helpful on filesystems that don’
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 1.2.7.</span></p>
 </div>
-<p>::
-$ ls -l /var/spool/holland/default/
+</div></blockquote>
+<dl class="simple">
+<dt>::</dt><dd><p>$ ls -l /var/spool/holland/default/
 total 0
 drwxrwx—. 3 root root 58 Aug 18 16:18 20210818_161856
 lrwxrwxrwx. 1 root root 42 Aug 18 16:18 newest -&gt; /var/spool/holland/default/20210818_161856
 lrwxrwxrwx. 1 root root 42 Aug 18 16:18 oldest -&gt; /var/spool/holland/default/20210818_161856</p>
-</div></blockquote>
+</dd>
+</dl>
 <p>For all hook commands, Holland will perform simple text substitution
 on the three parameters:</p>
 <blockquote>
