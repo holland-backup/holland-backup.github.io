@@ -63,7 +63,7 @@ Backs up a MySQL instance using ``mariabackup`` tool.
 
     A command to run prior to running this mariabackup run.  This can be used,
     for instance, to generate a mysqldump schema dump prior to running
-    mariabackup.  instances of ${backup_directory} will be replaced with the
+    mariabackup.  instances of ${backup_directory} and ${backupdir} will be replaced with the
     current holland backup directory where the mariabackup data will be stored.
 
 .. include:: compression.txt

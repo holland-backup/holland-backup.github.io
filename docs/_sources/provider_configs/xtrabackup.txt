@@ -80,7 +80,7 @@ Backs up a MySQL instance using Percona's Xtrabackup tool.
 
     A command to run prior to running this xtrabackup run.  This can be used,
     for instance, to generate a mysqldump schema dump prior to running
-    xtrabackup.  instances of ${backup_directory} will be replaced with the
+    xtrabackup.  instances of ${backup_directory} and ${backupdir} will be replaced with the
     current holland backup directory where the xtrabackup data will be stored.
 
 .. include:: compression.txt

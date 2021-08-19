@@ -215,6 +215,20 @@ Configuration Options
 
     .. versionadded:: 1.1.1
 
+**create-symlinks** = yes | no
+
+    Defaults to yes. Enable the creation of "newest" and "oldest" symlinks in the backupset directory.
+    Disabling the symlink creation process and be helpful on filesystems that don't support symlinks.
+
+    .. versionadded:: 1.2.7::
+
+    $ ls -l /var/spool/holland/default/
+    total 0
+    drwxrwx---. 3 root root 58 Aug 18 16:18 20210818_161856
+    lrwxrwxrwx. 1 root root 42 Aug 18 16:18 newest -> /var/spool/holland/default/20210818_161856
+    lrwxrwxrwx. 1 root root 42 Aug 18 16:18 oldest -> /var/spool/holland/default/20210818_161856
+
+
 For all hook commands, Holland will perform simple text substitution  
 on the three parameters:
 

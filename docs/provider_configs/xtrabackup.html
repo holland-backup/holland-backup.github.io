@@ -68,7 +68,7 @@
             
             
               <div class="version">
-                1.2.5
+                1.2.7
               </div>
             
           
@@ -188,18 +188,18 @@
             
   <div class="section" id="xtrabackup-provider-configuration-xtrabackup">
 <span id="config-xtrabackup"></span><h1>Xtrabackup Provider Configuration [xtrabackup]<a class="headerlink" href="#xtrabackup-provider-configuration-xtrabackup" title="Permalink to this headline">¶</a></h1>
-<p>Backs up a MySQL instance using Percona’s Xtrabackup tool.</p>
+<p>Backs up a MySQL instance using Percona's Xtrabackup tool.</p>
 <div class="section" id="xtrabackup">
 <h2>[xtrabackup]<a class="headerlink" href="#xtrabackup" title="Permalink to this headline">¶</a></h2>
 <p><strong>global-defaults</strong> = &lt;path&gt; (default: /etc/my.cnf)</p>
 <blockquote>
-<div><p>The MySQL configuration file for xtrabackup to parse.  This is !include’d
+<div><p>The MySQL configuration file for xtrabackup to parse.  This is !include'd
 into the my.cnf the xtrabackup plugin generates</p>
 </div></blockquote>
 <p><strong>innobackupex</strong> = &lt;name&gt; (default: innobackupex-1.5.1)</p>
 <blockquote>
 <div><p>The path to the innobackupex script to run. If this is a relative path
-this will be found in holland’s environment PATH as configured in
+this will be found in holland's environment PATH as configured in
 /etc/holland/holland.conf.</p>
 </div></blockquote>
 <div class="versionchanged">
@@ -207,7 +207,7 @@ this will be found in holland’s environment PATH as configured in
 </div>
 <p><strong>ibbackup</strong> = &lt;name&gt;</p>
 <blockquote>
-<div><p>The path to the ibbackup command to use.  By default, no –ibbackup option
+<div><p>The path to the ibbackup command to use.  By default, no --ibbackup option
 is pass to the innobackupex script.  Usually innobackupex will detect this
 by itself and this should not need to be set.</p>
 </div></blockquote>
@@ -216,13 +216,13 @@ by itself and this should not need to be set.</p>
 <div><p>Whether to generate a streaming backup.</p>
 </div></blockquote>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 1.0.8: </span>‘tar’ and ‘xbstream’ are now valid options.  The old stream = yes is
+<p><span class="versionmodified changed">Changed in version 1.0.8: </span>'tar' and 'xbstream' are now valid options.  The old stream = yes is
 now equivalent to stream = tar and stream = no disables streaming
 entirely and will result in a normal directory copy with xtrabackup</p>
 </div>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 1.1.12: </span>For xtrabackup version 8.0 or greater,’xstream’ will be used unless
-this value is set to ‘no’</p>
+<p><span class="versionmodified changed">Changed in version 1.1.12: </span>For xtrabackup version 8.0 or greater,'xstream' will be used unless
+this value is set to 'no'</p>
 </div>
 <p><strong>apply-logs</strong> = yes | no (default: yes)</p>
 <blockquote>
@@ -237,26 +237,26 @@ want to disable apply-logs if you wish to use incremental backups.</p>
 </div></blockquote>
 <p><strong>slave-info</strong> = yes | no (default: yes)</p>
 <blockquote>
-<div><p>Whether to enable the –slave-info innobackupex option</p>
+<div><p>Whether to enable the --slave-info innobackupex option</p>
 </div></blockquote>
 <p><strong>safe-slave-backup</strong> = yes | no (default: yes)</p>
 <blockquote>
-<div><p>Whether to enable the –safe-slave-backup innobackupex option.</p>
+<div><p>Whether to enable the --safe-slave-backup innobackupex option.</p>
 </div></blockquote>
 <p><strong>no-lock</strong> = yes | no (default: no)</p>
 <blockquote>
-<div><p>Whether to enable the –no-lock innobackupex option</p>
+<div><p>Whether to enable the --no-lock innobackupex option</p>
 </div></blockquote>
 <p><strong>tmpdir</strong> = &lt;path&gt; (default: <code class="docutils literal notranslate"><span class="pre">${backup_directory}</span></code>)</p>
 <blockquote>
-<div><p>The path for the innobackupex –tmpdir option. By default this will use the
+<div><p>The path for the innobackupex --tmpdir option. By default this will use the
 current holland backup directory to workaround the following bug:
 <a class="reference external" href="https://bugs.launchpad.net/percona-xtrabackup/+bug/1007446">https://bugs.launchpad.net/percona-xtrabackup/+bug/1007446</a></p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 1.0.8.</span></p>
 </div>
 </div></blockquote>
-<p><strong>additional-options</strong> = &lt;option&gt;[, &lt;option&gt;…]</p>
+<p><strong>additional-options</strong> = &lt;option&gt;[, &lt;option&gt;...]</p>
 <blockquote>
 <div><p>A list of additional options to pass to innobackupex.  This is a comma
 separated list of options.</p>
@@ -265,7 +265,7 @@ separated list of options.</p>
 <blockquote>
 <div><p>A command to run prior to running this xtrabackup run.  This can be used,
 for instance, to generate a mysqldump schema dump prior to running
-xtrabackup.  instances of ${backup_directory} will be replaced with the
+xtrabackup.  instances of ${backup_directory} and ${backupdir} will be replaced with the
 current holland backup directory where the xtrabackup data will be stored.</p>
 </div></blockquote>
 </div>
@@ -304,15 +304,15 @@ usual places or not in the system path.</p>
 <p><strong>options</strong> = &lt;string&gt;</p>
 <blockquote>
 <div><p>Add commandline options to the configuration compression command.</p>
-<p>options = “-Q4”</p>
+<p>options = &quot;-Q4&quot;</p>
 </div></blockquote>
 <p><strong>split</strong> = yes | no</p>
 <blockquote>
 <div><p>Defautls to no. If set the backup will be piped through the split command.
-This may be useful for user’s with large databases, as some backup systems perform
+This may be useful for user's with large databases, as some backup systems perform
 better with many smaller files instead of 1 large one. This defaults to 1GB file size,
-so this option isn’t helpful if your dumps are smaller than that.</p>
-<p>For python2.6, this option will be disabled if the subprocess32 module isn’t avaiable.</p>
+so this option isn't helpful if your dumps are smaller than that.</p>
+<p>For python2.6, this option will be disabled if the subprocess32 module isn't avaiable.</p>
 <div class="versionadded">
 <p><span class="versionmodified added">New in version 1.1.13.</span></p>
 </div>
