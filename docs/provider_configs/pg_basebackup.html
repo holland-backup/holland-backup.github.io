@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   
-  <title>[compression] &mdash; Holland Documentation</title>
+  <title>pg_basebackup Provider Configuration [pg_basebackup] &mdash; Holland Documentation</title>
   
 
   
@@ -144,13 +144,13 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-      <li>[compression]</li>
+      <li>pg_basebackup Provider Configuration [pg_basebackup]</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/provider_configs/compression.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/provider_configs/pg_basebackup.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -163,8 +163,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="compression">
-<h1>[compression]<a class="headerlink" href="#compression" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="pg-basebackup-provider-configuration-pg-basebackup">
+<span id="config-pg-basebackup"></span><h1>pg_basebackup Provider Configuration [pg_basebackup]<a class="headerlink" href="#pg-basebackup-provider-configuration-pg-basebackup" title="Permalink to this headline">¶</a></h1>
+<p>Backs up a PostgreSQL instance using the pg_basebackup utility.</p>
+<div class="section" id="pg-basebackup">
+<h2>[pg_basebackup]<a class="headerlink" href="#pg-basebackup" title="Permalink to this headline">¶</a></h2>
+<p><strong>format</strong> = tar | plain (default: tar)</p>
+<blockquote>
+<div><p>Defines the –format option for pg_basebackup.</p>
+</div></blockquote>
+<p><strong>wal-method</strong> = none | fetch | plain (default: fetch)</p>
+<blockquote>
+<div><p>Defines the –wal-method used for pg_basebackup.</p>
+</div></blockquote>
+<p><strong>checkpoint</strong> = none | fast | spread (default: fast)</p>
+<blockquote>
+<div><p>Defines the –checkpoint used for pg_basebackup.</p>
+</div></blockquote>
+<p><strong>additional-options</strong> = &lt;command-string&gt; (default: none)</p>
+<blockquote>
+<div><p>Pass additional options to the pg_basebackup command</p>
+</div></blockquote>
+</div>
+<div class="section" id="compression">
+<h2>[compression]<a class="headerlink" href="#compression" title="Permalink to this headline">¶</a></h2>
 <p>Specify various compression settings, such as compression utility,
 compression level, etc.</p>
 <p><strong>method</strong> = gzip| gzip-rsyncable | pigz | bzip2 | pbzip2 | lzop | lzma | gpg | zstd</p>
@@ -211,6 +233,26 @@ so this option isn’t helpful if your dumps are smaller than that.</p>
 <p><span class="versionmodified added">New in version 1.1.13.</span></p>
 </div>
 </div></blockquote>
+</div>
+<div class="section" id="pgauth">
+<h2>[pgauth]<a class="headerlink" href="#pgauth" title="Permalink to this headline">¶</a></h2>
+<p><strong>username</strong> = &lt;name&gt;</p>
+<blockquote>
+<div><p>Username for pg_basebackup to authenticate with</p>
+</div></blockquote>
+<p><strong>password</strong> = &lt;string&gt;</p>
+<blockquote>
+<div><p>Password for pg_basebackup to authenticate with</p>
+</div></blockquote>
+<p><strong>hostname</strong> = &lt;string&gt;</p>
+<blockquote>
+<div><p>Hostname for pg_basebackup to connect with</p>
+</div></blockquote>
+<p><strong>port</strong> = &lt;integer&gt;</p>
+<blockquote>
+<div><p>TCP port for pg_basebackup to connect on</p>
+</div></blockquote>
+</div>
 </div>
 
 

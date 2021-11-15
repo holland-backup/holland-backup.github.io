@@ -1,0 +1,47 @@
+.. _config-pg_basebackup:
+
+pg_basebackup Provider Configuration [pg_basebackup]
+======================================
+
+Backs up a PostgreSQL instance using the pg_basebackup utility.
+
+[pg_basebackup]
+--------
+
+**format** = tar | plain (default: tar)
+
+    Defines the --format option for pg_basebackup.
+
+**wal-method** = none | fetch | plain (default: fetch)
+    
+    Defines the --wal-method used for pg_basebackup.
+
+**checkpoint** = none | fast | spread (default: fast)
+
+    Defines the --checkpoint used for pg_basebackup.
+
+**additional-options** = <command-string> (default: none)
+
+    Pass additional options to the pg_basebackup command
+
+
+.. include:: compression.txt
+
+[pgauth]
+--------
+
+**username** = <name>
+
+    Username for pg_basebackup to authenticate with
+
+**password** = <string>
+
+    Password for pg_basebackup to authenticate with
+
+**hostname** = <string>
+
+    Hostname for pg_basebackup to connect with
+
+**port** = <integer>
+
+    TCP port for pg_basebackup to connect on
