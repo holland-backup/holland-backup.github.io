@@ -93,6 +93,7 @@ with ``[provider-name]``.
     provider_configs/mysqldump-lvm
     provider_configs/xtrabackup
     provider_configs/pgdump
+    provider_configs/pg_basebackup
     provider_configs/mongodump
     provider_configs/mariabackup
 

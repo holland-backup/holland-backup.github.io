@@ -206,7 +206,7 @@ or fully lockless (when transactional engines are used) backups.</p>
 <li><p>mysqldump + LVM</p>
 <blockquote>
 <div><p>This plugin creates an LVM snapshot, starts a mysql instance using the snapshot
-as it’s datadir, and then use the <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> utility to backup the databases.</p>
+as it's datadir, and then use the <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> utility to backup the databases.</p>
 </div></blockquote>
 </li>
 <li><p>XtraBackup</p>
@@ -214,7 +214,7 @@ as it’s datadir, and then use the <code class="docutils literal notranslate"><
 <div><div class="versionadded">
 <p><span class="versionmodified added">New in version 1.0.8.</span></p>
 </div>
-<p>Backup MySQL databases using Percona’s
+<p>Backup MySQL databases using Percona's
 <a class="reference external" href="http://www.percona.com/software/percona-xtrabackup">XtraBackup</a> tool.
 This provides a near lockless backup when using the InnoDB storage engine.</p>
 </div></blockquote>
@@ -224,12 +224,20 @@ This provides a near lockless backup when using the InnoDB storage engine.</p>
 <div><p>Backup PostgreSQL databases using the <code class="docutils literal notranslate"><span class="pre">pgdump</span></code> utility.</p>
 </div></blockquote>
 </li>
+<li><p>pg_basebackup</p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="versionmodified added">New in version 1.2.8.</span></p>
+</div>
+<p>Backup PostgreSQL databases using the <code class="docutils literal notranslate"><span class="pre">pg_basebackup</span></code> utility.</p>
+</div></blockquote>
+</li>
 <li><p>mariabackup</p>
 <blockquote>
 <div><div class="versionadded">
 <p><span class="versionmodified added">New in version 1.1.0.</span></p>
 </div>
-<p>Backup MySQL databases using MariaDB’s
+<p>Backup MySQL databases using MariaDB's
 <a class="reference external" href="https://mariadb.com/kb/en/library/mariabackup-options/">mariabackup</a> tool.</p>
 </div></blockquote>
 </li>

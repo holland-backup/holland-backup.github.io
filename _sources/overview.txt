@@ -52,6 +52,12 @@ Providers essentially provide a backup service for use in a backup set.
 
     Backup PostgreSQL databases using the ``pgdump`` utility.
 
+* pg_basebackup
+
+    .. versionadded:: 1.2.8
+
+    Backup PostgreSQL databases using the ``pg_basebackup`` utility.
+
 * mariabackup
 
     .. versionadded:: 1.1.0
