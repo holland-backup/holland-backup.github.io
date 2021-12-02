@@ -1,12 +1,12 @@
 .. _config-pg_basebackup:
 
 pg_basebackup Provider Configuration [pg_basebackup]
-======================================
+====================================================
 
 Backs up a PostgreSQL instance using the pg_basebackup utility.
 
 [pg_basebackup]
---------
+---------------
 
 **format** = tar | plain (default: tar)
 
@@ -22,7 +22,8 @@ Backs up a PostgreSQL instance using the pg_basebackup utility.
 
 **additional-options** = <command-string> (default: none)
 
-    Pass additional options to the pg_basebackup command
+    Pass additional options to the pg_basebackup command.
+    This will expand backup_directory/backupdir variables.
 
 
 .. include:: compression.txt
