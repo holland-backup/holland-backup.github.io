@@ -252,6 +252,16 @@ separated list of options.</div></blockquote>
 for instance, to generate a mysqldump schema dump prior to running
 xtrabackup.  instances of ${backup_directory} and ${backupdir} will be replaced with the
 current holland backup directory where the xtrabackup data will be stored.</div></blockquote>
+<p><strong>strict</strong> = yes | no (default: yes)</p>
+<blockquote>
+<div><p>If strict is set to no, add –strict=OFF option to the xtrabackup command. The strict
+option in xtrabackup prevents errors and warning for invalid command line options.</p>
+<blockquote>
+<div><div class="versionadded">
+<p><span class="versionmodified">New in version 1.2.10.</span></p>
+</div>
+</div></blockquote>
+</div></blockquote>
 </div>
 <div class="section" id="compression">
 <h2>[compression]<a class="headerlink" href="#compression" title="Permalink to this headline">¶</a></h2>
