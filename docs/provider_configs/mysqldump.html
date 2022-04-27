@@ -1,57 +1,53 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>mysqldump Provider Configuration [mysqldump] &mdash; Holland Documentation</title>
   
 
   
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-
-  
   
     <link rel="shortcut icon" href="../_static/holland_logo_64x64.png"/>
   
-
   
   
 
   
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Database and Table filtering" href="databasefiltering.html" />
     <link rel="prev" title="Holland Config Files" href="../config.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -68,7 +64,7 @@
             
             
               <div class="version">
-                1.2.8
+                1.2.10
               </div>
             
           
@@ -85,7 +81,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -111,6 +106,7 @@
 <li class="toctree-l3"><a class="reference internal" href="mysqldump-lvm.html">mysqldump LVM Provider Configuration [mysqldump-lvm]</a></li>
 <li class="toctree-l3"><a class="reference internal" href="xtrabackup.html">Xtrabackup Provider Configuration [xtrabackup]</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pgdump.html">pgdump Provider Configuration [pgdump]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pg_basebackup.html">pg_basebackup Provider Configuration [pg_basebackup]</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mongodump.html">mongodump Provider Configuration [mongodump]</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mariabackup.html">Mariabackup Provider Configuration [mariabackup]</a></li>
 </ul>
@@ -123,7 +119,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -158,13 +153,11 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="../index.html">Docs</a> &raquo;</li>
         
           <li><a href="../config.html">Holland Config Files</a> &raquo;</li>
         
@@ -173,7 +166,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../_sources/provider_configs/mysqldump.txt" rel="nofollow"> View page source</a>
           
         
@@ -194,14 +187,13 @@
 <h2>[mysqldump]<a class="headerlink" href="#mysqldump" title="Permalink to this headline">¶</a></h2>
 <p><strong>mysql-binpath</strong> = /path/to/mysql/bin</p>
 <blockquote>
-<div><p>Defines the location of the MySQL binary utilities. If not provided,
-Holland will use whatever is in the path.</p>
-</div></blockquote>
+<div>Defines the location of the MySQL binary utilities. If not provided,
+Holland will use whatever is in the path.</div></blockquote>
 <p><strong>lock-method</strong> = flush-lock | lock-tables | single-transaction | auto-detect | none</p>
 <blockquote>
 <div><p>Defines which lock method to use. By default, auto-detect will be used.</p>
 <ul>
-<li><p>flush-lock</p>
+<li><p class="first">flush-lock</p>
 <blockquote>
 <div><p>flush-lock will place a global lock on all tables involved in the backup
 regardless of whether or not they are in the backup-set. If
@@ -210,14 +202,14 @@ for every database being backed up. In other words, this option may not
 make much sense when using file-per-database.</p>
 </div></blockquote>
 </li>
-<li><p>lock-tables</p>
+<li><p class="first">lock-tables</p>
 <blockquote>
 <div><p>lock-tables will lock all tables involved in the backup. If
 file-per-database is enabled, then lock-tables will only lock all the
 tables associated with that database.</p>
 </div></blockquote>
 </li>
-<li><p>single-transaction</p>
+<li><p class="first">single-transaction</p>
 <blockquote>
 <div><p>Forces the use of <code class="docutils literal notranslate"><span class="pre">--single-transaction</span></code> which enabled
 semi-transparent backups of transactional tables. Forcing this
@@ -227,7 +219,7 @@ lock when they are actually being backed up. <strong>Use this setting
 with extreme caution when backing non-transactional tables.</strong></p>
 </div></blockquote>
 </li>
-<li><p>auto-detect</p>
+<li><p class="first">auto-detect</p>
 <blockquote>
 <div><p>Let Holland decide which option to use by checking to see if
 a database or backup-set only contains transactional tables. If
@@ -235,7 +227,7 @@ so, <code class="docutils literal notranslate"><span class="pre">--single-transa
 <code class="docutils literal notranslate"><span class="pre">--lock-tables</span></code> will be used.</p>
 </div></blockquote>
 </li>
-<li><p>none</p>
+<li><p class="first">none</p>
 <blockquote>
 <div><p>Does absolutely no explicit locking when backing up the
 databases or backup-set. This should only be used when backing
@@ -256,7 +248,7 @@ ignore-table option will be added to exclude the table.  Additionally, the
 plugin will attempt to save the view definion to ‘invalid_views.sql’ in the
 backupset’s backup directory.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.0.8.</span></p>
+<p><span class="versionmodified">New in version 1.0.8.</span></p>
 </div>
 </div></blockquote>
 <p><strong>dump-routines</strong> = yes | no (default: yes)</p>
@@ -265,7 +257,7 @@ backupset’s backup directory.</p>
 are stored in the ‘mysql’ database, but it can sometimes be convenient
 to include them in a backup-set directly.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 1.0.8: </span>This option now enabled by default.</p>
+<p><span class="versionmodified">Changed in version 1.0.8: </span>This option now enabled by default.</p>
 </div>
 </div></blockquote>
 <p><strong>dump-events</strong> = yes | no</p>
@@ -276,7 +268,7 @@ convenient to include them in the backup-set directly.</p>
 <p><strong>Note</strong>: This feature requires MySQL 5.1 or later. The mysqldump plugin
 will automatically disable events if the version of mysqldump is too old.</p>
 <div class="versionchanged">
-<p><span class="versionmodified changed">Changed in version 1.0.8: </span>This option is now enabled by default</p>
+<p><span class="versionmodified">Changed in version 1.0.8: </span>This option is now enabled by default</p>
 </div>
 </div></blockquote>
 <p><strong>stop-slave</strong> = yes | no</p>
@@ -309,19 +301,17 @@ backup-set destination directory
 </div></blockquote>
 <p><strong>flush-logs</strong> = yes | no</p>
 <blockquote>
-<div><p>Whether or not to run FLUSH LOGS in MySQL with the backup. When FLUSH
+<div>Whether or not to run FLUSH LOGS in MySQL with the backup. When FLUSH
 LOGS is actually executed depends on which if database filtering is being
 used and whether or not file-per-database is enabled. Generally speaking,
 it does not make sense to use flush-logs with file-per-database since the
-binary logs will not be consistent with the backup.</p>
-</div></blockquote>
+binary logs will not be consistent with the backup.</div></blockquote>
 <p><strong>file-per-database</strong> = yes | no</p>
 <blockquote>
-<div><p>Whether or not to split up each database into its own file. Note that
+<div>Whether or not to split up each database into its own file. Note that
 it can be more consistent an efficient to backup all databases into
 one file, however this means that restore a single database can
-be difficult if multiple databases are defined in the backup set.</p>
-</div></blockquote>
+be difficult if multiple databases are defined in the backup set.</div></blockquote>
 <p><strong>arg-per-database</strong> = JSON object</p>
 <blockquote>
 <div><p>If file-per-database is enable this argument is ued to specify mysqldump
@@ -329,26 +319,24 @@ arguments per database. It takes a JSON object with the database names as keys.
 Example: {“employee1”: “–no-data”} Adds the ‘–no-data’ argument to the mysqldump
 command when backing up the ‘employee1’ database</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.0.9.</span></p>
+<p><span class="versionmodified">New in version 1.0.9.</span></p>
 </div>
 </div></blockquote>
 <p><strong>additional-options</strong> = &lt;mysqldump argument&gt;[, &lt;mysqldump argument&gt;]</p>
 <blockquote>
-<div><p>Can optionally specify additional options directly to <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> if
+<div>Can optionally specify additional options directly to <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> if
 there is no native Holland option available.  This option accepts a comma
-delimited list of arguments to pass on the commandline.</p>
-</div></blockquote>
+delimited list of arguments to pass on the commandline.</div></blockquote>
 <p><strong>extra-defaults</strong> = yes | no (default: no)</p>
 <blockquote>
-<div><p>This option controls whether mysqldump will only read options as set by
+<div>This option controls whether mysqldump will only read options as set by
 holland or if additional options from global config files are read.  By
 default, the plugin only uses optons as set in the backupset config and
 includes authentication credentials only from the [client] section in
-~/.my.cnf.</p>
-</div></blockquote>
+~/.my.cnf.</div></blockquote>
 <p><strong>estimate-method</strong> = plugin | const:&lt;size&gt; (default: plugin)</p>
 <blockquote>
-<div><p>This option will skip some of the heavyweight queries necessary to
+<div>This option will skip some of the heavyweight queries necessary to
 calculate the size of tables to be backed up.  If a constant size is
 specified, then only table names are evaluated and only if table filtering
 is being used. Additionally, engines will be looked up via SHOW CREATE
@@ -356,8 +344,7 @@ TABLE if lock-method = auto-detect, in order for the plugin to determine if
 tables are using a transactional storage engine.  With ‘plugin’, the
 default behavior of reading both size information and table names from the
 information schema is used, which may be slow particularly for a large
-number of tables.</p>
-</div></blockquote>
+number of tables.</div></blockquote>
 </div>
 <div class="section" id="database-and-table-filtering">
 <h2>Database and Table filtering<a class="headerlink" href="#database-and-table-filtering" title="Permalink to this headline">¶</a></h2>
@@ -381,24 +368,21 @@ and <code class="docutils literal notranslate"><span class="pre">default-recipie
 </div></blockquote>
 <p><strong>inline</strong> = yes | no</p>
 <blockquote>
-<div><p>Whether or not to pipe the output of the backup command into the compression
+<div>Whether or not to pipe the output of the backup command into the compression
 utility. Enabling this is recommended since it usually only marginally
 impacts performance, particularly when using a lower compression
-level.</p>
-</div></blockquote>
+level.</div></blockquote>
 <p><strong>level</strong> = 0-9</p>
 <blockquote>
-<div><p>Specify the compression ratio. The lower the number, the lower the
+<div>Specify the compression ratio. The lower the number, the lower the
 compression ratio, but the faster the backup will take. Generally,
 setting the lever to 1 or 2 results in favorable compression of
 textual data and is noticeably faster than the higher levels.
-Setting the level to 0 effectively disables compression.</p>
-</div></blockquote>
+Setting the level to 0 effectively disables compression.</div></blockquote>
 <p><strong>bin-path</strong> = &lt;full path to utility&gt;</p>
 <blockquote>
-<div><p>This only needs to be defined if the compression utility is not in the
-usual places or not in the system path.</p>
-</div></blockquote>
+<div>This only needs to be defined if the compression utility is not in the
+usual places or not in the system path.</div></blockquote>
 <p><strong>options</strong> = &lt;string&gt;</p>
 <blockquote>
 <div><p>Add commandline options to the configuration compression command.</p>
@@ -412,7 +396,7 @@ better with many smaller files instead of 1 large one. This defaults to 1GB file
 so this option isn’t helpful if your dumps are smaller than that.</p>
 <p>For python2.6, this option will be disabled if the subprocess32 module isn’t avaiable.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.1.13.</span></p>
+<p><span class="versionmodified">New in version 1.1.13.</span></p>
 </div>
 </div></blockquote>
 </div>
@@ -438,29 +422,29 @@ the standard .my.cnf conventions.</p>
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="databasefiltering.html" class="btn btn-neutral float-right" title="Database and Table filtering" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="../config.html" class="btn btn-neutral float-left" title="Holland Config Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="databasefiltering.html" class="btn btn-neutral float-right" title="Database and Table filtering" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../config.html" class="btn btn-neutral" title="Holland Config Files" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021.
+        &copy; Copyright 2022.
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -469,16 +453,36 @@ the standard .my.cnf conventions.</p>
   </div>
   
 
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.2.10',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>

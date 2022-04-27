@@ -1,57 +1,53 @@
 
 
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>MySQL LVM Provider Configuration [mysql-lvm] &mdash; Holland Documentation</title>
   
 
   
-  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-
-  
   
     <link rel="shortcut icon" href="../_static/holland_logo_64x64.png"/>
   
-
   
   
 
   
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
   
     
-      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
-    
-    <script type="text/javascript" src="../_static/js/theme.js"></script>
 
-    
+  
+
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="mysqldump LVM Provider Configuration [mysqldump-lvm]" href="mysqldump-lvm.html" />
     <link rel="prev" title="Database and Table filtering" href="databasefiltering.html" /> 
+
+  
+  <script src="../_static/js/modernizr.min.js"></script>
+
 </head>
 
 <body class="wy-body-for-nav">
 
    
   <div class="wy-grid-for-nav">
+
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
-        <div class="wy-side-nav-search" >
+        <div class="wy-side-nav-search">
           
 
           
@@ -68,7 +64,7 @@
             
             
               <div class="version">
-                1.2.8
+                1.2.10
               </div>
             
           
@@ -85,7 +81,6 @@
           
         </div>
 
-        
         <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
             
@@ -111,6 +106,7 @@
 <li class="toctree-l3"><a class="reference internal" href="mysqldump-lvm.html">mysqldump LVM Provider Configuration [mysqldump-lvm]</a></li>
 <li class="toctree-l3"><a class="reference internal" href="xtrabackup.html">Xtrabackup Provider Configuration [xtrabackup]</a></li>
 <li class="toctree-l3"><a class="reference internal" href="pgdump.html">pgdump Provider Configuration [pgdump]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pg_basebackup.html">pg_basebackup Provider Configuration [pg_basebackup]</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mongodump.html">mongodump Provider Configuration [mongodump]</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mariabackup.html">Mariabackup Provider Configuration [mariabackup]</a></li>
 </ul>
@@ -123,7 +119,6 @@
             
           
         </div>
-        
       </div>
     </nav>
 
@@ -158,13 +153,11 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
     
-      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li><a href="../index.html">Docs</a> &raquo;</li>
         
           <li><a href="../config.html">Holland Config Files</a> &raquo;</li>
         
@@ -173,7 +166,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
             <a href="../_sources/provider_configs/mysql-lvm.txt" rel="nofollow"> View page source</a>
           
         
@@ -197,51 +190,43 @@ that this volume be separate from the one storing the resulting backups.</p>
 <h2>[mysql-lvm]<a class="headerlink" href="#mysql-lvm" title="Permalink to this headline">¶</a></h2>
 <p><strong>snapshot-size</strong> = &lt;size-in-MB&gt;</p>
 <blockquote>
-<div><p>The size of the snapshot itself. By default it is 20% of the size of  the
+<div>The size of the snapshot itself. By default it is 20% of the size of  the
 MySQL LVM mount or the remaining free-space in the Volume Group (if there
 is less than 20% available) up to 15GB. If snapshot-size is defined, the
-number represents the size of the snapshot in megabytes.</p>
-</div></blockquote>
+number represents the size of the snapshot in megabytes.</div></blockquote>
 <p><strong>snapshot-name</strong> = &lt;name&gt;</p>
 <blockquote>
-<div><p>The name of the snapshot, the default being the name of the MySQL LVM
-volume + “_snapshot” (ie Storage-MySQL_snapshot)</p>
-</div></blockquote>
+<div>The name of the snapshot, the default being the name of the MySQL LVM
+volume + “_snapshot” (ie Storage-MySQL_snapshot)</div></blockquote>
 <p><strong>snapshot-mountpoint</strong> = &lt;path&gt;</p>
 <blockquote>
-<div><p>Where to mount the snapshot. By default a randomly generated directory
-under /tmp is used.</p>
-</div></blockquote>
+<div>Where to mount the snapshot. By default a randomly generated directory
+under /tmp is used.</div></blockquote>
 <p><strong>innodb-recovery</strong> = yes | no (default: no)</p>
 <blockquote>
-<div><p>Whether or not to run an InnoDB recovery operation. This avoids needing
+<div>Whether or not to run an InnoDB recovery operation. This avoids needing
 to do so during a restore, though will make the backup process itself
-take longer.</p>
-</div></blockquote>
+take longer.</div></blockquote>
 <p><strong>force-innodb-backup</strong> = yes | no (default: no)</p>
 <blockquote>
-<div><p>Whether to attempt a backup even if the mysql-lvm plugin thinks it cannot obtain a good
+<div>Whether to attempt a backup even if the mysql-lvm plugin thinks it cannot obtain a good
 backup.  This can occur when innodb data files are outside of the mysql datadir or exist
-on entirely separate logical volumes.</p>
-</div></blockquote>
+on entirely separate logical volumes.</div></blockquote>
 <p><strong>lock-tables</strong> = yes | no (default: yes)</p>
 <blockquote>
-<div><p>Whether or not to run a FLUSH TABLES WITH READ LOCK to grab various
+<div>Whether or not to run a FLUSH TABLES WITH READ LOCK to grab various
 bits of information (such as the binary log name and position). Disabling
 this requires that binary logging is disabled and InnoDB is being used
 exclusively. Otherwise, it is possible that the backup could contain
-crashed tables.</p>
-</div></blockquote>
+crashed tables.</div></blockquote>
 <p><strong>extra-flush-tables</strong> = yes | no (default: yes)</p>
 <blockquote>
-<div><p>Whether or not to run a FLUSH TABLES before running the full
+<div>Whether or not to run a FLUSH TABLES before running the full
 FLUSH TABLES WITH READ LOCK. Should make the FLUSH TABLES WITH READ LOCK
-operation a bit faster.</p>
-</div></blockquote>
+operation a bit faster.</div></blockquote>
 <p><strong>archive-method</strong>      = tar | dir (default: tar)</p>
 <blockquote>
-<div><p>Create a tar file of the datadir, or just copy it.</p>
-</div></blockquote>
+<div>Create a tar file of the datadir, or just copy it.</div></blockquote>
 </div>
 <div class="section" id="tar">
 <h2>[tar]<a class="headerlink" href="#tar" title="Permalink to this headline">¶</a></h2>
@@ -276,24 +261,21 @@ and <code class="docutils literal notranslate"><span class="pre">default-recipie
 </div></blockquote>
 <p><strong>inline</strong> = yes | no</p>
 <blockquote>
-<div><p>Whether or not to pipe the output of the backup command into the compression
+<div>Whether or not to pipe the output of the backup command into the compression
 utility. Enabling this is recommended since it usually only marginally
 impacts performance, particularly when using a lower compression
-level.</p>
-</div></blockquote>
+level.</div></blockquote>
 <p><strong>level</strong> = 0-9</p>
 <blockquote>
-<div><p>Specify the compression ratio. The lower the number, the lower the
+<div>Specify the compression ratio. The lower the number, the lower the
 compression ratio, but the faster the backup will take. Generally,
 setting the lever to 1 or 2 results in favorable compression of
 textual data and is noticeably faster than the higher levels.
-Setting the level to 0 effectively disables compression.</p>
-</div></blockquote>
+Setting the level to 0 effectively disables compression.</div></blockquote>
 <p><strong>bin-path</strong> = &lt;full path to utility&gt;</p>
 <blockquote>
-<div><p>This only needs to be defined if the compression utility is not in the
-usual places or not in the system path.</p>
-</div></blockquote>
+<div>This only needs to be defined if the compression utility is not in the
+usual places or not in the system path.</div></blockquote>
 <p><strong>options</strong> = &lt;string&gt;</p>
 <blockquote>
 <div><p>Add commandline options to the configuration compression command.</p>
@@ -307,7 +289,7 @@ better with many smaller files instead of 1 large one. This defaults to 1GB file
 so this option isn’t helpful if your dumps are smaller than that.</p>
 <p>For python2.6, this option will be disabled if the subprocess32 module isn’t avaiable.</p>
 <div class="versionadded">
-<p><span class="versionmodified added">New in version 1.1.13.</span></p>
+<p><span class="versionmodified">New in version 1.1.13.</span></p>
 </div>
 </div></blockquote>
 </div>
@@ -333,29 +315,29 @@ the standard .my.cnf conventions.</p>
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="mysqldump-lvm.html" class="btn btn-neutral float-right" title="mysqldump LVM Provider Configuration [mysqldump-lvm]" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="databasefiltering.html" class="btn btn-neutral float-left" title="Database and Table filtering" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="mysqldump-lvm.html" class="btn btn-neutral float-right" title="mysqldump LVM Provider Configuration [mysqldump-lvm]" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="databasefiltering.html" class="btn btn-neutral" title="Database and Table filtering" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2021.
+        &copy; Copyright 2022.
 
     </p>
   </div>
-    
-    
-    
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
-    
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
-    
-    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
@@ -364,16 +346,36 @@ the standard .my.cnf conventions.</p>
   </div>
   
 
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'1.2.10',
+            LANGUAGE:'None',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true,
+            SOURCELINK_SUFFIX: '.txt'
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
   <script type="text/javascript">
       jQuery(function () {
           SphinxRtdTheme.Navigation.enable(true);
       });
-  </script>
-
-  
-  
-    
-   
+  </script> 
 
 </body>
 </html>
