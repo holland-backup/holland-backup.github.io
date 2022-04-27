@@ -20,13 +20,13 @@
 # -- Project information -----------------------------------------------------
 
 project = 'Holland'
-copyright = '2021'
+copyright = '2022'
 author = 'Holland Core Team'
 
 # The short X.Y version
-version = '1.2.9'
+version = '1.2.10'
 # The full version, including alpha/beta/rc tags
-release = '1.2.9'
+release = '1.2.10'
 
 
 # -- General configuration ---------------------------------------------------
