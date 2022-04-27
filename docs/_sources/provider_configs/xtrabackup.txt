@@ -83,13 +83,6 @@ Backs up a MySQL instance using Percona's Xtrabackup tool.
     xtrabackup.  instances of ${backup_directory} and ${backupdir} will be replaced with the
     current holland backup directory where the xtrabackup data will be stored.
 
-**strict** = yes | no (default: yes)
-
-   If strict is set to no, add --strict=OFF option to the xtrabackup command. The strict
-   option in xtrabackup prevents errors and warning for invalid command line options.
-
-    .. versionadded:: 1.2.10
-
 .. include:: compression.txt
 
 .. include:: mysqlconfig.txt
