@@ -60,7 +60,7 @@ Backs up a MySQL database using the mysqldump tool.
     mysqldump to fail.  This adds additional overhead so this option is not
     enabled by default.
 
-    When enabled, thos option will scan the INFORMATION_SCHEMA.VIEWS table and
+    When enabled, this option will scan the INFORMATION_SCHEMA.VIEWS table and
     execute SHOW FIELDS against each view.  If a view is detects as invalid, an
     ignore-table option will be added to exclude the table.  Additionally, the
     plugin will attempt to save the view definion to 'invalid_views.sql' in the
