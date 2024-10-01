@@ -162,7 +162,8 @@ Backs up a MySQL database using the mysqldump tool.
     This option will skip some of the heavyweight queries necessary to
     calculate the size of tables to be backed up.  If a constant size is
     specified, then only table names are evaluated and only if table filtering
-    is being used. Additionally, engines will be looked up via SHOW CREATE
+    is being used.  Valid units for size are: K, M, G, T, P, E (case-insensitive).
+    Additionally, engines will be looked up via SHOW CREATE
     TABLE if lock-method = auto-detect, in order for the plugin to determine if
     tables are using a transactional storage engine.  With 'plugin', the
     default behavior of reading both size information and table names from the
