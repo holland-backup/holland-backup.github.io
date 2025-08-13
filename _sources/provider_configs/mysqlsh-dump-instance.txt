@@ -39,7 +39,7 @@ Backs up a MySQL instance using the mysqlsh dump-instance utility.
 
 **additional-options** = ,
 
-    Additional options to pass to the mysqlsh command. When specificying an
+    Additional options to pass to the mysqlsh command. When specifying an
     additional named argument that takes a list of values. You will want to
     define the key repeatedly for each item in the list.
     e.g --compatibility=strip_definers, --compatibility=strip_restricted_grants
@@ -77,7 +77,7 @@ Backs up a MySQL instance using the mysqlsh dump-instance utility.
 **bytes-per-chunk** = 64M
 
     The approximate size of each chunk when chunking is enabled. Requires chunking to be enabled
-    in the backupset config. This options is always specified when holland executes mysqlsh
+    in the backupset config. This option is always specified when holland executes mysqlsh
     and chunking is enabled.
 
 **ddl-only** = yes | no (default: no)
