@@ -1,0 +1,163 @@
+.. _config-mariadb-dump:
+
+mariadb-dump Provider Configuration [mariadb-dump]
+===================================================
+
+Backs up a MariaDB database using the mariadb-dump tool.
+
+[mariadb-dump]
+--------------
+
+**extra-defaults** = yes | no (default: no)
+
+    This option controls whether mariadb-dump will only read options as set by
+    holland or if additional options from global config files are read. By
+    default, the plugin only uses options as set in the backupset config and
+    includes authentication credentials only from the [client] section in
+    ~/.my.cnf.
+
+**executable** = "mariadb-dump"
+
+    Override the path where we can find mariadb command line utilities.
+
+**lock-method** = flush-lock | lock-tables | single-transaction | auto-detect | none (default: auto-detect)
+
+    One of: flush-lock, lock-tables, single-transaction, auto-detect, none.
+
+    * flush-lock
+
+        flush-lock will place a global lock on all tables involved in the backup
+        regardless of whether or not they are in the backup-set. If
+        file-per-database is enabled, then flush-lock will lock all tables
+        for every database being backed up. In other words, this option may not
+        make much sense when using file-per-database.
+
+    * lock-tables
+
+        lock-tables will lock all tables involved in the backup. If
+        file-per-database is enabled, then lock-tables will only lock all the
+        tables associated with that database.
+
+    * single-transaction
+
+        single-transaction will force running a backup within a transaction.
+        This allows backing up of transactional tables without imposing a lock
+        however will NOT properly backup non-transactional tables.
+
+    * auto-detect
+
+        Auto-detect will choose single-transaction unless Holland finds
+        non-transactional tables in the backup-set.
+
+    * none
+
+        None will completely disable locking. This is generally only viable
+        on a MariaDB slave and only after traffic has been diverted, or slave
+        services suspended.
+
+**databases** = "*"
+
+    List of comma-delimited glob patterns for matching databases.
+    Only databases matching these patterns will be backed up.
+    default: include everything.
+
+**exclude-databases** =
+
+    List of comma-delimited glob patterns to exclude particular databases.
+
+**tables** = "*"
+
+    List of comma-delimited tables to include.
+
+**exclude-tables** = ""
+
+    List of comma-delimited tables to exclude.
+
+**engines** = "*"
+
+    List of comma-delimited glob patterns for matching table engines.
+    Only tables matching these patterns will be backed up.
+    default: include everything.
+
+**exclude-engines** =
+
+    List of comma-delimited glob patterns to exclude particular table engines.
+
+**exclude-invalid-views** = yes | no (default: no)
+
+    Whether to automate exclusion of invalid views that would otherwise cause
+    mariadb-dump to fail. This adds additional overhead so this option is not
+    enabled by default.
+
+**flush-logs** = yes | no (default: no)
+
+    Whether to run FLUSH LOGS in MariaDB with the backup. When FLUSH
+    LOGS is actually executed depends on which if database filtering is being
+    used and whether or not file-per-database is enabled. Generally speaking,
+    it does not make sense to use flush-logs with file-per-database since the
+    binary logs will not be consistent with the backup.
+
+**flush-privileges** = yes | no (default: yes)
+
+    Whether to emit a FLUSH PRIVILEGES statement after dumping the mysql database.
+    This ensures a proper restore when a dump contains the mysql database.
+
+**dump-routines** = yes | no (default: yes)
+
+    Whether to dump routines explicitly.
+    (routines are implicitly included in the mariadb database)
+
+**dump-events** = yes | no (default: no)
+
+    Whether to dump events explicitly.
+
+**dump-history** = yes | no (default: no)
+
+    Whether to dump history explicitly.
+    Requires MariaDB 10.11.0 or later.
+
+**order-by-size** = yes | no (default: no)
+
+    Whether to dump tables in the order of their size, smaller first.
+    Requires MariaDB 10.9.1 or later.
+
+**stop-slave** = yes | no (default: no)
+
+    Whether to stop the slave before commencing with the backup.
+
+**bin-log-position** = yes | no (default: no)
+
+    Whether to record the binary log name and position at the time of the backup.
+
+**max-allowed-packet** = 128M
+
+    Maximum packet length to send/receive from the server.
+
+**file-per-database** = yes | no (default: yes)
+
+    Whether to run a separate 'mariadb-dump' for each database. Note that while
+    this may initially sound like a good idea, it is far simpler to backup
+    all databases in one file, although that makes the restore process
+    more difficult when only certain data needs to be restored.
+
+**arg-per-database** = {}
+
+    The args-per-database option is only used if file-per-database is enabled.
+    It takes a JSON string in the format {"table1": "--arg", "table2": "--arg"}.
+
+**additional-options** = ""
+
+    Any additional options to pass to the 'mariadb-dump' command-line utility.
+    These should show up exactly as they are on the command line.
+    e.g.: --flush-privileges --reset-master.
+
+Database and Table filtering
+----------------------------
+.. toctree::
+    :maxdepth: 1
+
+    databasefiltering
+
+.. include:: compression.txt
+
+.. include:: mysqlconfig.txt
