@@ -1,31 +1,26 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mariabackup Provider Configuration [mariabackup] &mdash; Holland Documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/holland_logo_64x64.png"/>
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>Mariabackup Provider Configuration [mariabackup] &mdash; Holland Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
   
-      <script>
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../',
-              VERSION:'1.2.12',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/holland_logo_64x64.png"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=1f29e9d3"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="mariadb-dump Provider Configuration [mariadb-dump]" href="mariadb-dump.html" />
     <link rel="prev" title="mongodump Provider Configuration [mongodump]" href="mongodump.html" /> 
 </head>
 
@@ -34,14 +29,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Holland<img src="../_static/holland_logo_64x64.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Holland
+              <img src="../_static/holland_logo_64x64.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                1.2.12
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -67,6 +64,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#mysql-connection-info-mysql-client">MySQL connection info [mysql:client]</a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="mariadb-dump.html">mariadb-dump Provider Configuration [mariadb-dump]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mysqlsh-dump-instance.html">mysqlsh-dump-instance Provider Configuration [mysqlsh-dump-instance]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mysqlsh-dump-schemas.html">mysqlsh-dump-schemas Provider Configuration [mysqlsh-dump-schemas]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command.html">command Provider Configuration [command]</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../config.html#backup-set-configs">Backup-Set Configs</a></li>
@@ -87,7 +88,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../config.html">Holland Config Files</a></li>
       <li class="breadcrumb-item active">Mariabackup Provider Configuration [mariabackup]</li>
       <li class="wy-breadcrumbs-aside">
@@ -99,60 +100,71 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="mariabackup-provider-configuration-mariabackup">
-<span id="config-mariabackup"></span><h1>Mariabackup Provider Configuration [mariabackup]<a class="headerlink" href="#mariabackup-provider-configuration-mariabackup" title="Permalink to this headline">¶</a></h1>
+  <section id="mariabackup-provider-configuration-mariabackup">
+<span id="config-mariabackup"></span><h1>Mariabackup Provider Configuration [mariabackup]<a class="headerlink" href="#mariabackup-provider-configuration-mariabackup" title="Link to this heading"></a></h1>
 <p>Backs up a MySQL instance using <code class="docutils literal notranslate"><span class="pre">mariabackup</span></code> tool.</p>
-<div class="section" id="mariabackup">
-<h2>[mariabackup]<a class="headerlink" href="#mariabackup" title="Permalink to this headline">¶</a></h2>
+<section id="mariabackup">
+<h2>[mariabackup]<a class="headerlink" href="#mariabackup" title="Link to this heading"></a></h2>
 <p><strong>global-defaults</strong> = &lt;path&gt; (default: /etc/my.cnf)</p>
 <blockquote>
-<div>The MySQL configuration file for mariabackup to parse.  This is !include’d
-into the my.cnf the mariabackup plugin generates</div></blockquote>
+<div><p>The MySQL configuration file for mariabackup to parse.  This is !include’d
+into the my.cnf the mariabackup plugin generates</p>
+</div></blockquote>
 <p><strong>innobackupex</strong> = &lt;name&gt; (default: innobackupex-1.5.1)</p>
 <blockquote>
-<div>The path to the innobackupex script to run. If this is a relative path
+<div><p>The path to the innobackupex script to run. If this is a relative path
 this will be found in holland’s environment PATH as configured in
-/etc/holland/holland.conf.</div></blockquote>
+/etc/holland/holland.conf.</p>
+</div></blockquote>
 <p><strong>ibbackup</strong> = &lt;name&gt;</p>
 <blockquote>
-<div>The path to the ibbackup command to use.  By default, no –ibbackup option
-is pass to the innobackupex script.  Usually innobackupex will detect this
-by itself and this should not need to be set.</div></blockquote>
-<p><strong>stream</strong> = mbstream(default: tar)</p>
+<div><p>The path to the ibbackup command to use.  By default, no –ibbackup option
+is passed to the innobackupex script.  Usually innobackupex will detect this
+by itself and this should not need to be set.</p>
+</div></blockquote>
+<p><strong>stream</strong> = mbstream (default: mbstream)</p>
 <blockquote>
-<div>Placeholder</div></blockquote>
+<div><p>Placeholder</p>
+</div></blockquote>
 <p><strong>apply-logs</strong> = yes | no (default: yes)</p>
 <blockquote>
-<div>Whether to run <code class="docutils literal notranslate"><span class="pre">innobackupex</span> <span class="pre">--apply-logs</span></code> at the end of the backup. This
+<div><p>Whether to run <code class="docutils literal notranslate"><span class="pre">innobackupex</span> <span class="pre">--apply-logs</span></code> at the end of the backup. This
 is only supported when performing a non-streaming, non-compressed backup.
 In this case, even if apply-logs = yes (the default), the prepare stage
 will be skipped.  Even with an uncompressed, non-streaming backup you may
-want to disable apply-logs if you wish to use incremental backups.</div></blockquote>
+want to disable apply-logs if you wish to use incremental backups.</p>
+</div></blockquote>
 <p><strong>slave-info</strong> = yes | no (default: yes)</p>
 <blockquote>
-<div>Whether to enable the –slave-info innobackupex option</div></blockquote>
+<div><p>Whether to enable the –slave-info innobackupex option</p>
+</div></blockquote>
 <p><strong>safe-slave-backup</strong> = yes | no (default: yes)</p>
 <blockquote>
-<div>Whether to enable the –safe-slave-backup innobackupex option.</div></blockquote>
+<div><p>Whether to enable the –safe-slave-backup innobackupex option.</p>
+</div></blockquote>
 <p><strong>no-lock</strong> = yes | no (default: no)</p>
 <blockquote>
-<div>Whether to enable the –no-lock innobackupex option</div></blockquote>
+<div><p>Whether to enable the –no-lock innobackupex option</p>
+</div></blockquote>
 <p><strong>tmpdir</strong> = &lt;path&gt; (default: <code class="docutils literal notranslate"><span class="pre">${backup_directory}</span></code>)</p>
 <blockquote>
-<div>The path for the innobackupex –tmpdir option.</div></blockquote>
+<div><p>The path for the innobackupex –tmpdir option.</p>
+</div></blockquote>
 <p><strong>additional-options</strong> = &lt;option&gt;[, &lt;option&gt;…]</p>
 <blockquote>
-<div>A list of additional options to pass to innobackupex.  This is a comma
-separated list of options.</div></blockquote>
+<div><p>A list of additional options to pass to innobackupex.  This is a comma
+separated list of options.</p>
+</div></blockquote>
 <p><strong>pre-command</strong> = &lt;command-string&gt;</p>
 <blockquote>
-<div>A command to run prior to running this mariabackup run.  This can be used,
+<div><p>A command to run prior to running this mariabackup run.  This can be used,
 for instance, to generate a mysqldump schema dump prior to running
 mariabackup.  instances of ${backup_directory} and ${backupdir} will be replaced with the
-current holland backup directory where the mariabackup data will be stored.</div></blockquote>
-</div>
-<div class="section" id="compression">
-<h2>[compression]<a class="headerlink" href="#compression" title="Permalink to this headline">¶</a></h2>
+current holland backup directory where the mariabackup data will be stored.</p>
+</div></blockquote>
+</section>
+<section id="compression">
+<h2>[compression]<a class="headerlink" href="#compression" title="Link to this heading"></a></h2>
 <p>Specify various compression settings, such as compression utility,
 compression level, etc.</p>
 <p><strong>method</strong> = gzip| gzip-rsyncable | pigz | bzip2 | pbzip2 | lzop | lzma | gpg | zstd</p>
@@ -165,21 +177,24 @@ and <code class="docutils literal notranslate"><span class="pre">default-recipie
 </div></blockquote>
 <p><strong>inline</strong> = yes | no</p>
 <blockquote>
-<div>Whether or not to pipe the output of the backup command into the compression
+<div><p>Whether or not to pipe the output of the backup command into the compression
 utility. Enabling this is recommended since it usually only marginally
 impacts performance, particularly when using a lower compression
-level.</div></blockquote>
+level.</p>
+</div></blockquote>
 <p><strong>level</strong> = 0-9</p>
 <blockquote>
-<div>Specify the compression ratio. The lower the number, the lower the
+<div><p>Specify the compression ratio. The lower the number, the lower the
 compression ratio, but the faster the backup will take. Generally,
-setting the lever to 1 or 2 results in favorable compression of
+setting the level to 1 or 2 results in favorable compression of
 textual data and is noticeably faster than the higher levels.
-Setting the level to 0 effectively disables compression.</div></blockquote>
+Setting the level to 0 effectively disables compression.</p>
+</div></blockquote>
 <p><strong>bin-path</strong> = &lt;full path to utility&gt;</p>
 <blockquote>
-<div>This only needs to be defined if the compression utility is not in the
-usual places or not in the system path.</div></blockquote>
+<div><p>This only needs to be defined if the compression utility is not in the
+usual places or not in the system path.</p>
+</div></blockquote>
 <p><strong>options</strong> = &lt;string&gt;</p>
 <blockquote>
 <div><p>Add commandline options to the configuration compression command.</p>
@@ -187,18 +202,18 @@ usual places or not in the system path.</div></blockquote>
 </div></blockquote>
 <p><strong>split</strong> = yes | no</p>
 <blockquote>
-<div><p>Defautls to no. If set the backup will be piped through the split command.
+<div><p>Defaults to no. If set the backup will be piped through the split command.
 This may be useful for user’s with large databases, as some backup systems perform
 better with many smaller files instead of 1 large one. This defaults to 1GB file size,
 so this option isn’t helpful if your dumps are smaller than that.</p>
-<p>For python2.6, this option will be disabled if the subprocess32 module isn’t avaiable.</p>
+<p>For python2.6, this option will be disabled if the subprocess32 module isn’t available.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.1.13.</span></p>
+<p><span class="versionmodified added">Added in version 1.1.13.</span></p>
 </div>
 </div></blockquote>
-</div>
-<div class="section" id="mysql-connection-info-mysql-client">
-<h2>MySQL connection info [mysql:client]<a class="headerlink" href="#mysql-connection-info-mysql-client" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="mysql-connection-info-mysql-client">
+<h2>MySQL connection info [mysql:client]<a class="headerlink" href="#mysql-connection-info-mysql-client" title="Link to this heading"></a></h2>
 <p>These are optional and, if left undefined, Holland will try to login using
 the standard .my.cnf conventions.</p>
 <p><strong>user</strong> = &lt;user&gt;</p>
@@ -211,20 +226,21 @@ the standard .my.cnf conventions.</p>
 <p>This would be used for connecting to MySQL remotely.</p>
 <p><strong>port</strong> = &lt;port&gt;</p>
 <p>Used if MySQL is running on a port other than 3306.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="mongodump.html" class="btn btn-neutral float-left" title="mongodump Provider Configuration [mongodump]" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mariadb-dump.html" class="btn btn-neutral float-right" title="mariadb-dump Provider Configuration [mariadb-dump]" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024.</p>
+    <p>&#169; Copyright 2025.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

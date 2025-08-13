@@ -1,0 +1,365 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mariadb-dump Provider Configuration [mariadb-dump] &mdash; Holland Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+    <link rel="shortcut icon" href="../_static/holland_logo_64x64.png"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=1f29e9d3"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="mysqlsh-dump-instance Provider Configuration [mysqlsh-dump-instance]" href="mysqlsh-dump-instance.html" />
+    <link rel="prev" title="Mariabackup Provider Configuration [mariabackup]" href="mariabackup.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Holland
+              <img src="../_static/holland_logo_64x64.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction to Holland</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands.html">Holland Command-Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Usage and Implementation Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../config.html">Holland Config Files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../config.html#holland-conf-main-config">holland.conf - main config</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../config.html#provider-configs">Provider Configs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mysqldump.html">mysqldump Provider Configuration [mysqldump]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mysql-lvm.html">MySQL LVM Provider Configuration [mysql-lvm]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mysqldump-lvm.html">mysqldump LVM Provider Configuration [mysqldump-lvm]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xtrabackup.html">Xtrabackup Provider Configuration [xtrabackup]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pgdump.html">pgdump Provider Configuration [pgdump]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pg_basebackup.html">pg_basebackup Provider Configuration [pg_basebackup]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mongodump.html">mongodump Provider Configuration [mongodump]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mariabackup.html">Mariabackup Provider Configuration [mariabackup]</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mariadb-dump Provider Configuration [mariadb-dump]</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mariadb-dump">[mariadb-dump]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#database-and-table-filtering">Database and Table filtering</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compression">[compression]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mysql-connection-info-mysql-client">MySQL connection info [mysql:client]</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mysqlsh-dump-instance.html">mysqlsh-dump-instance Provider Configuration [mysqlsh-dump-instance]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mysqlsh-dump-schemas.html">mysqlsh-dump-schemas Provider Configuration [mysqlsh-dump-schemas]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command.html">command Provider Configuration [command]</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#backup-set-configs">Backup-Set Configs</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Holland</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../config.html">Holland Config Files</a></li>
+      <li class="breadcrumb-item active">mariadb-dump Provider Configuration [mariadb-dump]</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/provider_configs/mariadb-dump.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mariadb-dump-provider-configuration-mariadb-dump">
+<span id="config-mariadb-dump"></span><h1>mariadb-dump Provider Configuration [mariadb-dump]<a class="headerlink" href="#mariadb-dump-provider-configuration-mariadb-dump" title="Link to this heading"></a></h1>
+<p>Backs up a MariaDB database using the mariadb-dump tool.</p>
+<section id="mariadb-dump">
+<h2>[mariadb-dump]<a class="headerlink" href="#mariadb-dump" title="Link to this heading"></a></h2>
+<p><strong>extra-defaults</strong> = yes | no (default: no)</p>
+<blockquote>
+<div><p>This option controls whether mariadb-dump will only read options as set by
+holland or if additional options from global config files are read. By
+default, the plugin only uses options as set in the backupset config and
+includes authentication credentials only from the [client] section in
+~/.my.cnf.</p>
+</div></blockquote>
+<p><strong>executable</strong> = “mariadb-dump”</p>
+<blockquote>
+<div><p>Override the path where we can find mariadb command line utilities.</p>
+</div></blockquote>
+<p><strong>lock-method</strong> = flush-lock | lock-tables | single-transaction | auto-detect | none (default: auto-detect)</p>
+<blockquote>
+<div><p>One of: flush-lock, lock-tables, single-transaction, auto-detect, none.</p>
+<ul>
+<li><p>flush-lock</p>
+<blockquote>
+<div><p>flush-lock will place a global lock on all tables involved in the backup
+regardless of whether or not they are in the backup-set. If
+file-per-database is enabled, then flush-lock will lock all tables
+for every database being backed up. In other words, this option may not
+make much sense when using file-per-database.</p>
+</div></blockquote>
+</li>
+<li><p>lock-tables</p>
+<blockquote>
+<div><p>lock-tables will lock all tables involved in the backup. If
+file-per-database is enabled, then lock-tables will only lock all the
+tables associated with that database.</p>
+</div></blockquote>
+</li>
+<li><p>single-transaction</p>
+<blockquote>
+<div><p>single-transaction will force running a backup within a transaction.
+This allows backing up of transactional tables without imposing a lock
+however will NOT properly backup non-transactional tables.</p>
+</div></blockquote>
+</li>
+<li><p>auto-detect</p>
+<blockquote>
+<div><p>Auto-detect will choose single-transaction unless Holland finds
+non-transactional tables in the backup-set.</p>
+</div></blockquote>
+</li>
+<li><p>none</p>
+<blockquote>
+<div><p>None will completely disable locking. This is generally only viable
+on a MariaDB slave and only after traffic has been diverted, or slave
+services suspended.</p>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+<p><strong>databases</strong> = “*”</p>
+<blockquote>
+<div><p>List of comma-delimited glob patterns for matching databases.
+Only databases matching these patterns will be backed up.
+default: include everything.</p>
+</div></blockquote>
+<p><strong>exclude-databases</strong> =</p>
+<blockquote>
+<div><p>List of comma-delimited glob patterns to exclude particular databases.</p>
+</div></blockquote>
+<p><strong>tables</strong> = “*”</p>
+<blockquote>
+<div><p>List of comma-delimited tables to include.</p>
+</div></blockquote>
+<p><strong>exclude-tables</strong> = “”</p>
+<blockquote>
+<div><p>List of comma-delimited tables to exclude.</p>
+</div></blockquote>
+<p><strong>engines</strong> = “*”</p>
+<blockquote>
+<div><p>List of comma-delimited glob patterns for matching table engines.
+Only tables matching these patterns will be backed up.
+default: include everything.</p>
+</div></blockquote>
+<p><strong>exclude-engines</strong> =</p>
+<blockquote>
+<div><p>List of comma-delimited glob patterns to exclude particular table engines.</p>
+</div></blockquote>
+<p><strong>exclude-invalid-views</strong> = yes | no (default: no)</p>
+<blockquote>
+<div><p>Whether to automate exclusion of invalid views that would otherwise cause
+mariadb-dump to fail. This adds additional overhead so this option is not
+enabled by default.</p>
+</div></blockquote>
+<p><strong>flush-logs</strong> = yes | no (default: no)</p>
+<blockquote>
+<div><p>Whether to run FLUSH LOGS in MariaDB with the backup. When FLUSH
+LOGS is actually executed depends on which if database filtering is being
+used and whether or not file-per-database is enabled. Generally speaking,
+it does not make sense to use flush-logs with file-per-database since the
+binary logs will not be consistent with the backup.</p>
+</div></blockquote>
+<p><strong>flush-privileges</strong> = yes | no (default: yes)</p>
+<blockquote>
+<div><p>Whether to emit a FLUSH PRIVILEGES statement after dumping the mysql database.
+This ensures a proper restore when a dump contains the mysql database.</p>
+</div></blockquote>
+<p><strong>dump-routines</strong> = yes | no (default: yes)</p>
+<blockquote>
+<div><p>Whether to dump routines explicitly.
+(routines are implicitly included in the mariadb database)</p>
+</div></blockquote>
+<p><strong>dump-events</strong> = yes | no (default: no)</p>
+<blockquote>
+<div><p>Whether to dump events explicitly.</p>
+</div></blockquote>
+<p><strong>dump-history</strong> = yes | no (default: no)</p>
+<blockquote>
+<div><p>Whether to dump history explicitly.
+Requires MariaDB 10.11.0 or later.</p>
+</div></blockquote>
+<p><strong>order-by-size</strong> = yes | no (default: no)</p>
+<blockquote>
+<div><p>Whether to dump tables in the order of their size, smaller first.
+Requires MariaDB 10.9.1 or later.</p>
+</div></blockquote>
+<p><strong>stop-slave</strong> = yes | no (default: no)</p>
+<blockquote>
+<div><p>Whether to stop the slave before commencing with the backup.</p>
+</div></blockquote>
+<p><strong>bin-log-position</strong> = yes | no (default: no)</p>
+<blockquote>
+<div><p>Whether to record the binary log name and position at the time of the backup.</p>
+</div></blockquote>
+<p><strong>max-allowed-packet</strong> = 128M</p>
+<blockquote>
+<div><p>Maximum packet length to send/receive from the server.</p>
+</div></blockquote>
+<p><strong>file-per-database</strong> = yes | no (default: yes)</p>
+<blockquote>
+<div><p>Whether to run a separate ‘mariadb-dump’ for each database. Note that while
+this may initially sound like a good idea, it is far simpler to backup
+all databases in one file, although that makes the restore process
+more difficult when only certain data needs to be restored.</p>
+</div></blockquote>
+<p><strong>arg-per-database</strong> = {}</p>
+<blockquote>
+<div><p>The args-per-database option is only used if file-per-database is enabled.
+It takes a JSON string in the format {“table1”: “–arg”, “table2”: “–arg”}.</p>
+</div></blockquote>
+<p><strong>additional-options</strong> = “”</p>
+<blockquote>
+<div><p>Any additional options to pass to the ‘mariadb-dump’ command-line utility.
+These should show up exactly as they are on the command line.
+e.g.: –flush-privileges –reset-master.</p>
+</div></blockquote>
+</section>
+<section id="database-and-table-filtering">
+<h2>Database and Table filtering<a class="headerlink" href="#database-and-table-filtering" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="databasefiltering.html">Database and Table filtering</a></li>
+</ul>
+</div>
+</section>
+<section id="compression">
+<h2>[compression]<a class="headerlink" href="#compression" title="Link to this heading"></a></h2>
+<p>Specify various compression settings, such as compression utility,
+compression level, etc.</p>
+<p><strong>method</strong> = gzip| gzip-rsyncable | pigz | bzip2 | pbzip2 | lzop | lzma | gpg | zstd</p>
+<blockquote>
+<div><p>Define which compression method to use. Note that some methods may
+not be available by default on every system and may need to be compiled
+or installed.</p>
+<p>For gpg compression, a key should already exist(<code class="docutils literal notranslate"><span class="pre">gpg</span> <span class="pre">--gen-key</span></code>)
+and <code class="docutils literal notranslate"><span class="pre">default-recipient</span></code> must be configured in <code class="docutils literal notranslate"><span class="pre">~/.gnupg/gpg.conf</span></code>.</p>
+</div></blockquote>
+<p><strong>inline</strong> = yes | no</p>
+<blockquote>
+<div><p>Whether or not to pipe the output of the backup command into the compression
+utility. Enabling this is recommended since it usually only marginally
+impacts performance, particularly when using a lower compression
+level.</p>
+</div></blockquote>
+<p><strong>level</strong> = 0-9</p>
+<blockquote>
+<div><p>Specify the compression ratio. The lower the number, the lower the
+compression ratio, but the faster the backup will take. Generally,
+setting the level to 1 or 2 results in favorable compression of
+textual data and is noticeably faster than the higher levels.
+Setting the level to 0 effectively disables compression.</p>
+</div></blockquote>
+<p><strong>bin-path</strong> = &lt;full path to utility&gt;</p>
+<blockquote>
+<div><p>This only needs to be defined if the compression utility is not in the
+usual places or not in the system path.</p>
+</div></blockquote>
+<p><strong>options</strong> = &lt;string&gt;</p>
+<blockquote>
+<div><p>Add commandline options to the configuration compression command.</p>
+<p>options = “-Q4”</p>
+</div></blockquote>
+<p><strong>split</strong> = yes | no</p>
+<blockquote>
+<div><p>Defaults to no. If set the backup will be piped through the split command.
+This may be useful for user’s with large databases, as some backup systems perform
+better with many smaller files instead of 1 large one. This defaults to 1GB file size,
+so this option isn’t helpful if your dumps are smaller than that.</p>
+<p>For python2.6, this option will be disabled if the subprocess32 module isn’t available.</p>
+<div class="versionadded">
+<p><span class="versionmodified added">Added in version 1.1.13.</span></p>
+</div>
+</div></blockquote>
+</section>
+<section id="mysql-connection-info-mysql-client">
+<h2>MySQL connection info [mysql:client]<a class="headerlink" href="#mysql-connection-info-mysql-client" title="Link to this heading"></a></h2>
+<p>These are optional and, if left undefined, Holland will try to login using
+the standard .my.cnf conventions.</p>
+<p><strong>user</strong> = &lt;user&gt;</p>
+<p>The user to connect to MySQL as.</p>
+<p><strong>password</strong> = &lt;password&gt;</p>
+<p>The password for the MySQL user</p>
+<p><strong>socket</strong> = &lt;socket&gt;</p>
+<p>The socket file to connect to MySQL with.</p>
+<p><strong>host</strong> = &lt;host&gt;</p>
+<p>This would be used for connecting to MySQL remotely.</p>
+<p><strong>port</strong> = &lt;port&gt;</p>
+<p>Used if MySQL is running on a port other than 3306.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mariabackup.html" class="btn btn-neutral float-left" title="Mariabackup Provider Configuration [mariabackup]" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mysqlsh-dump-instance.html" class="btn btn-neutral float-right" title="mysqlsh-dump-instance Provider Configuration [mysqlsh-dump-instance]" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

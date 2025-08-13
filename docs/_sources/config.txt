@@ -5,11 +5,11 @@ Holland Config Files
 ====================
 
 By default, Holland's configuration files reside in /etc/holland. The main
-configuration file is holland.conf, however there are a number of other 
+configuration file is holland.conf, however there are a number of other
 configuration files for configuring default settings for providers and for
 configuring backup sets.
 
-Each configuration file has one ore more sections, defined by square
+Each configuration file has one or more sections, defined by square
 brackets Underneath each section, one or more configuration option
 can be specified. These options are in a standard "option = value" format.
 Comments are prefixed by the # sign.
@@ -22,7 +22,7 @@ holland.conf - main config
 
 The main configuration file (usually /etc/holland/holland.conf) defines
 both global settings as well as the active backup sets. It is divided into
-two sections :ref:`[holland]<holland-config>` and :ref:`[logging]<logging-config>`. 
+two sections :ref:`[holland]<holland-config>` and :ref:`[logging]<logging-config>`.
 
 .. _holland-config:
 
@@ -31,15 +31,15 @@ two sections :ref:`[holland]<holland-config>` and :ref:`[logging]<logging-config
 
 .. describe:: plugin-dirs
 
-    Defines where the plugins can be found. This can be a comma-separated 
+    Defines where the plugins can be found. This can be a comma-separated
     list but usually does not need to be modified.
-    
-.. _holland-config-backup_directory:    
-    
+
+.. _holland-config-backup_directory:
+
 .. describe:: backup_directory
 
-    Top-level directory where backups are held. 
-    
+    Top-level directory where backups are held.
+
 .. _holland-config-backupsets:
 
 .. describe:: backupsets
@@ -47,17 +47,17 @@ two sections :ref:`[holland]<holland-config>` and :ref:`[logging]<logging-config
     A comma-separated list of all the backup sets Holland should backup.
     Each backup set is defined in ``/etc/holland/backupsets/<name>.conf`` by
     default.
-    
+
 .. describe:: umask
 
     Sets the umask of the resulting backup files.
-    
+
 .. describe:: path
 
     Defines a path for holland and its spawned processes
 
 .. _logging-config:
-    
+
 [logging]
 ^^^^^^^^^
 
@@ -72,7 +72,7 @@ two sections :ref:`[holland]<holland-config>` and :ref:`[logging]<logging-config
 
 .. describe:: format
 
-    Define the format of the log message. This options should be in the format 
+    Define the format of the log message. This option should be in the format
     defined by the 'logging' python library.
 
     .. versionadded:: 1.1.0
@@ -80,7 +80,7 @@ two sections :ref:`[holland]<holland-config>` and :ref:`[logging]<logging-config
 Provider Configs
 ----------------
 
-These files control the global settings / defaults for the providers used by 
+These files control the global settings / defaults for the providers used by
 the backup-sets. Many of these global settings can be overridden if defined
 in a backup-set. Note that each provider's configuration file should begin
 with ``[provider-name]``.
@@ -96,6 +96,10 @@ with ``[provider-name]``.
     provider_configs/pg_basebackup
     provider_configs/mongodump
     provider_configs/mariabackup
+    provider_configs/mariadb-dump
+    provider_configs/mysqlsh-dump-instance
+    provider_configs/mysqlsh-dump-schemas
+    provider_configs/command
 
 Backup-Set Configs
 ------------------
@@ -122,14 +126,14 @@ Configuration Options
 
 **backups-to-keep** = #
 
-    Specifies the number of backups to keep for a backup-set. 
+    Specifies the number of backups to keep for a backup-set.
     Defaults to retaining 1 backup.
-    
+
 **estimated-size-factor** = #
 
     Specifies the scale factor when Holland decides if there is enough
     free space to perform a backup.  The default is 1.0 and this number
-    is multiplied against what each individual plugin reports its 
+    is multiplied against what each individual plugin reports its
     estimated backup size when Holland is verifying sufficient free
     space for the backupset.
 
@@ -140,7 +144,7 @@ Configuration Options
 
     Specifies whether to keep a failed backup or to automatically remove
     the backup directory.  By default this is on with the intention that
-    whatever process is calling holland will retry when a backup fails. 
+    whatever process is calling holland will retry when a backup fails.
     This behavior can be disabled by setting auto-purge-failures = no when
     partial backups might be useful or when troubleshooting a backup failure.
 
@@ -163,28 +167,28 @@ Configuration Options
 
 **before-backup-command** = string
 
-    Run a shell command before a backup starts.  This allows a command to 
+    Run a shell command before a backup starts.  This allows a command to
     perform some action before the backup starts such as setting up an
-    iptables rule (taking a mysql slave out of a load balancer) or aborting 
-    the backup based on some external condition. 
-    
+    iptables rule (taking a mysql slave out of a load balancer) or aborting
+    the backup based on some external condition.
+
     The backup will fail if this command exits with a non-zero status.
 
     .. versionadded:: 1.0.7
 
 **after-backup-command** = string
 
-    Run a shell command after a backup completes.  This allows a command to 
+    Run a shell command after a backup completes.  This allows a command to
     perform some action when a backup completes successfully such as sending
     out a success notification.
-    
+
     The backup will fail if this command exits with a non-zero status.
 
     .. versionadded:: 1.0.7
 
 **failed-backup-command** = string
 
-    Run a shell command if a backup starts.  This allows some command to 
+    Run a shell command if a backup fails.  This allows some command to
     perform some action when a backup fails such as sending out a failure
     notification.
 
@@ -232,7 +236,7 @@ Configuration Options
     lrwxrwxrwx. 1 root root 42 Aug 18 16:18 oldest -> /var/spool/holland/default/20210818_161856
 
 
-For all hook commands, Holland will perform simple text substitution  
+For all hook commands, Holland will perform simple text substitution
 on the three parameters:
 
   * hook - name of the hook being called (one of: before-backup-command, after-backup-command, failed-backup-command)
@@ -240,17 +244,17 @@ on the three parameters:
   * backupset - name of the backupset being run (e.g. 'mysql-lvm')
 
 For example::
-    
+
     [holland:backup]
     plugin = mysqldump
     before-backup-command = /usr/local/bin/my-custom-script --hook ${hook} --backupset ${backupset} --backupdir ${backupdir}
     after-backup-command = echo ${backupset} completed successfully.  Files are in ${backupdir}
-    
+
     [mysqldump]
     ...
 
 Backup-Set files are defined in the "backupsets" directory which is,
-by default, ``/etc/holland/backupsets``. The name of the backup-set is 
+by default, ``/etc/holland/backupsets``. The name of the backup-set is
 defined by its configuration filename and can really be most anything. That
 means backup-sets can be organized in any arbitrary way, although backup
 set files must end in .conf. The file extension is not part of the name of
@@ -259,7 +263,7 @@ the backup-set.
 As noted above, in order for a backup-set to be active, it must be listed in
 the :ref:`backupsets<holland-config-backupsets>` variable.
 
-Backups are placed under the directory defined in the 
+Backups are placed under the directory defined in the
 :ref:`backup_directory<holland-config-backup_directory>`
 section of the main configuration file. Each backup resides under a directory
 corresponding to the backup-set name followed by a date-encoded directory.

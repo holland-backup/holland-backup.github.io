@@ -1,28 +1,22 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>[compression] &mdash; Holland Documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/holland_logo_64x64.png"/>
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>[compression] &mdash; Holland Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
   
-      <script>
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../',
-              VERSION:'1.2.12',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/holland_logo_64x64.png"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=1f29e9d3"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -33,14 +27,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Holland<img src="../_static/holland_logo_64x64.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Holland
+              <img src="../_static/holland_logo_64x64.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                1.2.12
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -66,7 +62,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">[compression]</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/provider_configs/compression.txt" rel="nofollow"> View page source</a>
@@ -77,8 +73,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="compression">
-<h1>[compression]<a class="headerlink" href="#compression" title="Permalink to this headline">¶</a></h1>
+  <section id="compression">
+<h1>[compression]<a class="headerlink" href="#compression" title="Link to this heading"></a></h1>
 <p>Specify various compression settings, such as compression utility,
 compression level, etc.</p>
 <p><strong>method</strong> = gzip| gzip-rsyncable | pigz | bzip2 | pbzip2 | lzop | lzma | gpg | zstd</p>
@@ -91,21 +87,24 @@ and <code class="docutils literal notranslate"><span class="pre">default-recipie
 </div></blockquote>
 <p><strong>inline</strong> = yes | no</p>
 <blockquote>
-<div>Whether or not to pipe the output of the backup command into the compression
+<div><p>Whether or not to pipe the output of the backup command into the compression
 utility. Enabling this is recommended since it usually only marginally
 impacts performance, particularly when using a lower compression
-level.</div></blockquote>
+level.</p>
+</div></blockquote>
 <p><strong>level</strong> = 0-9</p>
 <blockquote>
-<div>Specify the compression ratio. The lower the number, the lower the
+<div><p>Specify the compression ratio. The lower the number, the lower the
 compression ratio, but the faster the backup will take. Generally,
-setting the lever to 1 or 2 results in favorable compression of
+setting the level to 1 or 2 results in favorable compression of
 textual data and is noticeably faster than the higher levels.
-Setting the level to 0 effectively disables compression.</div></blockquote>
+Setting the level to 0 effectively disables compression.</p>
+</div></blockquote>
 <p><strong>bin-path</strong> = &lt;full path to utility&gt;</p>
 <blockquote>
-<div>This only needs to be defined if the compression utility is not in the
-usual places or not in the system path.</div></blockquote>
+<div><p>This only needs to be defined if the compression utility is not in the
+usual places or not in the system path.</p>
+</div></blockquote>
 <p><strong>options</strong> = &lt;string&gt;</p>
 <blockquote>
 <div><p>Add commandline options to the configuration compression command.</p>
@@ -113,16 +112,16 @@ usual places or not in the system path.</div></blockquote>
 </div></blockquote>
 <p><strong>split</strong> = yes | no</p>
 <blockquote>
-<div><p>Defautls to no. If set the backup will be piped through the split command.
+<div><p>Defaults to no. If set the backup will be piped through the split command.
 This may be useful for user’s with large databases, as some backup systems perform
 better with many smaller files instead of 1 large one. This defaults to 1GB file size,
 so this option isn’t helpful if your dumps are smaller than that.</p>
-<p>For python2.6, this option will be disabled if the subprocess32 module isn’t avaiable.</p>
+<p>For python2.6, this option will be disabled if the subprocess32 module isn’t available.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.1.13.</span></p>
+<p><span class="versionmodified added">Added in version 1.1.13.</span></p>
 </div>
 </div></blockquote>
-</div>
+</section>
 
 
            </div>
@@ -132,7 +131,7 @@ so this option isn’t helpful if your dumps are smaller than that.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024.</p>
+    <p>&#169; Copyright 2025.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
