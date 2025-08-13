@@ -42,7 +42,7 @@ Backs up a MySQL instance using Percona's Xtrabackup tool.
    this value is set to 'no'
 
 .. versionchanged:: 1.3.0
-The default stream method has switched from `tar` to `xbstream`.
+   The default stream method has switched from `tar` to `xbstream`.
 
 **apply-logs** = yes | no (default: yes)
 
