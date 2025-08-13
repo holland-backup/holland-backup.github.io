@@ -26,7 +26,7 @@ Backs up a MySQL instance using ``mariabackup`` tool.
     is passed to the innobackupex script.  Usually innobackupex will detect this
     by itself and this should not need to be set.
 
-**stream** = mbstream (default: tar)
+**stream** = mbstream (default: mbstream)
 
     Placeholder
 
