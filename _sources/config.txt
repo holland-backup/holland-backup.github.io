@@ -9,7 +9,7 @@ configuration file is holland.conf, however there are a number of other
 configuration files for configuring default settings for providers and for
 configuring backup sets.
 
-Each configuration file has one ore more sections, defined by square
+Each configuration file has one or more sections, defined by square
 brackets Underneath each section, one or more configuration option
 can be specified. These options are in a standard "option = value" format.
 Comments are prefixed by the # sign.
@@ -72,7 +72,7 @@ two sections :ref:`[holland]<holland-config>` and :ref:`[logging]<logging-config
 
 .. describe:: format
 
-    Define the format of the log message. This options should be in the format
+    Define the format of the log message. This option should be in the format
     defined by the 'logging' python library.
 
     .. versionadded:: 1.1.0
@@ -188,7 +188,7 @@ Configuration Options
 
 **failed-backup-command** = string
 
-    Run a shell command if a backup starts.  This allows some command to
+    Run a shell command if a backup fails.  This allows some command to
     perform some action when a backup fails such as sending out a failure
     notification.
 
