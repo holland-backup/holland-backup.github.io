@@ -1,28 +1,22 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Holland Config Files &mdash; Holland Documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/holland_logo_64x64.png"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>Holland Config Files &mdash; Holland Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
   
-      <script>
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'./',
-              VERSION:'1.2.12',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/holland_logo_64x64.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=1f29e9d3"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -35,14 +29,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Holland<img src="_static/holland_logo_64x64.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Holland
+              <img src="_static/holland_logo_64x64.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                1.2.12
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -67,6 +63,10 @@
 <li class="toctree-l3"><a class="reference internal" href="provider_configs/pg_basebackup.html">pg_basebackup Provider Configuration [pg_basebackup]</a></li>
 <li class="toctree-l3"><a class="reference internal" href="provider_configs/mongodump.html">mongodump Provider Configuration [mongodump]</a></li>
 <li class="toctree-l3"><a class="reference internal" href="provider_configs/mariabackup.html">Mariabackup Provider Configuration [mariabackup]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="provider_configs/mariadb-dump.html">mariadb-dump Provider Configuration [mariadb-dump]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="provider_configs/mysqlsh-dump-instance.html">mysqlsh-dump-instance Provider Configuration [mysqlsh-dump-instance]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="provider_configs/mysqlsh-dump-schemas.html">mysqlsh-dump-schemas Provider Configuration [mysqlsh-dump-schemas]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="provider_configs/command.html">command Provider Configuration [command]</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#backup-set-configs">Backup-Set Configs</a><ul>
@@ -90,7 +90,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Holland Config Files</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/config.txt" rel="nofollow"> View page source</a>
@@ -101,88 +101,88 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="holland-config-files">
-<span id="config"></span><h1>Holland Config Files<a class="headerlink" href="#holland-config-files" title="Permalink to this headline">¶</a></h1>
+  <section id="holland-config-files">
+<span id="config"></span><h1>Holland Config Files<a class="headerlink" href="#holland-config-files" title="Link to this heading"></a></h1>
 <p>By default, Holland’s configuration files reside in /etc/holland. The main
 configuration file is holland.conf, however there are a number of other
 configuration files for configuring default settings for providers and for
 configuring backup sets.</p>
-<p>Each configuration file has one ore more sections, defined by square
+<p>Each configuration file has one or more sections, defined by square
 brackets Underneath each section, one or more configuration option
 can be specified. These options are in a standard “option = value” format.
 Comments are prefixed by the # sign.</p>
 <p>Note that many settings have default values and, as a result, can either
 be commented out or omitted entirely.</p>
-<div class="section" id="holland-conf-main-config">
-<h2>holland.conf - main config<a class="headerlink" href="#holland-conf-main-config" title="Permalink to this headline">¶</a></h2>
+<section id="holland-conf-main-config">
+<h2>holland.conf - main config<a class="headerlink" href="#holland-conf-main-config" title="Link to this heading"></a></h2>
 <p>The main configuration file (usually /etc/holland/holland.conf) defines
 both global settings as well as the active backup sets. It is divided into
 two sections <a class="reference internal" href="#holland-config"><span class="std std-ref">[holland]</span></a> and <a class="reference internal" href="#logging-config"><span class="std std-ref">[logging]</span></a>.</p>
-<div class="section" id="holland">
-<span id="holland-config"></span><h3>[holland]<a class="headerlink" href="#holland" title="Permalink to this headline">¶</a></h3>
+<section id="holland">
+<span id="holland-config"></span><h3>[holland]<a class="headerlink" href="#holland" title="Link to this heading"></a></h3>
 <dl class="describe">
-<dt>
-<code class="descname">plugin-dirs</code></dt>
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">plugin-dirs</span></span></dt>
 <dd><p>Defines where the plugins can be found. This can be a comma-separated
 list but usually does not need to be modified.</p>
 </dd></dl>
 
-<span class="target" id="holland-config-backup-directory"></span><dl class="describe">
-<dt>
-<code class="descname">backup_directory</code></dt>
+<dl class="describe" id="holland-config-backup-directory">
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">backup_directory</span></span></dt>
 <dd><p>Top-level directory where backups are held.</p>
 </dd></dl>
 
-<span class="target" id="holland-config-backupsets"></span><dl class="describe">
-<dt>
-<code class="descname">backupsets</code></dt>
+<dl class="describe" id="holland-config-backupsets">
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">backupsets</span></span></dt>
 <dd><p>A comma-separated list of all the backup sets Holland should backup.
 Each backup set is defined in <code class="docutils literal notranslate"><span class="pre">/etc/holland/backupsets/&lt;name&gt;.conf</span></code> by
 default.</p>
 </dd></dl>
 
 <dl class="describe">
-<dt>
-<code class="descname">umask</code></dt>
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">umask</span></span></dt>
 <dd><p>Sets the umask of the resulting backup files.</p>
 </dd></dl>
 
 <dl class="describe">
-<dt>
-<code class="descname">path</code></dt>
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">path</span></span></dt>
 <dd><p>Defines a path for holland and its spawned processes</p>
 </dd></dl>
 
-</div>
-<div class="section" id="logging">
-<span id="logging-config"></span><h3>[logging]<a class="headerlink" href="#logging" title="Permalink to this headline">¶</a></h3>
+</section>
+<section id="logging">
+<span id="logging-config"></span><h3>[logging]<a class="headerlink" href="#logging" title="Link to this heading"></a></h3>
 <dl class="describe">
-<dt>
-<code class="descname">filename</code></dt>
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">filename</span></span></dt>
 <dd><p>The log file itself.</p>
 </dd></dl>
 
 <dl class="describe">
-<dt>
-<code class="descname">level</code></dt>
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">level</span></span></dt>
 <dd><p>Sets the verbosity of Holland’s logging process. Available options are
 <code class="docutils literal notranslate"><span class="pre">debug</span></code>, <code class="docutils literal notranslate"><span class="pre">info</span></code>, <code class="docutils literal notranslate"><span class="pre">warning</span></code>, <code class="docutils literal notranslate"><span class="pre">error</span></code>, and <code class="docutils literal notranslate"><span class="pre">critical</span></code></p>
 </dd></dl>
 
 <dl class="describe">
-<dt>
-<code class="descname">format</code></dt>
-<dd><p>Define the format of the log message. This options should be in the format
+<dt class="sig sig-object">
+<span class="sig-name descname"><span class="pre">format</span></span></dt>
+<dd><p>Define the format of the log message. This option should be in the format
 defined by the ‘logging’ python library.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.1.0.</span></p>
+<p><span class="versionmodified added">Added in version 1.1.0.</span></p>
 </div>
 </dd></dl>
 
-</div>
-</div>
-<div class="section" id="provider-configs">
-<h2>Provider Configs<a class="headerlink" href="#provider-configs" title="Permalink to this headline">¶</a></h2>
+</section>
+</section>
+<section id="provider-configs">
+<h2>Provider Configs<a class="headerlink" href="#provider-configs" title="Link to this heading"></a></h2>
 <p>These files control the global settings / defaults for the providers used by
 the backup-sets. Many of these global settings can be overridden if defined
 in a backup-set. Note that each provider’s configuration file should begin
@@ -197,11 +197,15 @@ with <code class="docutils literal notranslate"><span class="pre">[provider-name
 <li class="toctree-l1"><a class="reference internal" href="provider_configs/pg_basebackup.html">pg_basebackup Provider Configuration [pg_basebackup]</a></li>
 <li class="toctree-l1"><a class="reference internal" href="provider_configs/mongodump.html">mongodump Provider Configuration [mongodump]</a></li>
 <li class="toctree-l1"><a class="reference internal" href="provider_configs/mariabackup.html">Mariabackup Provider Configuration [mariabackup]</a></li>
+<li class="toctree-l1"><a class="reference internal" href="provider_configs/mariadb-dump.html">mariadb-dump Provider Configuration [mariadb-dump]</a></li>
+<li class="toctree-l1"><a class="reference internal" href="provider_configs/mysqlsh-dump-instance.html">mysqlsh-dump-instance Provider Configuration [mysqlsh-dump-instance]</a></li>
+<li class="toctree-l1"><a class="reference internal" href="provider_configs/mysqlsh-dump-schemas.html">mysqlsh-dump-schemas Provider Configuration [mysqlsh-dump-schemas]</a></li>
+<li class="toctree-l1"><a class="reference internal" href="provider_configs/command.html">command Provider Configuration [command]</a></li>
 </ul>
 </div>
-</div>
-<div class="section" id="backup-set-configs">
-<h2>Backup-Set Configs<a class="headerlink" href="#backup-set-configs" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="backup-set-configs">
+<h2>Backup-Set Configs<a class="headerlink" href="#backup-set-configs" title="Link to this heading"></a></h2>
 <p>Backup-Set configuration files largely inherit the configuration options of
 the specified provider. To define a provider for the backup set, you must
 put the following at the top of the backup set configuration file:</p>
@@ -214,16 +218,18 @@ put the following at the top of the backup set configuration file:</p>
 <span class="n">historic</span><span class="o">-</span><span class="n">estimated</span><span class="o">-</span><span class="n">size</span><span class="o">-</span><span class="n">factor</span> <span class="o">=</span> <span class="c1">#</span>
 </pre></div>
 </div>
-<div class="section" id="configuration-options">
-<h3>Configuration Options<a class="headerlink" href="#configuration-options" title="Permalink to this headline">¶</a></h3>
+<section id="configuration-options">
+<h3>Configuration Options<a class="headerlink" href="#configuration-options" title="Link to this heading"></a></h3>
 <p><strong>plugin</strong> = &lt;plugin&gt;</p>
 <blockquote>
-<div>This is the name of the provider that will be used for the backup-set.
-This is required in order for the backup-set to function.</div></blockquote>
+<div><p>This is the name of the provider that will be used for the backup-set.
+This is required in order for the backup-set to function.</p>
+</div></blockquote>
 <p><strong>backups-to-keep</strong> = #</p>
 <blockquote>
-<div>Specifies the number of backups to keep for a backup-set.
-Defaults to retaining 1 backup.</div></blockquote>
+<div><p>Specifies the number of backups to keep for a backup-set.
+Defaults to retaining 1 backup.</p>
+</div></blockquote>
 <p><strong>estimated-size-factor</strong> = #</p>
 <blockquote>
 <div><p>Specifies the scale factor when Holland decides if there is enough
@@ -236,11 +242,12 @@ is unable to determine that size, it will default back to this.</p>
 </div></blockquote>
 <p><strong>auto-purge-failures</strong> = yes | no</p>
 <blockquote>
-<div>Specifies whether to keep a failed backup or to automatically remove
+<div><p>Specifies whether to keep a failed backup or to automatically remove
 the backup directory.  By default this is on with the intention that
 whatever process is calling holland will retry when a backup fails.
 This behavior can be disabled by setting auto-purge-failures = no when
-partial backups might be useful or when troubleshooting a backup failure.</div></blockquote>
+partial backups might be useful or when troubleshooting a backup failure.</p>
+</div></blockquote>
 <p><strong>purge-policy</strong> = manual | before-backup | after-backup</p>
 <blockquote>
 <div><p>Specifies when to run the purge routine on a backupset.  By default this is
@@ -264,7 +271,7 @@ iptables rule (taking a mysql slave out of a load balancer) or aborting
 the backup based on some external condition.</p>
 <p>The backup will fail if this command exits with a non-zero status.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.0.7.</span></p>
+<p><span class="versionmodified added">Added in version 1.0.7.</span></p>
 </div>
 </div></blockquote>
 <p><strong>after-backup-command</strong> = string</p>
@@ -274,17 +281,17 @@ perform some action when a backup completes successfully such as sending
 out a success notification.</p>
 <p>The backup will fail if this command exits with a non-zero status.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.0.7.</span></p>
+<p><span class="versionmodified added">Added in version 1.0.7.</span></p>
 </div>
 </div></blockquote>
 <p><strong>failed-backup-command</strong> = string</p>
 <blockquote>
-<div><p>Run a shell command if a backup starts.  This allows some command to
+<div><p>Run a shell command if a backup fails.  This allows some command to
 perform some action when a backup fails such as sending out a failure
 notification.</p>
 <p>The backup will fail if this command exits with a non-zero status.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.0.7.</span></p>
+<p><span class="versionmodified added">Added in version 1.0.7.</span></p>
 </div>
 </div></blockquote>
 <p><strong>historic-size</strong> = yes | no</p>
@@ -294,7 +301,7 @@ If the configuration file exists and contains ‘estimated-size’ and ‘on-dis
 to decide if holland has enough free space for a backupset. This means Holland will use values from the previous
 backup to estimate the size of the next backup.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.1.1.</span></p>
+<p><span class="versionmodified added">Added in version 1.1.1.</span></p>
 </div>
 </div></blockquote>
 <p><strong>historic-size-factor</strong> = #</p>
@@ -302,7 +309,7 @@ backup to estimate the size of the next backup.</p>
 <div><p>Defaults to ‘1.5’. If the estimated size of the database has changed by more than this multiple, the ‘estimated-size-factor’ value
 will be used to determine if there is sufficient free space for the backupset.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.1.1.</span></p>
+<p><span class="versionmodified added">Added in version 1.1.1.</span></p>
 </div>
 </div></blockquote>
 <p><strong>historic-estimated-size-factor</strong> = #</p>
@@ -311,7 +318,7 @@ will be used to determine if there is sufficient free space for the backupset.</
 free space to perform a backup. Holland will throw an error if the system
 has less free space than the last backup size multiplied by this value</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.1.1.</span></p>
+<p><span class="versionmodified added">Added in version 1.1.1.</span></p>
 </div>
 </div></blockquote>
 <p><strong>create-symlinks</strong> = yes | no</p>
@@ -319,7 +326,7 @@ has less free space than the last backup size multiplied by this value</p>
 <div><p>Defaults to yes. Enable the creation of “newest” and “oldest” symlinks in the backupset directory.
 Disabling the symlink creation process and be helpful on filesystems that don’t support symlinks.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.2.7.</span></p>
+<p><span class="versionmodified added">Added in version 1.2.7.</span></p>
 </div>
 </div></blockquote>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ ls -l /var/spool/holland/default/
@@ -333,9 +340,9 @@ lrwxrwxrwx. 1 root root 42 Aug 18 16:18 oldest -&gt; /var/spool/holland/default/
 on the three parameters:</p>
 <blockquote>
 <div><ul class="simple">
-<li>hook - name of the hook being called (one of: before-backup-command, after-backup-command, failed-backup-command)</li>
-<li>backupdir - path to the current backup directory (e.g. /var/spool/holland/mysqldump/YYYYmmdd_HHMMSS)</li>
-<li>backupset - name of the backupset being run (e.g. ‘mysql-lvm’)</li>
+<li><p>hook - name of the hook being called (one of: before-backup-command, after-backup-command, failed-backup-command)</p></li>
+<li><p>backupdir - path to the current backup directory (e.g. /var/spool/holland/mysqldump/YYYYmmdd_HHMMSS)</p></li>
+<li><p>backupset - name of the backupset being run (e.g. ‘mysql-lvm’)</p></li>
 </ul>
 </div></blockquote>
 <p>For example:</p>
@@ -360,9 +367,9 @@ the <a class="reference internal" href="#holland-config-backupsets"><span class=
 <a class="reference internal" href="#holland-config-backup-directory"><span class="std std-ref">backup_directory</span></a>
 section of the main configuration file. Each backup resides under a directory
 corresponding to the backup-set name followed by a date-encoded directory.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
            </div>
@@ -375,7 +382,7 @@ corresponding to the backup-set name followed by a date-encoded directory.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024.</p>
+    <p>&#169; Copyright 2025.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -1,28 +1,22 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Usage and Implementation Overview &mdash; Holland Documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/holland_logo_64x64.png"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>Usage and Implementation Overview &mdash; Holland Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
   
-      <script>
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'./',
-              VERSION:'1.2.12',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/holland_logo_64x64.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=1f29e9d3"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -35,14 +29,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Holland<img src="_static/holland_logo_64x64.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Holland
+              <img src="_static/holland_logo_64x64.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                1.2.12
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -72,7 +68,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Usage and Implementation Overview</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/overview.txt" rel="nofollow"> View page source</a>
@@ -83,8 +79,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="usage-and-implementation-overview">
-<h1>Usage and Implementation Overview<a class="headerlink" href="#usage-and-implementation-overview" title="Permalink to this headline">¶</a></h1>
+  <section id="usage-and-implementation-overview">
+<h1>Usage and Implementation Overview<a class="headerlink" href="#usage-and-implementation-overview" title="Link to this heading"></a></h1>
 <p>Because Holland is very pluggable, it may first seem a bit confusing when
 it comes to configuring Holland to do something useful. Out of the box,
 Holland is designed to backup MySQL databases using the mysqldump provider.
@@ -94,76 +90,76 @@ use another method other than mysqldump.</p>
 <p>For instance, one can configure a backup set to backup certain databases
 using mysqldump, others using the mysql-lvm plugins etc. All this is done
 by a mix of providers and backup-sets.</p>
-<div class="section" id="backup-sets">
-<h2>Backup-Sets<a class="headerlink" href="#backup-sets" title="Permalink to this headline">¶</a></h2>
+<section id="backup-sets">
+<h2>Backup-Sets<a class="headerlink" href="#backup-sets" title="Link to this heading"></a></h2>
 <p>Each backup-set implements exactly one provider and will inherit the default
 values of that provider. These values can be overridden to adjust the
 behavior of the backup set. This includes defining what databases or tables
 to include (or exclude) in the backup, the type of compression used (if
 any), what locking method to use, among other things.</p>
-</div>
-<div class="section" id="providers">
-<h2>Providers<a class="headerlink" href="#providers" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="providers">
+<h2>Providers<a class="headerlink" href="#providers" title="Link to this heading"></a></h2>
 <p>Providers essentially provide a backup service for use in a backup set.</p>
 <ul>
-<li><p class="first">mysqldump</p>
+<li><p>mysqldump</p>
 <blockquote>
 <div><p>Uses the <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> utility to backup databases.</p>
 </div></blockquote>
 </li>
-<li><p class="first">MySQL + LVM</p>
+<li><p>MySQL + LVM</p>
 <blockquote>
 <div><p>Backup MySQL databases using LVM snapshots which allows for near lockless
 or fully lockless (when transactional engines are used) backups.</p>
 </div></blockquote>
 </li>
-<li><p class="first">mysqldump + LVM</p>
+<li><p>mysqldump + LVM</p>
 <blockquote>
 <div><p>This plugin creates an LVM snapshot, starts a mysql instance using the snapshot
-as it’s datadir, and then use the <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> utility to backup the databases.</p>
+as its datadir, and then use the <code class="docutils literal notranslate"><span class="pre">mysqldump</span></code> utility to backup the databases.</p>
 </div></blockquote>
 </li>
-<li><p class="first">XtraBackup</p>
+<li><p>XtraBackup</p>
 <blockquote>
 <div><div class="versionadded">
-<p><span class="versionmodified">New in version 1.0.8.</span></p>
+<p><span class="versionmodified added">Added in version 1.0.8.</span></p>
 </div>
 <p>Backup MySQL databases using Percona’s
 <a class="reference external" href="http://www.percona.com/software/percona-xtrabackup">XtraBackup</a> tool.
 This provides a near lockless backup when using the InnoDB storage engine.</p>
 </div></blockquote>
 </li>
-<li><p class="first">pgdump</p>
+<li><p>pgdump</p>
 <blockquote>
 <div><p>Backup PostgreSQL databases using the <code class="docutils literal notranslate"><span class="pre">pgdump</span></code> utility.</p>
 </div></blockquote>
 </li>
-<li><p class="first">pg_basebackup</p>
+<li><p>pg_basebackup</p>
 <blockquote>
 <div><div class="versionadded">
-<p><span class="versionmodified">New in version 1.2.8.</span></p>
+<p><span class="versionmodified added">Added in version 1.2.8.</span></p>
 </div>
 <p>Backup PostgreSQL databases using the <code class="docutils literal notranslate"><span class="pre">pg_basebackup</span></code> utility.</p>
 </div></blockquote>
 </li>
-<li><p class="first">mariabackup</p>
+<li><p>mariabackup</p>
 <blockquote>
 <div><div class="versionadded">
-<p><span class="versionmodified">New in version 1.1.0.</span></p>
+<p><span class="versionmodified added">Added in version 1.1.0.</span></p>
 </div>
 <p>Backup MySQL databases using MariaDB’s
 <a class="reference external" href="https://mariadb.com/kb/en/library/mariabackup-options/">mariabackup</a> tool.</p>
 </div></blockquote>
 </li>
-<li><p class="first">mongodump</p>
+<li><p>mongodump</p>
 <blockquote>
 <div><div class="versionadded">
-<p><span class="versionmodified">New in version 1.1.0.</span></p>
+<p><span class="versionmodified added">Added in version 1.1.0.</span></p>
 </div>
 <p>This plugin performs logical backups of a MongoDB by using the <code class="docutils literal notranslate"><span class="pre">mongodump</span></code> utility.</p>
 </div></blockquote>
 </li>
-<li><p class="first">Example</p>
+<li><p>Example</p>
 <blockquote>
 <div><p>This is used solely as a template for designing providers. It otherwise
 does nothing.</p>
@@ -174,8 +170,8 @@ does nothing.</p>
 as there is a provider for it. This includes things that have nothing to do
 with databases. The idea is to present an easy to use and clear method
 of backing up and restoring backups no matter the source.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -188,7 +184,7 @@ of backing up and restoring backups no matter the source.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024.</p>
+    <p>&#169; Copyright 2025.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

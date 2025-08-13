@@ -1,0 +1,147 @@
+.. _config-mysqlsh-dump-schemas:
+
+mysqlsh-dump-schemas Provider Configuration [mysqlsh-dump-schemas]
+==================================================================
+
+Backs up MySQL schemas using the mysqlsh dump-schemas utility.
+
+[mysqlsh-dump-schemas]
+----------------------
+
+**executable** = mysqlsh
+
+    Override the path where we can find mysqlsh binary
+
+**bin-log-position** = yes | no (default: no)
+
+    Whether to record the binary log name and position at the time of the backup
+
+**estimate-method** = plugin
+
+    The method to use to estimate the size of the backup.
+
+**extra-defaults** = yes | no (default: no)
+
+    This option controls whether mysqlsh will only read options as set by
+    holland or if additional options from global config files are read. By
+    default, the plugin only uses options as set in the backupset config and
+    includes authentication credentials only from the [client] section in
+    ~/.my.cnf.
+
+**log-level** = 5
+
+    The log level used for the mysqlsh application log (mysqlsh.log).
+    1=none, 2=internal, 3=error, 4=warning, 5=info, 6=debug, 7=debug2, or 8=debug3.
+
+**stop-slave** = yes | no (default: no)
+
+    Whether to stop the slave before commencing with the backup.
+
+**additional-options** = ,
+
+    Additional options to pass to the mysqlsh command. When specifying an
+    additional named argument that takes a list of values. You will want to
+    define the key repeatedly for each item in the list.
+    e.g --compatibility=strip_definers, --compatibility=strip_restricted_grants
+
+**threads** = 4
+
+    The number of parallel threads to use to dump chunks of data from the MySQL instance.
+
+**max-rate** = 0
+
+    The maximum number of bytes per second per thread for data read throughput during the dump.
+    The unit suffixes k for kilobytes, M for megabytes, and G for gigabytes can be used. Setting
+    this to 0 will disable rate limiting.
+
+**consistent** = yes | no (default: yes)
+
+    Whether to enable consistent data dumps by locking the instance for backup during the dump.
+
+**skip-consistency-checks** = yes | no (default: no)
+
+    Whether to skip consistency checks.
+
+**tz-utc** = yes | no (default: yes)
+
+    Whether to include a statement at the start of the dump to set the time zone to UTC
+
+**compression** = zstd
+
+    The compression type to use when writing data files for the dump.
+
+**chunking** = yes | no (default: yes)
+
+    Whether to enable chunking of table data.
+
+**bytes-per-chunk** = 64M
+
+    The approximate size of each chunk when chunking is enabled. Requires chunking to be enabled
+    in the backupset config. This option is always specified when holland executes mysqlsh
+    and chunking is enabled.
+
+**ddl-only** = yes | no (default: no)
+
+    Whether to only dump the DDL files and exclude the data
+
+**data-only** = yes | no (default: no)
+
+    Whether to only dump the data and exclude the DDL files
+
+**exclude-tables** = ,
+
+    A list of tables to exclude from the dump. Table names must be qualified with a valid schema name
+    and quoted with backticks if needed.
+
+**include-tables** = ,
+
+    A list of tables to include in the dump. Table names must be qualified with a valid schema name
+    and quoted with backticks if needed.
+
+**events** = yes | no (default: yes)
+
+    Whether to dump events.
+
+**exclude-events** = ,
+
+    A list of events to exclude from the dump. Events must be qualified with a valid schema name
+    and quoted with backticks if needed.
+
+**include-events** = ,
+
+    A list of events to include in the dump. Events must be qualified with a valid schema name
+    and quoted with backticks if needed.
+
+**routines** = yes | no (default: yes)
+
+    Whether to dump routines.
+
+**exclude-routines** = ,
+
+    A list of routines to exclude from the dump. Routines must be qualified with a valid schema name
+    and quoted with backticks if needed.
+
+**include-routines** = ,
+
+    A list of routines to include in the dump. Routines must be qualified with a valid schema name
+    and quoted with backticks if needed.
+
+**triggers** = yes | no (default: yes)
+
+    Whether to dump triggers.
+
+**exclude-triggers** = ,
+
+    A list of triggers to exclude from the dump. Triggers must be qualified with a valid schema name
+    and quoted with backticks if needed.
+
+**include-triggers** = ,
+
+    A list of triggers to include in the dump. Triggers must be qualified with a valid schema name
+    and quoted with backticks if needed.
+
+**schemas** = ,
+
+    A list of schemas to include in the dump. This is required for the dump-schemas provider.
+
+.. include:: mysqlconfig.txt

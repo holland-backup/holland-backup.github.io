@@ -1,28 +1,22 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>mysqldump LVM Provider Configuration [mysqldump-lvm] &mdash; Holland Documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="../_static/holland_logo_64x64.png"/>
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>mysqldump LVM Provider Configuration [mysqldump-lvm] &mdash; Holland Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
   
-      <script>
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'../',
-              VERSION:'1.2.12',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/underscore.js"></script>
-        <script src="../_static/doctools.js"></script>
+    <link rel="shortcut icon" href="../_static/holland_logo_64x64.png"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=1f29e9d3"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -35,14 +29,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="../index.html" class="icon icon-home"> Holland<img src="../_static/holland_logo_64x64.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Holland
+              <img src="../_static/holland_logo_64x64.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                1.2.12
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -70,6 +66,10 @@
 <li class="toctree-l3"><a class="reference internal" href="pg_basebackup.html">pg_basebackup Provider Configuration [pg_basebackup]</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mongodump.html">mongodump Provider Configuration [mongodump]</a></li>
 <li class="toctree-l3"><a class="reference internal" href="mariabackup.html">Mariabackup Provider Configuration [mariabackup]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mariadb-dump.html">mariadb-dump Provider Configuration [mariadb-dump]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mysqlsh-dump-instance.html">mysqlsh-dump-instance Provider Configuration [mysqlsh-dump-instance]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mysqlsh-dump-schemas.html">mysqlsh-dump-schemas Provider Configuration [mysqlsh-dump-schemas]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command.html">command Provider Configuration [command]</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../config.html#backup-set-configs">Backup-Set Configs</a></li>
@@ -90,7 +90,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="../index.html" class="icon icon-home"></a></li>
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../config.html">Holland Config Files</a></li>
       <li class="breadcrumb-item active">mysqldump LVM Provider Configuration [mysqldump-lvm]</li>
       <li class="wy-breadcrumbs-aside">
@@ -102,81 +102,91 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="mysqldump-lvm-provider-configuration-mysqldump-lvm">
-<span id="config-mysqldump-lvm"></span><h1>mysqldump LVM Provider Configuration [mysqldump-lvm]<a class="headerlink" href="#mysqldump-lvm-provider-configuration-mysqldump-lvm" title="Permalink to this headline">¶</a></h1>
+  <section id="mysqldump-lvm-provider-configuration-mysqldump-lvm">
+<span id="config-mysqldump-lvm"></span><h1>mysqldump LVM Provider Configuration [mysqldump-lvm]<a class="headerlink" href="#mysqldump-lvm-provider-configuration-mysqldump-lvm" title="Link to this heading"></a></h1>
 <p>Backs up one or more MySQL databases by creating an LVM snapshot and
 then starting a instance of MySQL on top of it to then perform a
 mysqldump. This effectively produces a non-blocking logical backup.</p>
-<div class="section" id="mysql-lvm">
-<h2>[mysql-lvm]<a class="headerlink" href="#mysql-lvm" title="Permalink to this headline">¶</a></h2>
+<section id="mysql-lvm">
+<h2>[mysql-lvm]<a class="headerlink" href="#mysql-lvm" title="Link to this heading"></a></h2>
 <p><strong>snapshot-size</strong> = &lt;size-in-MB&gt;</p>
 <blockquote>
-<div>The size of the snapshot itself. By default it is 20% of the size of  the
+<div><p>The size of the snapshot itself. By default it is 20% of the size of  the
 MySQL LVM mount or the remaining free-space in the Volume Group (if there
 is less than 20% available) up to 15GB. If snapshot-size is defined, the
-number represents the size of the snapshot in megabytes.</div></blockquote>
+number represents the size of the snapshot in megabytes.</p>
+</div></blockquote>
 <p><strong>snapshot-name</strong> = &lt;name&gt;</p>
 <blockquote>
-<div>The name of the snapshot, the default being the name of the MySQL LVM
-volume + “_snapshot” (ie Storage-MySQL_snapshot)</div></blockquote>
+<div><p>The name of the snapshot, the default being the name of the MySQL LVM
+volume + “_snapshot” (ie Storage-MySQL_snapshot)</p>
+</div></blockquote>
 <p><strong>snapshot-mountpoint</strong> = &lt;path&gt;</p>
 <blockquote>
-<div>Where to mount the snapshot. By default a randomly generated directory
-under /tmp is used.</div></blockquote>
+<div><p>Where to mount the snapshot. By default a randomly generated directory
+under /tmp is used.</p>
+</div></blockquote>
 <p><strong>innodb-recovery</strong> = yes | no (default: no)</p>
 <blockquote>
-<div>Whether or not to run an InnoDB recovery operation. This avoids needing
+<div><p>Whether or not to run an InnoDB recovery operation. This avoids needing
 to do so during a restore, though will make the backup process itself
-take longer.</div></blockquote>
+take longer.</p>
+</div></blockquote>
 <p><strong>lock-tables</strong> = yes | no (default: yes)</p>
 <blockquote>
-<div>Whether or not to run a FLUSH TABLES WITH READ LOCK to grab various
+<div><p>Whether or not to run a FLUSH TABLES WITH READ LOCK to grab various
 bits of information (such as the binary log name and position). Disabling
 this requires that binary logging is disabled and InnoDB is being used
 exclusively. Otherwise, it is possible that the backup could contain
-crashed tables.</div></blockquote>
+crashed tables.</p>
+</div></blockquote>
 <p><strong>extra-flush-tables</strong> = yes | no (default: yes)</p>
 <blockquote>
-<div>Whether or not to run a FLUSH TABLES before running the full
+<div><p>Whether or not to run a FLUSH TABLES before running the full
 FLUSH TABLES WITH READ LOCK. Should make the FLUSH TABLES WITH READ LOCK
-operation a bit faster.</div></blockquote>
-</div>
-<div class="section" id="mysqld">
-<h2>[mysqld]<a class="headerlink" href="#mysqld" title="Permalink to this headline">¶</a></h2>
+operation a bit faster.</p>
+</div></blockquote>
+</section>
+<section id="mysqld">
+<h2>[mysqld]<a class="headerlink" href="#mysqld" title="Link to this heading"></a></h2>
 <p><strong>mysqld-exe</strong> = &lt;path&gt;[, &lt;path&gt;…] (default: mysqld in PATH, /usr/libexec/mysqld)</p>
 <blockquote>
-<div>This provides a list of locations where the mysqld process to use might be
-found.  This is searched in order of entries in this list.</div></blockquote>
+<div><p>This provides a list of locations where the mysqld process to use might be
+found.  This is searched in order of entries in this list.</p>
+</div></blockquote>
 <p><strong>user</strong> = &lt;name&gt;</p>
 <blockquote>
-<div>The –user parameter to use with mysqld.</div></blockquote>
+<div><p>The –user parameter to use with mysqld.</p>
+</div></blockquote>
 <p><strong>innodb-buffer-pool-size</strong> = &lt;size&gt; (default: 128M)</p>
 <blockquote>
-<div>How large to size the innodb-buffer-pool-size.</div></blockquote>
+<div><p>How large to size the innodb-buffer-pool-size.</p>
+</div></blockquote>
 <p><strong>tmpdir</strong> = &lt;path&gt;  (default: system tempdir)</p>
 <blockquote>
-<div>Path to the –tmpdir that mysqld should use.</div></blockquote>
+<div><p>Path to the –tmpdir that mysqld should use.</p>
+</div></blockquote>
 <p><strong>log-error</strong> = &lt;path&gt;  (default: tempdir/holland_lvm.log)</p>
 <blockquote>
 <div><p>Define path for mysqld’s error log. The default location get cleaned up by Holland after
 the backup is complete. This settings allows the user to define the log file in another location
 and can be useful for debugging issue with the MySQL instance running on the snapshot.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.0.9.</span></p>
+<p><span class="versionmodified added">Added in version 1.0.9.</span></p>
 </div>
 </div></blockquote>
-</div>
-<div class="section" id="mysqldump">
-<h2>[mysqldump]<a class="headerlink" href="#mysqldump" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="mysqldump">
+<h2>[mysqldump]<a class="headerlink" href="#mysqldump" title="Link to this heading"></a></h2>
 <p>mysqldump-lvm supports almost all of the options from the mysqldump plugin.
 –master-data is not supported, as the mysqld process will not read binary
 logs, so this plugin will automatically disable bin-log-position, if set.</p>
-<p>Binary log information from SOHW MASTER STATUS and SHOW SLAVE STATUS is
+<p>Binary log information from SHOW MASTER STATUS and SHOW SLAVE STATUS is
 recorded in the ${backup_directory}/backup.conf file under the
 [mysql:replication] section.</p>
-</div>
-<div class="section" id="compression">
-<h2>[compression]<a class="headerlink" href="#compression" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="compression">
+<h2>[compression]<a class="headerlink" href="#compression" title="Link to this heading"></a></h2>
 <p>Specify various compression settings, such as compression utility,
 compression level, etc.</p>
 <p><strong>method</strong> = gzip| gzip-rsyncable | pigz | bzip2 | pbzip2 | lzop | lzma | gpg | zstd</p>
@@ -189,21 +199,24 @@ and <code class="docutils literal notranslate"><span class="pre">default-recipie
 </div></blockquote>
 <p><strong>inline</strong> = yes | no</p>
 <blockquote>
-<div>Whether or not to pipe the output of the backup command into the compression
+<div><p>Whether or not to pipe the output of the backup command into the compression
 utility. Enabling this is recommended since it usually only marginally
 impacts performance, particularly when using a lower compression
-level.</div></blockquote>
+level.</p>
+</div></blockquote>
 <p><strong>level</strong> = 0-9</p>
 <blockquote>
-<div>Specify the compression ratio. The lower the number, the lower the
+<div><p>Specify the compression ratio. The lower the number, the lower the
 compression ratio, but the faster the backup will take. Generally,
-setting the lever to 1 or 2 results in favorable compression of
+setting the level to 1 or 2 results in favorable compression of
 textual data and is noticeably faster than the higher levels.
-Setting the level to 0 effectively disables compression.</div></blockquote>
+Setting the level to 0 effectively disables compression.</p>
+</div></blockquote>
 <p><strong>bin-path</strong> = &lt;full path to utility&gt;</p>
 <blockquote>
-<div>This only needs to be defined if the compression utility is not in the
-usual places or not in the system path.</div></blockquote>
+<div><p>This only needs to be defined if the compression utility is not in the
+usual places or not in the system path.</p>
+</div></blockquote>
 <p><strong>options</strong> = &lt;string&gt;</p>
 <blockquote>
 <div><p>Add commandline options to the configuration compression command.</p>
@@ -211,18 +224,18 @@ usual places or not in the system path.</div></blockquote>
 </div></blockquote>
 <p><strong>split</strong> = yes | no</p>
 <blockquote>
-<div><p>Defautls to no. If set the backup will be piped through the split command.
+<div><p>Defaults to no. If set the backup will be piped through the split command.
 This may be useful for user’s with large databases, as some backup systems perform
 better with many smaller files instead of 1 large one. This defaults to 1GB file size,
 so this option isn’t helpful if your dumps are smaller than that.</p>
-<p>For python2.6, this option will be disabled if the subprocess32 module isn’t avaiable.</p>
+<p>For python2.6, this option will be disabled if the subprocess32 module isn’t available.</p>
 <div class="versionadded">
-<p><span class="versionmodified">New in version 1.1.13.</span></p>
+<p><span class="versionmodified added">Added in version 1.1.13.</span></p>
 </div>
 </div></blockquote>
-</div>
-<div class="section" id="mysql-connection-info-mysql-client">
-<h2>MySQL connection info [mysql:client]<a class="headerlink" href="#mysql-connection-info-mysql-client" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="mysql-connection-info-mysql-client">
+<h2>MySQL connection info [mysql:client]<a class="headerlink" href="#mysql-connection-info-mysql-client" title="Link to this heading"></a></h2>
 <p>These are optional and, if left undefined, Holland will try to login using
 the standard .my.cnf conventions.</p>
 <p><strong>user</strong> = &lt;user&gt;</p>
@@ -235,8 +248,8 @@ the standard .my.cnf conventions.</p>
 <p>This would be used for connecting to MySQL remotely.</p>
 <p><strong>port</strong> = &lt;port&gt;</p>
 <p>Used if MySQL is running on a port other than 3306.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -249,7 +262,7 @@ the standard .my.cnf conventions.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024.</p>
+    <p>&#169; Copyright 2025.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

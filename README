@@ -1,5 +1,33 @@
-This repo is for the docs.hollandbackup.org site.
+# Holland Backup Documentation
 
-Documents have been build using sphinx-build-3 1.7.2
+This repository contains the source for [docs.hollandbackup.org](https://docs.hollandbackup.org).
 
-To rebuild, install sphinx-build-3 and run 'make html'
+### 1. Setup
+Install the required dependencies:
+```bash
+pip3 install -r requirements.txt
+```
+
+### 2. Edit Documentation
+Edit the source files in `_sources/`.
+- `_sources/conf.py` - Main Sphinx configuration file
+
+### 3. Build and Review
+Build the documentation:
+```bash
+make html
+```
+View the results by opening `_build/index.html` in your browser.
+
+### 4. Deploy and Publish
+When ready to publish changes to the live site:
+```bash
+make deploy
+```
+This builds the docs and copies them to the `docs/` folder. Commit and push your changes to update the live site.
+
+### 5. Cleanup (Optional)
+Remove build artifacts:
+```bash
+make clean
+```

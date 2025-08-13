@@ -1,0 +1,317 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>mysqlsh-dump-instance Provider Configuration [mysqlsh-dump-instance] &mdash; Holland Documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+
+  
+    <link rel="shortcut icon" href="../_static/holland_logo_64x64.png"/>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=1f29e9d3"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="mysqlsh-dump-schemas Provider Configuration [mysqlsh-dump-schemas]" href="mysqlsh-dump-schemas.html" />
+    <link rel="prev" title="mariadb-dump Provider Configuration [mariadb-dump]" href="mariadb-dump.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Holland
+              <img src="../_static/holland_logo_64x64.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../intro.html">Introduction to Holland</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../commands.html">Holland Command-Line Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Usage and Implementation Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../config.html">Holland Config Files</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../config.html#holland-conf-main-config">holland.conf - main config</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../config.html#provider-configs">Provider Configs</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mysqldump.html">mysqldump Provider Configuration [mysqldump]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mysql-lvm.html">MySQL LVM Provider Configuration [mysql-lvm]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mysqldump-lvm.html">mysqldump LVM Provider Configuration [mysqldump-lvm]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="xtrabackup.html">Xtrabackup Provider Configuration [xtrabackup]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pgdump.html">pgdump Provider Configuration [pgdump]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pg_basebackup.html">pg_basebackup Provider Configuration [pg_basebackup]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mongodump.html">mongodump Provider Configuration [mongodump]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mariabackup.html">Mariabackup Provider Configuration [mariabackup]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mariadb-dump.html">mariadb-dump Provider Configuration [mariadb-dump]</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mysqlsh-dump-instance Provider Configuration [mysqlsh-dump-instance]</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mysqlsh-dump-instance">[mysqlsh-dump-instance]</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mysql-connection-info-mysql-client">MySQL connection info [mysql:client]</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="mysqlsh-dump-schemas.html">mysqlsh-dump-schemas Provider Configuration [mysqlsh-dump-schemas]</a></li>
+<li class="toctree-l3"><a class="reference internal" href="command.html">command Provider Configuration [command]</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../config.html#backup-set-configs">Backup-Set Configs</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Holland</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../config.html">Holland Config Files</a></li>
+      <li class="breadcrumb-item active">mysqlsh-dump-instance Provider Configuration [mysqlsh-dump-instance]</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/provider_configs/mysqlsh-dump-instance.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mysqlsh-dump-instance-provider-configuration-mysqlsh-dump-instance">
+<span id="config-mysqlsh-dump-instance"></span><h1>mysqlsh-dump-instance Provider Configuration [mysqlsh-dump-instance]<a class="headerlink" href="#mysqlsh-dump-instance-provider-configuration-mysqlsh-dump-instance" title="Link to this heading"></a></h1>
+<p>Backs up a MySQL instance using the mysqlsh dump-instance utility.</p>
+<section id="mysqlsh-dump-instance">
+<h2>[mysqlsh-dump-instance]<a class="headerlink" href="#mysqlsh-dump-instance" title="Link to this heading"></a></h2>
+<p><strong>executable</strong> = mysqlsh</p>
+<blockquote>
+<div><p>Override the path where we can find mysqlsh binary</p>
+</div></blockquote>
+<p><strong>bin-log-position</strong> = yes | no (default: no)</p>
+<blockquote>
+<div><p>Whether to record the binary log name and position at the time of the backup</p>
+</div></blockquote>
+<p><strong>estimate-method</strong> = plugin</p>
+<blockquote>
+<div><p>The method to use to estimate the size of the backup.</p>
+</div></blockquote>
+<p><strong>extra-defaults</strong> = yes | no (default: no)</p>
+<blockquote>
+<div><p>This option controls whether mysqlsh will only read options as set by
+holland or if additional options from global config files are read. By
+default, the plugin only uses options as set in the backupset config and
+includes authentication credentials only from the [client] section in
+~/.my.cnf.</p>
+</div></blockquote>
+<p><strong>log-level</strong> = 5</p>
+<blockquote>
+<div><p>The log level used for the mysqlsh application log (mysqlsh.log).
+1=none, 2=internal, 3=error, 4=warning, 5=info, 6=debug, 7=debug2, or 8=debug3.</p>
+</div></blockquote>
+<p><strong>stop-slave</strong> = yes | no (default: no)</p>
+<blockquote>
+<div><p>Whether to stop the slave before commencing with the backup.</p>
+</div></blockquote>
+<p><strong>additional-options</strong> = ,</p>
+<blockquote>
+<div><p>Additional options to pass to the mysqlsh command. When specifying an
+additional named argument that takes a list of values. You will want to
+define the key repeatedly for each item in the list.
+e.g –compatibility=strip_definers, –compatibility=strip_restricted_grants</p>
+</div></blockquote>
+<p><strong>threads</strong> = 4</p>
+<blockquote>
+<div><p>The number of parallel threads to use to dump chunks of data from the MySQL instance.</p>
+</div></blockquote>
+<p><strong>max-rate</strong> = 0</p>
+<blockquote>
+<div><p>The maximum number of bytes per second per thread for data read throughput during the dump.
+The unit suffixes k for kilobytes, M for megabytes, and G for gigabytes can be used. Setting
+this to 0 will disable rate limiting.</p>
+</div></blockquote>
+<p><strong>consistent</strong> = yes | no (default: yes)</p>
+<blockquote>
+<div><p>Whether to enable consistent data dumps by locking the instance for backup during the dump.</p>
+</div></blockquote>
+<p><strong>skip-consistency-checks</strong> = yes | no (default: no)</p>
+<blockquote>
+<div><p>Whether to skip consistency checks.</p>
+</div></blockquote>
+<p><strong>tz-utc</strong> = yes | no (default: yes)</p>
+<blockquote>
+<div><p>Whether to include a statement at the start of the dump to set the time zone to UTC</p>
+</div></blockquote>
+<p><strong>compression</strong> = zstd</p>
+<blockquote>
+<div><p>The compression type to use when writing data files for the dump.</p>
+</div></blockquote>
+<p><strong>chunking</strong> = yes | no (default: yes)</p>
+<blockquote>
+<div><p>Whether to enable chunking of table data.</p>
+</div></blockquote>
+<p><strong>bytes-per-chunk</strong> = 64M</p>
+<blockquote>
+<div><p>The approximate size of each chunk when chunking is enabled. Requires chunking to be enabled
+in the backupset config. This option is always specified when holland executes mysqlsh
+and chunking is enabled.</p>
+</div></blockquote>
+<p><strong>ddl-only</strong> = yes | no (default: no)</p>
+<blockquote>
+<div><p>Whether to only dump the DDL files and exclude the data</p>
+</div></blockquote>
+<p><strong>data-only</strong> = yes | no (default: no)</p>
+<blockquote>
+<div><p>Whether to only dump the data and exclude the DDL files</p>
+</div></blockquote>
+<p><strong>exclude-tables</strong> = ,</p>
+<blockquote>
+<div><p>A list of tables to exclude from the dump. Table names must be qualified with a valid schema name
+and quoted with backticks if needed.</p>
+</div></blockquote>
+<p><strong>include-tables</strong> = ,</p>
+<blockquote>
+<div><p>A list of tables to include in the dump. Table names must be qualified with a valid schema name
+and quoted with backticks if needed.</p>
+</div></blockquote>
+<p><strong>events</strong> = yes | no (default: yes)</p>
+<blockquote>
+<div><p>Whether to dump events.</p>
+</div></blockquote>
+<p><strong>exclude-events</strong> = ,</p>
+<blockquote>
+<div><p>A list of events to exclude from the dump. Events must be qualified with a valid schema name
+and quoted with backticks if needed.</p>
+</div></blockquote>
+<p><strong>include-events</strong> = ,</p>
+<blockquote>
+<div><p>A list of events to include in the dump. Events must be qualified with a valid schema name
+and quoted with backticks if needed.</p>
+</div></blockquote>
+<p><strong>routines</strong> = yes | no (default: yes)</p>
+<blockquote>
+<div><p>Whether to dump routines.</p>
+</div></blockquote>
+<p><strong>exclude-routines</strong> = ,</p>
+<blockquote>
+<div><p>A list of routines to exclude from the dump. Routines must be qualified with a valid schema name
+and quoted with backticks if needed.</p>
+</div></blockquote>
+<p><strong>include-routines</strong> = ,</p>
+<blockquote>
+<div><p>A list of routines to include in the dump. Routines must be qualified with a valid schema name
+and quoted with backticks if needed.</p>
+</div></blockquote>
+<p><strong>triggers</strong> = yes | no (default: yes)</p>
+<blockquote>
+<div><p>Whether to dump triggers.</p>
+</div></blockquote>
+<p><strong>exclude-triggers</strong> = ,</p>
+<blockquote>
+<div><p>A list of triggers to exclude from the dump. Triggers must be qualified with a valid schema name
+and quoted with backticks if needed.</p>
+</div></blockquote>
+<p><strong>include-triggers</strong> = ,</p>
+<blockquote>
+<div><p>A list of triggers to include in the dump. Triggers must be qualified with a valid schema name
+and quoted with backticks if needed.</p>
+</div></blockquote>
+<p><strong>users</strong> = yes | no (default: yes)</p>
+<blockquote>
+<div><p>Whether to include users and their roles and grants in the dump.</p>
+</div></blockquote>
+<p><strong>exclude-users</strong> = ,</p>
+<blockquote>
+<div><p>A list of users to exclude from the dump.</p>
+</div></blockquote>
+<p><strong>include-users</strong> = ,</p>
+<blockquote>
+<div><p>A list of users to include in the dump.</p>
+</div></blockquote>
+<p><strong>exclude-schemas</strong> = ,</p>
+<blockquote>
+<div><p>A list of schemas to exclude from the dump.</p>
+</div></blockquote>
+<p><strong>include-schemas</strong> = ,</p>
+<blockquote>
+<div><p>A specific list of schemas to include in the dump. You cannot include the information_schema, mysql,
+ndbinfo, performance_schema, or sys schemas by naming them here. Use the dump-schemas plugin instead.</p>
+</div></blockquote>
+<p><strong>strip-definers</strong> = yes | no (default: no)</p>
+<blockquote>
+<div><p>Whether to enable the strip_definers HeatWave compatibility requirement.</p>
+</div></blockquote>
+<p><strong>create-invisible-pks</strong> = yes | no (default: no)</p>
+<blockquote>
+<div><p>Whether to enable the create_invisible_pks HeatWave compatibility requirement.</p>
+</div></blockquote>
+</section>
+<section id="mysql-connection-info-mysql-client">
+<h2>MySQL connection info [mysql:client]<a class="headerlink" href="#mysql-connection-info-mysql-client" title="Link to this heading"></a></h2>
+<p>These are optional and, if left undefined, Holland will try to login using
+the standard .my.cnf conventions.</p>
+<p><strong>user</strong> = &lt;user&gt;</p>
+<p>The user to connect to MySQL as.</p>
+<p><strong>password</strong> = &lt;password&gt;</p>
+<p>The password for the MySQL user</p>
+<p><strong>socket</strong> = &lt;socket&gt;</p>
+<p>The socket file to connect to MySQL with.</p>
+<p><strong>host</strong> = &lt;host&gt;</p>
+<p>This would be used for connecting to MySQL remotely.</p>
+<p><strong>port</strong> = &lt;port&gt;</p>
+<p>Used if MySQL is running on a port other than 3306.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mariadb-dump.html" class="btn btn-neutral float-left" title="mariadb-dump Provider Configuration [mariadb-dump]" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="mysqlsh-dump-schemas.html" class="btn btn-neutral float-right" title="mysqlsh-dump-schemas Provider Configuration [mysqlsh-dump-schemas]" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

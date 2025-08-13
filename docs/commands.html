@@ -1,28 +1,22 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html4" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Holland Command-Line Reference &mdash; Holland Documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" /><link rel="shortcut icon" href="_static/holland_logo_64x64.png"/>
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+  <title>Holland Command-Line Reference &mdash; Holland Documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+
   
-      <script>
-          var DOCUMENTATION_OPTIONS = {
-              URL_ROOT:'./',
-              VERSION:'1.2.12',
-              LANGUAGE:'None',
-              COLLAPSE_INDEX:false,
-              FILE_SUFFIX:'.html',
-              HAS_SOURCE:  true,
-              SOURCELINK_SUFFIX: '.txt'
-          };
-      </script>
-        <script src="_static/jquery.js"></script>
-        <script src="_static/underscore.js"></script>
-        <script src="_static/doctools.js"></script>
+    <link rel="shortcut icon" href="_static/holland_logo_64x64.png"/>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=1f29e9d3"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -35,14 +29,16 @@
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
       <div class="wy-side-scroll">
         <div class="wy-side-nav-search" >
-            <a href="index.html" class="icon icon-home"> Holland<img src="_static/holland_logo_64x64.png" class="logo" alt="Logo"/>
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Holland
+              <img src="_static/holland_logo_64x64.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                1.2.12
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search docs" />
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
     <input type="hidden" name="check_keywords" value="yes" />
     <input type="hidden" name="area" value="default" />
   </form>
@@ -76,7 +72,7 @@
         <div class="rst-content">
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
-      <li><a href="index.html" class="icon icon-home"></a></li>
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
       <li class="breadcrumb-item active">Holland Command-Line Reference</li>
       <li class="wy-breadcrumbs-aside">
             <a href="_sources/commands.txt" rel="nofollow"> View page source</a>
@@ -87,17 +83,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="holland-command-line-reference">
-<span id="command-line-reference"></span><h1>Holland Command-Line Reference<a class="headerlink" href="#holland-command-line-reference" title="Permalink to this headline">¶</a></h1>
+  <section id="holland-command-line-reference">
+<span id="command-line-reference"></span><h1>Holland Command-Line Reference<a class="headerlink" href="#holland-command-line-reference" title="Link to this heading"></a></h1>
 <p>Here are the commands available from the ‘holland’ command-line tool:</p>
-<div class="section" id="help-h">
-<h2>help (h)<a class="headerlink" href="#help-h" title="Permalink to this headline">¶</a></h2>
+<section id="help-h">
+<h2>help (h)<a class="headerlink" href="#help-h" title="Link to this heading"></a></h2>
 <p><strong>Usage</strong>: <code class="docutils literal notranslate"><span class="pre">holland</span> <span class="pre">&lt;command&gt;</span> <span class="pre">--help(-h)</span></code></p>
 <p>Provides basic information about the provided command. If no command is
 provided, it displays global help instead.</p>
-</div>
-<div class="section" id="backup-bk">
-<h2>backup (bk)<a class="headerlink" href="#backup-bk" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="backup-bk">
+<h2>backup (bk)<a class="headerlink" href="#backup-bk" title="Link to this heading"></a></h2>
 <p><strong>Usage:</strong> <code class="docutils literal notranslate"><span class="pre">holland</span> <span class="pre">backup</span> <span class="pre">[backup-set1,</span> <span class="pre">backup-set2,</span> <span class="pre">...,</span> <span class="pre">backup-setN]</span></code></p>
 <p>Runs the backup operation. If no backup-sets are specified,
 all active backup-sets (those defined in the ‘backupsets’ variable in
@@ -120,19 +116,19 @@ backup-set.</p>
 <p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">holland</span> <span class="pre">bk</span> <span class="pre">--no-lock</span> <span class="pre">--abort-immediately</span></code>: Attempts a backup of all
 the default backup-sets ignoring locks and aborting immediately if one of the
 backup-sets fails.</p>
-</div>
-<div class="section" id="list-backups-lb">
-<h2>list-backups (lb)<a class="headerlink" href="#list-backups-lb" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="list-backups-lb">
+<h2>list-backups (lb)<a class="headerlink" href="#list-backups-lb" title="Link to this heading"></a></h2>
 <p><strong>Usage:</strong> <code class="docutils literal notranslate"><span class="pre">holland</span> <span class="pre">list-backups</span></code></p>
 <p>Provides extended information about available backups.</p>
-</div>
-<div class="section" id="list-plugins-lp">
-<h2>list-plugins (lp)<a class="headerlink" href="#list-plugins-lp" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="list-plugins-lp">
+<h2>list-plugins (lp)<a class="headerlink" href="#list-plugins-lp" title="Link to this heading"></a></h2>
 <p><strong>Usage</strong>: <code class="docutils literal notranslate"><span class="pre">holland</span> <span class="pre">list-plugins</span></code></p>
 <p>Lists all the available (installed) plugins available to Holland.</p>
-</div>
-<div class="section" id="mk-config-mc">
-<h2>mk-config (mc)<a class="headerlink" href="#mk-config-mc" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="mk-config-mc">
+<h2>mk-config (mc)<a class="headerlink" href="#mk-config-mc" title="Link to this heading"></a></h2>
 <p><strong>Usage:</strong> <code class="docutils literal notranslate"><span class="pre">holland</span> <span class="pre">mk-config</span> <span class="pre">&lt;provider&gt;</span></code></p>
 <p>Generates a template backup-set for a particular provider (such as mysqldump).
 By default, the output is sent to standard out but can be copied to a file,
@@ -155,16 +151,16 @@ mysql-lvm.conf in the current working directory.</p>
 <p><code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">holland</span> <span class="pre">mc</span> <span class="pre">mysqldump</span> <span class="pre">--name=Bob</span> <span class="pre">--edit</span></code>: Create a backup-set using
 the mysqldump provider named Bob and allow interactive editing of the
 backup-set before saving the file.</p>
-</div>
-<div class="section" id="purge-pg">
-<h2>purge (pg)<a class="headerlink" href="#purge-pg" title="Permalink to this headline">¶</a></h2>
+</section>
+<section id="purge-pg">
+<h2>purge (pg)<a class="headerlink" href="#purge-pg" title="Link to this heading"></a></h2>
 <p><strong>Usage:</strong> <code class="docutils literal notranslate"><span class="pre">holland</span> <span class="pre">purge</span> <span class="pre">&lt;backup-set&gt;/&lt;backup-id&gt;</span></code></p>
 <p>Purges old backups by specifying the backup-set name and set-id.</p>
 <p>For example:
 <code class="docutils literal notranslate"><span class="pre">#</span> <span class="pre">holland</span> <span class="pre">purge</span> <span class="pre">mybackups/20090502_155438</span></code>: Purge one of the backups
 taken on May 2nd, 2009 from the mybackups backup-set.</p>
-</div>
-</div>
+</section>
+</section>
 
 
            </div>
@@ -177,7 +173,7 @@ taken on May 2nd, 2009 from the mybackups backup-set.</p>
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2024.</p>
+    <p>&#169; Copyright 2025.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

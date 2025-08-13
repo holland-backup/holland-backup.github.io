@@ -1,12 +1,12 @@
 Introduction to Holland
 =======================
 
-Holland is an Open Source backup framework originally developed by Rackspace 
-and written in Python. It's goal is to help facilitate backing up databases 
-with greater configurability, consistency, and ease. Holland currently 
-focuses on MySQL, however future development will include other database 
-platforms and even non-database related applications. Because of it's 
-plugin structure, Holland can be used to backup anything you want by 
+Holland is an Open Source backup framework originally developed by Rackspace
+and written in Python. Its goal is to help facilitate backing up databases
+with greater configurability, consistency, and ease. Holland currently
+focuses on MySQL, however future development will include other database
+platforms and even non-database related applications. Because of its
+plugin structure, Holland can be used to backup anything you want by
 whatever means you want.
 
 Python2 support has been removed as of holland 1.2.0
@@ -21,7 +21,7 @@ remotely modern Linux distribution):
 * python-setuptools
 * ConfigParser
 
-MySQL based plugins additional require the MySQLdb python connector:
+MySQL based plugins additionally require the MySQLdb python connector:
 
 * pyMySQL
 

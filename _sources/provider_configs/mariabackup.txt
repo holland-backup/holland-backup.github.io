@@ -18,15 +18,15 @@ Backs up a MySQL instance using ``mariabackup`` tool.
     The path to the innobackupex script to run. If this is a relative path
     this will be found in holland's environment PATH as configured in
     /etc/holland/holland.conf.
-    
-    
-**ibbackup** = <name>    
-    
+
+
+**ibbackup** = <name>
+
     The path to the ibbackup command to use.  By default, no --ibbackup option
-    is pass to the innobackupex script.  Usually innobackupex will detect this
+    is passed to the innobackupex script.  Usually innobackupex will detect this
     by itself and this should not need to be set.
 
-**stream** = mbstream(default: tar)
+**stream** = mbstream (default: mbstream)
 
     Placeholder
 
@@ -39,11 +39,11 @@ Backs up a MySQL instance using ``mariabackup`` tool.
     want to disable apply-logs if you wish to use incremental backups.
 
 **slave-info** = yes | no (default: yes)
-    
+
     Whether to enable the --slave-info innobackupex option
 
 **safe-slave-backup** = yes | no (default: yes)
-    
+
     Whether to enable the --safe-slave-backup innobackupex option.
 
 **no-lock** = yes | no (default: no)
